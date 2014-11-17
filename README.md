@@ -15,6 +15,12 @@ Preparing your PRTG installation
 - define a new accesskey for the MiniProbes (**Setup** -> **System Administration** -> **Core&Probes** -> *Access Keys*)
 - make sure you can reach the PRTG web interface from the machine the mini probe should run on (e.g. wget https://YOUR_PRTG_SERVER)
 
+Getting the mini probe
+------------------
+
+- You can download a pre-built WAR, which should work both in standalone-mode and as part of an application server, from [the releases page](https://github.com/PaesslerAG/JMXMiniProbe/releases)
+- A gradle and/or ant config is on the TODO list
+
 Starting the probe in standalone-mode
 -------------------------------------
 
