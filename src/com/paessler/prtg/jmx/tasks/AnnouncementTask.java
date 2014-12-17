@@ -88,6 +88,6 @@ public class AnnouncementTask extends TimerTask {
             return;
         }
 
-        mScheduledExecutorService.scheduleWithFixedDelay(new TaskFetcherTask(mServletContext, mProbeContext), 1, 1, TimeUnit.MINUTES);
+        mScheduledExecutorService.scheduleWithFixedDelay(new TaskFetcherTask(mServletContext, mProbeContext), 60, 60, TimeUnit.SECONDS);
     }
 }

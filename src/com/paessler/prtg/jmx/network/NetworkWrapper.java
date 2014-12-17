@@ -64,19 +64,15 @@ public class NetworkWrapper {
                 }
             };
             X509HostnameVerifier verifier = new X509HostnameVerifier() {
-                @Override
                 public void verify(String string, SSLSocket ssls) throws IOException {
                 }
 
-                @Override
                 public void verify(String string, X509Certificate xc) throws SSLException {
                 }
 
-                @Override
                 public void verify(String string, String[] strings, String[] strings1) throws SSLException {
                 }
 
-                @Override
                 public boolean verify(String string, SSLSession ssls) {
                     return true;
                 }

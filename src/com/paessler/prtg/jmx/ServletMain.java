@@ -51,7 +51,6 @@ public class ServletMain extends GenericServlet implements ServletContextListene
         super.init(config);
     }
 
-    @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         ServletContext context = servletContextEvent.getServletContext();
         String key = null;
@@ -103,7 +102,6 @@ public class ServletMain extends GenericServlet implements ServletContextListene
         mScheduledExecutorService.schedule(new AnnouncementTask(probeContext, context, mScheduledExecutorService), 1, TimeUnit.SECONDS);
     }
 
-    @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
         mScheduledExecutorService.shutdownNow();
     }
