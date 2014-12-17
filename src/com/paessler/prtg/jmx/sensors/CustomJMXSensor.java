@@ -64,13 +64,14 @@ public class CustomJMXSensor extends Sensor {
         if (attributeList == null)
             return null;
         DataResponse response = null;
+        JMXConnector jmxc = null;
         try {
             response = new DataResponse(sensorId, mBean);
             String[] creds = {rmiUsername, rmiPassword};
             Map env = new HashMap<String, String[]>();
             env.put(JMXConnector.CREDENTIALS, creds);
             JMXServiceURL serviceURL = new JMXServiceURL(rmiString);
-            JMXConnector jmxc = JMXConnectorFactory.connect(serviceURL, env);
+            jmxc = JMXConnectorFactory.connect(serviceURL, env);
             MBeanServerConnection mbsc = jmxc.getMBeanServerConnection();
             ObjectName bean = new ObjectName(mBean);
 
@@ -103,6 +104,14 @@ public class CustomJMXSensor extends Sensor {
             error.setError("Exception");
             error.setMessage(e.getMessage() + " (Service URL: " + rmiString + ")");
             response = error;
+        } finally {
+            if (jmxc != null) {
+                try {
+                    jmxc.close();
+                } catch (Exception e) {
+                    // Ignore
+                }
+            }
         }
         return response;
     }
