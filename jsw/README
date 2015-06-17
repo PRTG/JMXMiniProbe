@@ -1,6 +1,0 @@
-This subdirectory contains the files needed to run the JMXMiniProbe on 
-Linux ARM platforms like the Raspberry Pi. 
-To run, copy all the files into the app directory:
-"cp -R * .."
-
-then run "bin/armJMXProbe"
