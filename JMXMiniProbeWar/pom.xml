@@ -1,0 +1,88 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+	<groupId>com.paessler.prtg</groupId>
+  	<artifactId>jmx</artifactId>
+  	<version>1.0</version>
+  </parent>
+  <artifactId>JMXMiniProbeWar</artifactId>
+  <packaging>war</packaging>
+  	<!-- version>1.0</version-->
+  <name>JMXProbe</name>
+  <url>https://github.com/PaesslerAG/JMXMiniProbe</url>
+
+   <properties> 
+      <daemonmain.classname>com.paessler.prtg.jmx.DaemonMain</daemonmain.classname>		
+   </properties> 
+  
+ <dependencies>
+  <dependency>
+      <groupId>com.paessler.prtg.jmx</groupId>
+      <artifactId>JMXMiniProbeJar</artifactId>
+      <version>${project.parent.version}</version>
+      <scope>system</scope>
+      <systemPath>${project.build.directory}/JMXMiniProbe.jar</systemPath>
+  </dependency>
+ </dependencies>
+
+ <build>
+   <finalName>${project.name}</finalName>
+   <directory>${project.basedir}/../target</directory>
+   <outputDirectory>${project.build.directory}/classes</outputDirectory>
+   <resources>
+     <resource>
+       <directory>web</directory>
+     </resource>
+   </resources>
+   <plugins>
+		<plugin>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-compiler-plugin</artifactId>
+		    <version>2.3.2</version>
+		    <configuration>
+		        <source>1.7</source>
+		        <target>1.7</target>
+		        <showDeprecation>true</showDeprecation>
+		        <compilerArguments>
+		            <d>${project.build.outputDirectory}</d>
+		        </compilerArguments>
+		    </configuration>
+		</plugin>
+		<!-- Make WAR -->
+		<plugin>
+		  <artifactId>maven-war-plugin</artifactId>
+		  <version>2.4</version>
+		  <configuration>
+		  	<webXml>${project.basedir}/../web/WEB-INF/web.xml</webXml>
+		    <!--archiveClasses>true</archiveClasses>
+		    <attachClasses>true</attachClasses-->
+		        <!-- excludes>
+		          <exclude>**/classes/WEB-INF/**</exclude>
+		        </excludes -->
+		    <packagingExcludes>**/WEB-INF/classes/**</packagingExcludes>
+		    <archive>
+	            <manifest>
+		        	<!--mainClass>com.paessler.prtg.jmx.DaemonMain</mainClass-->
+		        	<mainClass>${daemonmain.classname}</mainClass>
+			        <!--mainClass>com.paessler.prtg.jmx.ServerletMain</mainClass-->
+							<!--  Class-Path>.</Class-Path -->
+			        <addClasspath>true</addClasspath>
+			        <classpathPrefix>WEB-INF/lib/</classpathPrefix>
+	            </manifest>
+	            <manifestEntries>
+	            	<mode>development</mode>
+	            	<Name>JavaJMXProbe</Name>
+	            	<url>${project.url}</url>
+					<Custom-Title>PRTG JavaJMXProbe</Custom-Title>
+					<Custom-Version>${project.parent.version}</Custom-Version> 
+					<Custom-Vendor>Paessler AG</Custom-Vendor>
+					<Custom-Description>Copyright 2014-2015. Paessler AG. Provided AS-IS, no warranty expressed or implied.</Custom-Description>
+	            </manifestEntries>
+		    </archive>
+		  </configuration>
+		</plugin>
+   </plugins>
+ </build>
+
+</project>

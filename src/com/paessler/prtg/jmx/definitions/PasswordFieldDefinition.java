@@ -31,13 +31,8 @@
 package com.paessler.prtg.jmx.definitions;
 
 public class PasswordFieldDefinition extends FieldDefinition {
-    public String type="password";
-    public String name;
-    public String caption;
-    public String help;
+    public static String FIELDTYPE_PASSWORD  = "password";
     public PasswordFieldDefinition(String name, String caption, String help) {
-        this.name = name;
-        this.caption = caption;
-        this.help = help;
+    	super(FIELDTYPE_PASSWORD, name, caption, help);
     }
 }

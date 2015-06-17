@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- ###########################################################
+Unit Values[BANDWIDTH, MEMORY, DISK, FILE, TIME_RESPONSE, TIME_SECONDS, TIME_HOURS, TEMP, PERCENT, COUNT,CPU,CUSTOM]
+***************************************************************
+ This file contains the definition of the PRTG JMXMiniProbe MBean
+*** PLEASE DO NOT MODIFY ***
+Please note, the apache.commons.digester3 is * VERY * case sensitive
+########################################################### -->
+<profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Profile.xsd">
+	<profile>
+		<kind>jmxmpsensor</kind>
+		<name>JMX MiniProbe Metrics</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<description>PRTG JMXMiniProbe metrics</description>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help>Performance metrics for the probe itself</help>
+		<entries>
+		  <entry>
+			<object>com.paessler.prtg.jmx.mbean.PRTGBean:name=JMXMiniProbe</object>
+			<displayvalue/>
+			<description>JMX: PRTG JMXMiniProbe statistics</description>
+			<shortdescription>PRTG</shortdescription>
+			<comment>Class Name:com.paessler.prtg.jmx.mbean.PRTGInterface</comment>
+			<attributes>
+			  <attribute>
+				<object>AvgExecutionTime</object>
+				<displayvalue>Avg Sensor Exec</displayvalue>
+				<description>AvgExecutionTime, Average query Execution.</description>
+				<shortdescription/>
+				<comment>type=java.lang.long</comment>
+				<unit>TIME_RESPONSE</unit>
+			  </attribute>
+			  <attribute>
+				<object>AvgSenorCreationTime</object>
+				<displayvalue>Avg Sensor Creation</displayvalue>
+				<description>AvgSenorCreationTime, Average sensor creation.</description>
+				<shortdescription/>
+				<comment>type=java.lang.long</comment>
+				<unit>TIME_RESPONSE</unit>
+			  </attribute>
+			  <attribute>
+				<object>AvgUploadTime</object>
+				<displayvalue>Avg Upload</displayvalue>
+				<description>avgUploadTime, Average time to upload data.</description>
+				<shortdescription/>
+				<comment>type=java.lang.long</comment>
+				<unit>TIME_RESPONSE</unit>
+			  </attribute>
+			  <attribute>
+				<object>QueryCount</object>
+				<displayvalue>Number of Poll iterations</displayvalue>
+				<description>QueryCount, Poll iterations performed.</description>
+				<shortdescription/>
+				<comment>type=java.lang.long</comment>
+				<unit>COUNT</unit>
+			  </attribute>
+			  <attribute>
+				<object>SensorCount</object>
+				<displayvalue>Number of Sensors</displayvalue>
+				<description>SensorCount, Number of sensors.</description>
+				<shortdescription/>
+				<comment>type=java.lang.int</comment>
+				<unit>COUNT</unit>
+			  </attribute>
+			</attributes>
+		  </entry>
+		</entries>
+	</profile>
+	
+</profiles>

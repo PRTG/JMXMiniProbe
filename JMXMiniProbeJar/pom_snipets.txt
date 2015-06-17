@@ -1,0 +1,91 @@
+    <!--  ##################################################################### -->
+ 		<!-- http://mojo.codehaus.org/appassembler/appassembler-maven-plugin/usage-program.html  
+         http://mojo.codehaus.org/appassembler/appassembler-maven-plugin/assemble-mojo.html
+ 		-->
+		<plugin>
+	        <groupId>org.codehaus.mojo</groupId>
+	        <artifactId>appassembler-maven-plugin</artifactId>
+	        <version>1.10</version>
+	        <!--executions>
+	          <execution>
+	            <phase>package</phase>
+	            <goals>
+	              <goal>single</goal>
+	            </goals>
+	          </execution>
+	        </executions-->
+	        <configuration>
+	          <platforms>
+	            <platform>windows</platform>
+	            <platform>unix</platform>
+	          </platforms>
+	          <programs>
+	            <program>
+	              <!--mainClass>${daemonmain.classname}com.paessler.prtg.jmx.DaemonMain</mainClass-->
+	              <mainClass>com.paessler.prtg.jmx.DaemonMain</mainClass>
+	              <name>JMXMiniProbe</name>
+	              <id>app</id>
+	            </program>
+	          </programs>
+	        </configuration>
+		</plugin>
+    <!-- http://mojo.codehaus.org/appassembler/appassembler-maven-plugin/usage-program.html  -->
+
+
+
+
+
+   <!-- http://mojo.codehaus.org/appassembler/appassembler-maven-plugin/usage-program.html  -->
+		<plugin>
+	        <groupId>org.codehaus.mojo</groupId>
+	        <artifactId>appassembler-maven-plugin</artifactId>
+	        <version>1.10</version>
+	        <executions>
+	          <execution>
+	            <phase>package</phase>
+	            <goals>
+	              <goal>assemble</goal>
+	            </goals>
+	          </execution>
+	        </executions>
+	        <configuration>
+	          <!-- Set the target configuration directory to be used in the bin scripts -->
+	          <configurationDirectory>.</configurationDirectory>
+	          <!-- Copy the contents from "/src/main/config" to the target
+	               configuration directory in the assembled application -->
+	          <copyConfigurationDirectory>true</copyConfigurationDirectory>
+	          <!-- Include the target configuration directory in the beginning of
+	               the classpath declaration in the bin scripts -->
+	          <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+	          <!-- set alternative assemble directory -->
+	          <!--assembleDirectory>${project.build.directory}/mycompany-assemble</assembleDirectory-->
+	          <!-- Extra JVM arguments that will be included in the bin scripts -->
+	          <!--extraJvmArguments>-Xms128m</extraJvmArguments-->
+	          <!-- Generate bin scripts for windows and unix pr default -->
+	          <platforms>
+	            <platform>windows</platform>
+	            <platform>unix</platform>
+	          </platforms>
+	          <programs>
+	            <program>
+	              <mainClass>${daemonmain.classname}</mainClass>
+	              <id>app1</id>
+	              <!-- Only generate windows bat script for this application -->
+	              <platforms>
+	                <platform>windows</platform>
+	              </platforms>
+	            </program>
+	            <program>
+	              <mainClass>${daemonmain.classname}</mainClass>
+	                <!-- Add two predefined command line arguments to the call of App3 -->
+	                <!-- commandLineArgument>arg1</commandLineArgument>
+	                <commandLineArgument>arg2</commandLineArgument-->
+	              <id>app2</id>
+	              <!-- Only generate unix shell script for this application -->
+	              <platforms>
+	                <platform>unix</platform>
+	              </platforms>
+	            </program>
+	          </programs>
+	        </configuration>
+		</plugin>

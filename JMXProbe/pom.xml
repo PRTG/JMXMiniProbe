@@ -1,0 +1,239 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+  	<groupId>com.paessler.prtg</groupId>
+  	<artifactId>JavaMiniProbe</artifactId>
+  	<version>1.0</version>
+  </parent>
+  <artifactId>JMXProbe</artifactId>
+  <packaging>war</packaging>
+  	<!-- version>1.0</version-->
+  <name>JMXProbe</name>
+  <url>https://github.com/PaesslerAG/JMXMiniProbe</url>
+
+<!--  *******************  Dependencies  ******************* -->
+    <repositories>
+	  <!-- repository>
+	    <id>localproject-build</id>
+	    <name>data</name>
+	    <url>file://${project.basedir}/../web/WEB-INF/lib/</url>
+	  </repository -->
+        <!--repository>
+            <id>shortpasta</id>
+            <url>https://www.aht-group.com/nexus/content/repositories/thirdparty/</url>
+        </repository-->
+		<repository>
+			<releases/>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>snmp4j.repo</id>
+			<name>SNMP4J Maven Repository</name>
+			<url>https://oosnmp.net/dist/release</url>
+		</repository>
+		
+  </repositories>
+  
+<dependencyManagement>
+    <dependencies>
+	  <!--  Our freshly created JAR -->
+	  <dependency>
+	      <groupId>com.paessler.prtg</groupId>
+	      <artifactId>JMXMiniProbe</artifactId>
+	      <version>${project.version}</version>
+            <scope>import</scope>
+            <type>pom</type>
+	  </dependency>
+    </dependencies>
+</dependencyManagement>
+  <dependencies>
+	  <dependency>
+	      <groupId>com.paessler.prtg</groupId>
+	      <artifactId>JMXMiniProbe</artifactId>
+	      <version>${project.version}</version>
+	  </dependency>
+  </dependencies>
+	 
+ <!-- Build directives -->
+ <build>
+   <directory>${project.basedir}/../target</directory>
+   <outputDirectory>${project.build.directory}/classes</outputDirectory>
+   <finalName>${project.artifactId}</finalName>
+   <resources>
+     <resource>
+       <directory>web</directory>
+     </resource>
+   </resources>
+   <plugins>
+		<plugin>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-compiler-plugin</artifactId>
+		    <version>2.3.2</version>
+		    <configuration>
+		        <source>1.7</source>
+		        <target>1.7</target>
+		        <showDeprecation>true</showDeprecation>
+		        <compilerArguments>
+		            <d>${project.build.outputDirectory}</d>
+		        </compilerArguments>
+		    </configuration>
+		</plugin>
+		<!-- Make WAR -->
+		<plugin>
+		  <artifactId>maven-war-plugin</artifactId>
+		  <version>2.4</version>
+		  <configuration>
+		  	<webXml>${project.basedir}/../web/WEB-INF/web.xml</webXml>
+		    <archiveClasses>false</archiveClasses>
+		    <attachClasses>false</attachClasses>
+		        <!--excludes>
+		          <exclude>**/classes/WEB-INF/**</exclude>
+		        </excludes-->
+		    <packagingExcludes>**/WEB-INF/classes/**</packagingExcludes>
+            <!-- Add the properties -->
+			<webResources>
+				<!--  Add JMXMiniprobe.jar -->
+			  <resource>
+			    <directory>${project.basedir}/../data</directory>
+			    <targetPath>WEB-INF/lib</targetPath>
+				<includes>
+				  <include>${project.build.directory}/JMXMiniProbe.jar</include>
+				</includes>
+			  </resource>
+			  <resource>
+			    <directory>${project.basedir}/../data</directory>
+			    <targetPath>.</targetPath>
+				<includes>
+				  <include>management.properties</include>
+				  <include>jmxremote.access</include>
+				  <include>jmxremote.password</include>
+				  <include>prtgjmx-sample.properties</include>
+				  <!--include>prtgjmx.properties</include-->
+				</includes>
+			  </resource>
+			  <resource>
+			    <directory>${project.basedir}/../data</directory>
+			    <targetPath>./WEB-INF</targetPath>
+				<includes>
+				  <include>log4j.properties</include>
+				</includes>
+			  </resource>
+			  <resource>
+			    <directory>${project.basedir}\..</directory>
+			    <targetPath>.</targetPath>
+				<includes>
+				  <include>README.md</include>
+				</includes>
+			  </resource>
+			  <!-- resource>
+			    <directory>${project.basedir}\..\JMXMiniProbeWar</directory>
+			    <targetPath>.</targetPath>
+				<includes>
+				  <include>JMXMiniProbe.bat</include>
+				  <include>JMXMiniProbe.sh</include>
+				  <include>JMXMiniProbeNoRmt.sh</include>
+				  <include>JMXMiniProbeD.sh</include>
+				</includes>
+			  </resource-->
+			  <!-- resource>
+			    <directory>${project.basedir}/..</directory>
+			    <targetPath>.</targetPath>
+				<includes>
+				  <include>scripts/probe.tpl</include>
+				  <include>scripts/rotate.tpl</include>
+				  <include>probe_installer.py</include>
+				</includes>
+            	<!- - Hack to make the WAR "executable" - ->
+			    <!- -directory>${project.build.outputDirectory}</directory>
+			    <targetPath>.</targetPath- ->
+			  </resource-->
+			  <!-- Include Sensor profiles -->
+			  <resource>
+			    <directory>${project.basedir}/../profiles</directory>
+			    <targetPath>./profiles</targetPath>
+				<includes>
+				  <include>*.xml</include>
+				  <include>*.xsd</include>
+				  <include>ProfileDescr.xml.txt</include>
+				</includes>
+			  </resource>
+			  <!-- Include genJMXProfile scripts -->
+			  <resource>
+			    <directory>${project.basedir}/../target/Assembletest/bin</directory>
+			    <targetPath>./bin</targetPath>
+				<includes>
+				  <include>*</include>
+				</includes>
+			  </resource>
+			  <!-- ** Not yet tested **  Include install and scripts -->
+			  <!--  resource>
+			    <directory>${project.basedir}/../JMXMiniProbeJar</directory>
+			    <targetPath>./bin</targetPath>
+				<includes>
+				  <include>installJMXMiniProbe</include>
+				  <include>removeJMXMiniProbe</include>
+				</includes>
+			  </resource -->
+			  <!-- Include jsw config and scripts -->
+			  <resource>
+			    <directory>${project.basedir}/../target/generated-resources/appassembler/jsw/JMXMiniProbe/bin</directory>
+			    <targetPath>./bin</targetPath>
+				<includes>
+				  <include>JMX*</include>
+				  <include>wrapper*</include>
+				</includes>
+			  </resource>
+			  <resource>
+			    <directory>${project.basedir}/../target/generated-resources/appassembler/jsw/JMXMiniProbe/etc</directory>
+			    <targetPath>./etc</targetPath>
+				<includes>
+				  <include>*.conf</include>
+				</includes>
+			  </resource>
+			  <resource>
+			    <directory>${project.basedir}/../target/generated-resources/appassembler/jsw/JMXMiniProbe/WEB-INF/lib</directory>
+			    <targetPath>./WEB-INF/lib</targetPath>
+				<includes>
+				  <include>wrapper*</include>
+				  <include>libwrapper*</include>
+				</includes>
+			  </resource>
+            <!-- Add Alternate jsw binaries for RPi(ARM)
+            	Not yet working... 
+            -->
+			  <!-- resource>
+			    <directory>${project.basedir}/../jsw</directory>
+			    <targetPath>./arm</targetPath>
+				<includes>
+				  <include>**</include>
+				</includes>
+			  </resource-->
+			</webResources>
+            <!-- Add the properties -->
+		    <archive>
+	            <manifest>
+		        	<mainClass>com.paessler.prtg.jmx.DaemonMain</mainClass>
+			        <!--mainClass>com.paessler.prtg.jmx.ServerletMain</mainClass-->
+							<!--  Class-Path>.</Class-Path -->
+			        <addClasspath>true</addClasspath>
+			        <classpathPrefix>WEB-INF/lib/</classpathPrefix>
+	            </manifest>
+	            <manifestEntries>
+	            	<!--Class-Path>${classpathPrefix}classes</Class-Path-->
+	            	<Class-Path>WEB-INF/lib/classes</Class-Path>
+	            	<mode>development</mode>
+	            	<Name>JavaJMXProbe</Name>
+	            	<url>${project.url}</url>
+					<Custom-Title>PRTG JavaJMXProbe</Custom-Title>
+					<Custom-Version>${project.parent.version}</Custom-Version> 
+					<Custom-Vendor>Paessler AG</Custom-Vendor>
+					<Custom-Description>Copyright 2014-2015. Paessler AG. Provided AS-IS, no warranty expressed or implied.</Custom-Description>
+	            </manifestEntries>
+		    </archive>
+		  </configuration>
+		</plugin>
+   </plugins>
+ </build>
+
+</project>

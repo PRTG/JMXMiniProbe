@@ -32,13 +32,10 @@ package com.paessler.prtg.jmx.tasks;
 
 import com.paessler.prtg.jmx.Logger;
 import com.paessler.prtg.jmx.ProbeContext;
-import com.paessler.prtg.jmx.definitions.SensorDefinition;
-import com.paessler.prtg.jmx.network.Announcement;
-import com.paessler.prtg.jmx.network.NetworkWrapper;
-import com.paessler.prtg.jmx.sensors.CustomJMXSensor;
-import com.paessler.prtg.jmx.sensors.VMHealthSensor;
+import com.paessler.prtg.jmx.sensors.jmx.JMXUtils;
 
 import javax.servlet.ServletContext;
+
 import java.util.*;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -60,34 +57,76 @@ public class AnnouncementTask extends TimerTask {
         mServletContext = context;
         mProbeContext = probeContext;
     }
+/*
+    public boolean sendAnnouncement(){
+    	boolean retVal = false;
+        try {
+			List<SensorDefinition> definitions = mProbeContext.getSensorDefinitionsListHack();
 
+			Announcement announcement = new Announcement("PRTG JMX Probe", "14.3.1", mProbeContext.getBaseInterval(), definitions);
+			String url = announcement.buildUrl(mProbeContext);
+			try {
+			    String postBody = announcement.toString();
+			    Logger.log("Sending: " + postBody);
+			    NetworkWrapper.post(url, postBody);
+			    retVal =  true;
+			} catch (Exception e) {
+			    Logger.log(e.getLocalizedMessage());
+			    if (mAnnouncementTries <= 10) {
+			        int seconds =  ANNOUNCEMENT_BACKOFF_IN_SECONDS * mAnnouncementTries;
+			        Logger.log(String.format("Trying again in %d seconds", seconds));
+			        mScheduledExecutorService.schedule(this, seconds, TimeUnit.SECONDS);
+			        mAnnouncementTries += 1;
+			    } else {
+			        Logger.log("Could not send announcement. I'm giving up now.");
+			    }
+			}
+
+		} catch (Throwable e) {
+	        Logger.log("Cought Throwable in AnnouncementTask.run(). "+e.getMessage());
+			e.printStackTrace();
+		}
+        return retVal;
+    }
+*/    
+    
     @Override
     public void run() {
-        Logger.log(mServletContext, "Announcement task running");
-        List<SensorDefinition> definitions = new ArrayList<SensorDefinition>(2);
-        CustomJMXSensor jmxSensor = new CustomJMXSensor();
-        definitions.add(jmxSensor.getDefinition());
-        VMHealthSensor healthSensor = new VMHealthSensor();
-        definitions.add(healthSensor.getDefinition());
-        Announcement announcement = new Announcement("PRTG JMX Probe", "14.3.1", 60, definitions);
-        String url = announcement.buildUrl(mProbeContext);
+        Logger.log("Announcement task running");
+        TaskFetcherTask taskfetcher = new TaskFetcherTask(mServletContext, mProbeContext, mScheduledExecutorService);
+    	if(mProbeContext.getDumpJMXMBeans() > 0){
+    		try {
+				JMXUtils.dumpJMXToFile(mProbeContext.getDumpJMXMBeansFileN(), mProbeContext.getDumpRMIString(), null, null, false);
+			} catch (Throwable e) {
+		        Logger.log("Dump of JMX MBeans["+mProbeContext.getDumpJMXMBeansFileN()+"] failed. "+e.getMessage());
+				e.printStackTrace();
+			}
+    		mProbeContext.setDumpJMXMBeans(0);
+    	}
         try {
-            String postBody = announcement.toString();
-            Logger.log(mServletContext, "Sending: " + postBody);
-            NetworkWrapper.post(url, postBody);
-        } catch (Exception e) {
-            Logger.log(mServletContext, e.getLocalizedMessage());
-            if (mAnnouncementTries <= 10) {
-                int seconds =  ANNOUNCEMENT_BACKOFF_IN_SECONDS * mAnnouncementTries;
-                Logger.log(mServletContext, String.format("Trying again in %d seconds", seconds));
-                mScheduledExecutorService.schedule(this, seconds, TimeUnit.SECONDS);
-                mAnnouncementTries += 1;
-            } else {
-                Logger.log(mServletContext, "Could not send announcement. I'm giving up now.");
-            }
-            return;
+        	
+        	if(taskfetcher.sendAnnouncement(mProbeContext)){
+//        		mScheduledExecutorService.scheduleWithFixedDelay(new TaskFetcherTask(mServletContext, mProbeContext, mScheduledExecutorService), (int)(mProbeContext.getBaseInterval() / 2), mProbeContext.getBaseInterval(), TimeUnit.SECONDS);
+        		mScheduledExecutorService.scheduleWithFixedDelay(taskfetcher, 15, mProbeContext.getBaseInterval(), TimeUnit.SECONDS);
+        		taskfetcher = null;
+        	} else {
+    		    if (mAnnouncementTries <= 10) {
+    		        int seconds =  ANNOUNCEMENT_BACKOFF_IN_SECONDS * mAnnouncementTries;
+    		        Logger.log(String.format("Trying again in %d seconds", seconds));
+    		        mScheduledExecutorService.schedule(this, seconds, TimeUnit.SECONDS);
+    		        mAnnouncementTries += 1;
+    		        taskfetcher = null;
+    		    } else {
+    		        Logger.log("Could not send announcement. I'm giving up now.");
+    		    }
+        	}
+        	
+		} catch (Throwable e) {
+	        Logger.log("Cought Throwable in AnnouncementTask.run(). "+e.getMessage());
+			e.printStackTrace();
+		}
+        if(taskfetcher != null){
+        	taskfetcher.cleanup();
         }
-
-        mScheduledExecutorService.scheduleWithFixedDelay(new TaskFetcherTask(mServletContext, mProbeContext), 60, 60, TimeUnit.SECONDS);
     }
 }

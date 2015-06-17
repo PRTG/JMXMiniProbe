@@ -33,8 +33,14 @@ package com.paessler.prtg.jmx.channels;
 public class FloatChannel extends Channel {
     float value;
 
+    public void setValue(float val){value = val;}
+    
+    public FloatChannel(String name, Unit unit, float value) {
+        super(name, unit, Mode.FLOAT);
+        setValue(value);
+    }
     public FloatChannel(String name, String unit, float value) {
-        super(name, unit, "float");
-        this.value = value;
+    	this(name, toUnit(unit), value);
+    	
     }
 }

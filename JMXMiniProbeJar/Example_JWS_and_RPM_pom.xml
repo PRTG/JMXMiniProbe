@@ -1,0 +1,202 @@
+<!-- https://wiki.cantara.no/display/dev/Example+JSW+and+RPM ->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+ 
+<profiles>
+<profile>
+  <id>rpm</id>
+  <activation>
+    <property>
+      <name>env</name>
+      <value>prod</value>
+    </property>
+  </activation>
+  <build>
+    <plugins>   
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>appassembler-maven-plugin</artifactId>
+        <version>1.0-beta-1</version>
+        <configuration>
+          <repositoryLayout>flat</repositoryLayout>
+          <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+          <target>${project.build.directory}</target>
+   
+          <defaultJvmSettings>
+            <initialMemorySize>256M</initialMemorySize>
+            <maxMemorySize>1024M</maxMemorySize>
+            <systemProperties>
+              <systemProperty>com.sun.management.jmxremote</systemProperty>
+              <systemProperty>com.sun.management.jmxremote.port=8999</systemProperty>
+              <systemProperty>com.sun.management.jmxremote.authenticate=false</systemProperty>
+              <systemProperty>com.sun.management.jmxremote.ssl=false</systemProperty>
+            </systemProperties>
+            <extraArguments>
+              <extraArgument>-server</extraArgument>
+            </extraArguments>
+          </defaultJvmSettings>
+   
+          <daemons>
+            <daemon>
+              <id>${rpm.appname}</id>
+              <mainClass>com.company.MainClass</mainClass>
+              <commandLineArguments>
+                <commandLineArgument>start</commandLineArgument>
+              </commandLineArguments>
+              <platforms>
+                <platform>jsw</platform>
+              </platforms>
+            </daemon>
+          </daemons>
+   
+        </configuration>
+        <executions>
+          <execution>
+            <id>libsAndScripts</id>
+            <phase>package</phase>
+            <goals>
+              <goal>generate-daemons</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+   
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>rpm-maven-plugin</artifactId>
+        <version>2.0-beta-1</version>
+        <executions>
+          <execution>
+            <phase>install</phase>
+            <goals>
+              <goal>rpm</goal>
+            </goals>
+          </execution>
+        </executions>
+   
+        <configuration>
+          <release>1</release>
+          <copyright>${pom.inceptionYear}, ${pom.organization.name}</copyright>
+          <group>Applications/Engineering</group>
+   
+          <mappings>
+            <mapping>
+              <directory>${rpm.path}/bin</directory>
+              <filemode>770</filemode>
+              <username>${rpm.username}</username>
+              <groupname>${rpm.groupname}</groupname>
+              <sources>
+                <source>
+                  <location>${jswDir}/bin</location>
+                  <excludes>
+                    <exclude>*.bat</exclude>
+                    <exclude>*.exe</exclude>
+                  </excludes>
+                </source>
+              </sources>
+            </mapping>
+            <mapping>
+              <directory>${rpm.path}/conf</directory>
+              <configuration>true</configuration>
+              <filemode>660</filemode>
+              <username>${rpm.username}</username>
+              <groupname>${rpm.groupname}</groupname>
+              <sources>
+                <source>
+                  <location>${distDir}/conf</location>
+                </source>
+              </sources>
+            </mapping>
+            <mapping>
+              <directory>${rpm.path}/lib</directory>
+              <filemode>660</filemode>
+              <username>${rpm.username}</username>
+              <groupname>${rpm.groupname}</groupname>
+              <sources>
+                <source>
+                  <location>${jswDir}/lib</location>
+                  <excludes>
+                    <exclude>*.dll</exclude>
+                  </excludes>
+                </source>
+              </sources>
+            </mapping>
+            <mapping>
+              <directory>${rpm.path}/repo</directory>
+              <filemode>660</filemode>
+              <username>${rpm.username}</username>
+              <groupname>${rpm.groupname}</groupname>
+              <artifact>
+                <classifiers>
+                  <classifier/>
+                </classifiers>
+              </artifact>
+              <dependency/>
+            </mapping>
+            <mapping>
+              <directory>${rpm.path}/logs</directory>
+              <filemode>660</filemode>
+              <username>${rpm.username}</username>
+              <groupname>${rpm.groupname}</groupname>
+            </mapping>
+          </mappings>
+          <preinstall>echo Installing ${rpm.appname} ...</preinstall>
+          <postinstall>
+            echo Configuring ${rpm.appname} init scripts
+            #!/bin/sh
+            ln -s ${rpm.path}/bin/${rpm.appname} /etc/init.d/${rpm.appname}
+            #update-rc.d ${rpm.appname} start 20 3 5 . stop 20 0 1 2 4 6 .
+   
+            # configure chkconfig install
+   
+            if [ -x /sbin/chkconfig ]; then
+            /sbin/chkconfig --add ${rpm.appname}
+            else
+            ln -sf /etc/init.d/${rpm.appname} /etc/rc.d/rc3.d/S20${rpm.appname}
+            ln -sf /etc/init.d/${rpm.appname} /etc/rc.d/rc5.d/S20${rpm.appname}
+   
+            ln -sf /etc/init.d/${rpm.appname} /etc/rc.d/rc0.d/K10${rpm.appname}
+            ln -sf /etc/init.d/${rpm.appname} /etc/rc.d/rc1.d/K10${rpm.appname}
+            ln -sf /etc/init.d/${rpm.appname} /etc/rc.d/rc2.d/K10${rpm.appname}
+            ln -sf /etc/init.d/${rpm.appname} /etc/rc.d/rc4.d/K10${rpm.appname}
+            ln -sf /etc/init.d/${rpm.appname} /etc/rc.d/rc6.d/K10${rpm.appname}
+            fi
+          </postinstall>
+          <preremove>
+            echo Removing ${rpm.appname} ...
+   
+            #chkconfig scripts removal
+            #only on uninstall, not on upgrades.
+            if [ $1 = 0 ]; then
+            /etc/init.d/${rpm.appname} stop
+            if [ -x /sbin/chkconfig ]; then
+            echo "chkconfig --del ${rpm.appname}"
+            /sbin/chkconfig --del ${rpm.appname}
+            else
+            echo "Deleting /etc/rc.d/rc?.d/???${rpm.appname}"
+            rm -f /etc/rc.d/rc?.d/???${rpm.appname}
+            fi
+            fi
+          </preremove>
+   
+          <postremove>
+            echo "Deleting /etc/init.d/${rpm.appname}"
+            rm /etc/init.d/${rpm.appname}
+            echo ${rpm.appname} is Successfully Removed!
+          </postremove>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+ 
+</profile>
+</profiles>
+ 
+  <properties>
+    <jswDir>${project.build.directory}/jsw/${rpm.appname}</jswDir>
+    <rpm.username>app1</rpm.username>
+    <rpm.groupname>app1</rpm.groupname>
+    <rpm.appname>app1</rpm.appname>
+    <rpm.path>/opt/${rpm.appname}</rpm.path>
+  </properties>
+ 
+</project>

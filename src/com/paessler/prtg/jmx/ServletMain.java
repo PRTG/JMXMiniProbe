@@ -34,17 +34,18 @@ package com.paessler.prtg.jmx;
 import com.paessler.prtg.jmx.tasks.AnnouncementTask;
 
 import javax.servlet.*;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
-import java.util.Properties;
-import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class ServletMain extends GenericServlet implements ServletContextListener {
-    private ScheduledExecutorService mScheduledExecutorService;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7416678098747609639L;
+	private ScheduledExecutorService mScheduledExecutorService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -53,57 +54,34 @@ public class ServletMain extends GenericServlet implements ServletContextListene
 
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         ServletContext context = servletContextEvent.getServletContext();
-        String key = null;
-        String prtgServer = null;
+    	Logger.initLogger(context);
+        String defCondpath = context.getRealPath("/"+ProbeContext.DEF_CONFIG_FILENAME);
         String configFile = System.getProperty("com.paessler.jmxprobe.config");
         if (configFile == null) {
-            Logger.log(context, "Missing configuration file path");
-            return;
+        	configFile = defCondpath;
+            Logger.log("Missing configuration file path. Reverting to default("+configFile+")");
         }
-        Logger.log(context, "Reading configuration from " + configFile);
-
-        Properties settings = new Properties();
-        try {
-            settings.load(new FileInputStream(configFile));
-            key = settings.getProperty("key");
-            prtgServer = settings.getProperty("host");
-        } catch (IOException e) {
-            // Ignore it
-        }
-
-        String guid = settings.getProperty("guid");
-        if (guid == null) {
-            guid = UUID.randomUUID().toString();
-            settings.put("guid", guid);
-            try {
-                settings.store(new FileOutputStream(configFile), "");
-            } catch (IOException e) {
-                Logger.log(context, "Could not write to the config file");
-                return;
-            }
-        }
-
-        if (guid == null) {
-            Logger.log(context, "I need a GUID to continue");
-            return;
-        }
-
-        if (key == null) {
-            Logger.log(context, "I need a key to continue");
-            return;
-        }
-
-        if (prtgServer == null) {
-            Logger.log(context, "I need a server to connect to");
-        }
-
-        ProbeContext probeContext = new ProbeContext(prtgServer, guid, key);
-        mScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-        mScheduledExecutorService.schedule(new AnnouncementTask(probeContext, context, mScheduledExecutorService), 1, TimeUnit.SECONDS);
+        Logger.log("Reading configuration from " + configFile);
+		ProbeContext probeContext = ProbeContext.getProbeContext(configFile);
+		
+		if(!probeContext.isErrorStatus()){
+//        mScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+			if(probeContext.getWorkerThreads() > 1){
+				mScheduledExecutorService = Executors.newScheduledThreadPool(probeContext.getWorkerThreads());
+			} else {
+				mScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+			}
+			mScheduledExecutorService.schedule(new AnnouncementTask(probeContext, context, mScheduledExecutorService), 1, TimeUnit.SECONDS);
+		} else {
+			System.out.println(probeContext.getErrorMessage()+" Failiure to launch-> [Default Config path="+defCondpath+"]");
+            Logger.log(probeContext.getErrorMessage()+" [Default Config path="+defCondpath+"]");
+		}
     }
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-        mScheduledExecutorService.shutdownNow();
+    	if(mScheduledExecutorService != null){
+    		mScheduledExecutorService.shutdownNow();
+    	}
     }
 
     @Override

@@ -30,19 +30,21 @@
 
 package com.paessler.prtg.jmx.responses;
 
+
 public class DataError extends DataResponse {
+	/**    The monitored device reported an error. This includes timeouts, HTTP response codes, etc.
+    Exception: Error in sensor handling.
+    Socket: Socket error.
+	 */
     public String error;
+    /** The error code which is stored in the database. */
     public int code;
-    public String message;
+    //public int  code;	 // The error code which is stored in the database.	Integer    
 
     public DataError(int sensorId, String name) {
         super(sensorId, name);
-        channel = null;
-    }
-
-
-    public void setMessage(String message) {
-        this.message = message;
+        setCode(1);
+        setError("Exception");
     }
 
     public void setCode(int code) {

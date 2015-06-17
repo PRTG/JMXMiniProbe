@@ -32,20 +32,21 @@ package com.paessler.prtg.jmx.definitions;
 
 import java.util.ArrayList;
 
+import com.google.gson.JsonObject;
+
 public class CustomJMXSensorDefinition extends SensorDefinition {
     public static String KIND = "jmxcustomattributes";
-    public String description = "Monitors custom attribute values";
-    public String help = "";
-    public String tag = "jmx";
     public CustomJMXSensorDefinition() {
         kind = KIND;
         name = "Custom MBean Attributes Sensor";
+        description = "Monitors custom attribute values";
+        tag = "jmx";
 
         groups = new ArrayList<GroupDefinition>();
         GroupDefinition rmiGroupDefinition = new GroupDefinition("Connection", "Connection Settings");
         rmiGroupDefinition.fields.add( new SimpleEditFieldDefinition("rmi_string", "RMI Connection String"));
-        rmiGroupDefinition.fields.add(new SimpleEditFieldDefinition("rmi_username", "Username"));
-        rmiGroupDefinition.fields.add(new PasswordFieldDefinition("rmi_password", "Password", ""));
+        rmiGroupDefinition.fields.add(new SimpleEditFieldDefinition(SensorConstants.USERNAME, "Username"));
+        rmiGroupDefinition.fields.add(new PasswordFieldDefinition(SensorConstants.PASSWORD, "Password", ""));
         rmiGroupDefinition.fields.add(new SimpleEditFieldDefinition("mbean", "MBean"));
         groups.add(rmiGroupDefinition);
 
@@ -58,4 +59,6 @@ public class CustomJMXSensorDefinition extends SensorDefinition {
             groups.add(attributeDefinition);
         }
     }
+    
+// 
 }

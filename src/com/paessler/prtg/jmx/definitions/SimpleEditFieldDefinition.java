@@ -31,12 +31,15 @@
 package com.paessler.prtg.jmx.definitions;
 
 public class SimpleEditFieldDefinition extends FieldDefinition {
-    public String type = "edit";
-    public String name;
-    public String caption;
-
+    public static String FIELDTYPE_EDIT  = "edit";
+    public SimpleEditFieldDefinition(String name, String caption, String help, Object defaultValue) {
+    	super(FIELDTYPE_EDIT, name, caption, help, defaultValue);
+    }
+    public SimpleEditFieldDefinition(String name, String caption, String help) {
+    	this(name, caption, help, null);
+    }
+	// --------------------------------------------------------------
     public SimpleEditFieldDefinition(String name, String caption) {
-        this.name = name;
-        this.caption = caption;
+    	this(name, caption, null);
     }
 }
