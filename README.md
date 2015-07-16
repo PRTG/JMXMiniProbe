@@ -1,7 +1,9 @@
-JMXMiniProbe
+JMXMiniProbe Proof-of-Concept
 ============
 
-A PRTG MiniProbe for monitoring Java applications using JMX
+A PRTG MiniProbe for monitoring Java applications using JMX.
+
+## Please note: we do not offer support for the JMXMiniProbe. It is a proof-of-concept that you can adapt to your needs.
 
 Installation Instructions
 =========================
