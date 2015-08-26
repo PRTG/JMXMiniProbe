@@ -79,7 +79,7 @@ public class PingSensor extends RemoteSensor {
 	    try {
 
 		      final IcmpPingRequest request = IcmpPingUtil.createIcmpPingRequest ();
-		      request.setHost (getRemoteHost());
+		      request.setHost (getHost());
 		      request.setTimeout(getTimeout());
 		      retVal = new ArrayList<IcmpPingResponse>(getPingCount());
 		      for (int count = 1; count <= getPingCount(); count ++) {

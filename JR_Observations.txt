@@ -1,0 +1,155 @@
+http://docs.oracle.com/javase/6/docs/technotes/guides/management/agent.html
+
+"C:\Program Files\Java\jre7\bin\keytool" -gen keypair -alias duke -keyalg RSA -validity 7 -keystore keystore
+Enter keystore password: java_duke
+Re-enter new password:
+What is your first and last name?
+  [Unknown]:  PRTG
+What is the name of your organizational unit?
+  [Unknown]:  Dev
+What is the name of your organization?
+  [Unknown]:  Paessler AG
+What is the name of your City or Locality?
+  [Unknown]:  Nurenburg
+What is the name of your State or Province?
+  [Unknown]:
+What is the two-letter country code for this unit?
+  [Unknown]:  DE
+Is CN=PRTG, OU=Dev, O=Paessler AG, L=Nurenburg, ST=Unknown, C=DE correct?
+  [no]:  Yes
+  
+"C:\Program Files\Java\jre7\bin\keytool" -list -v -keystore keystore
+
+"C:\Program Files\Java\jre7\bin\keytool" -export -alias duke -keystore keystore -rfc -file duke.cer
+
+-Djavax.net.debug="ssl,handshake"
+-Dsun.security.ssl.allowUnsafeRenegotiation=true
+
+-c data/prtgjmx.properties \
+	-Dcom.sun.management.jmxremote.port=3000 \
+     -Dcom.sun.management.jmxremote.password.file=password.properties \
+     -Dcom.sun.management.jmxremote.access.file=access.properties \
+     -Djavax.net.ssl.keyStore=keystore \
+     -Djavax.net.ssl.keyStorePassword=password
+     
+     
+JMX Stuff:
+http://events.linuxfoundation.org/sites/events/files/slides/Monitoring%20Apache%20Tomcat%20with%20JMX.pdf
+http://www.i-net-design.com/2011/07/15/monitoring-tomcat-7-with-jmc/
+
+
+You are not authorized to view this page.
+
+If you have already configured the Manager application to allow access and you have used your browsers back button, used a saved book-mark or similar then you may have triggered the cross-site request forgery (CSRF) protection that has been enabled for the HTML interface of the Manager application. You will need to reset this protection by returning to the main Manager page. Once you return to this page, you will be able to continue using the Manager appliction's HTML interface normally. If you continue to see this access denied message, check that you have the necessary permissions to access this application.
+
+If you have not changed any configuration files, please examine the file conf/tomcat-users.xml in your installation. That file must contain the credentials to let you use this webapp.
+
+For example, to add the manager-gui role to a user named tomcat with a password of s3cret, add the following to the config file listed above.
+
+<role rolename="manager-gui"/>
+<user username="tomcat" password="s3cret" roles="manager-gui"/>
+Note that for Tomcat 7 onwards, the roles required to use the manager application were changed from the single manager role to the following four roles. You will need to assign the role(s) required for the functionality you wish to access.
+
+manager-gui - allows access to the HTML GUI and the status pages
+manager-script - allows access to the text interface and the status pages
+manager-jmx - allows access to the JMX proxy and the status pages
+manager-status - allows access to the status pages only
+The HTML interface is protected against CSRF but the text and JMX interfaces are not. To maintain the CSRF protection:
+
+Users with the manager-gui role should not be granted either the manager-script or manager-jmx roles.
+If the text or jmx interfaces are accessed through a browser (e.g. for testing since these interfaces are intended for tools not humans) then the browser must be closed afterwards to terminate the session.
+For more information - please see the Manager App HOW-TO.
+
+
+
+What is needed....
+FOr Servlet Debugging:
+Eclipse Web Tools(WTP)
+ Include JST Server Adapters & JST Server Adapters Extentions
+ http://www.joe0.com/2014/03/24/how-to-fix-apache-tomcat-v7-0-not-showing-in-eclipse-server-runtime-environments-kepler-instructions/
+ 
+Debugging http://eclipse.dzone.com/tips/launching-and-debugging-tomcat 
+
+
+Catalina:type=Manager,host=localhost,context=/docs
+activeSessions
+rejectedSessions
+
+MBean Found, Class Name:com.sun.management.OperatingSystem
+	Object Name:java.lang:type=OperatingSystem, Information on the management interface of the MBean
+		Attribute Name: CommittedVirtualMemorySize, Type:long, Description: CommittedVirtualMemorySize
+		Attribute Name: FreePhysicalMemorySize, Type:long, Description: FreePhysicalMemorySize
+		Attribute Name: FreeSwapSpaceSize, Type:long, Description: FreeSwapSpaceSize
+		Attribute Name: ProcessCpuLoad, Type:double, Description: ProcessCpuLoad
+		Attribute Name: ProcessCpuTime, Type:long, Description: ProcessCpuTime
+		Attribute Name: SystemCpuLoad, Type:double, Description: SystemCpuLoad
+		Attribute Name: TotalPhysicalMemorySize, Type:long, Description: TotalPhysicalMemorySize
+		Attribute Name: TotalSwapSpaceSize, Type:long, Description: TotalSwapSpaceSize
+		Attribute Name: Name, Type:java.lang.String, Description: Name
+		Attribute Name: Version, Type:java.lang.String, Description: Version
+		Attribute Name: AvailableProcessors, Type:int, Description: AvailableProcessors
+		Attribute Name: Arch, Type:java.lang.String, Description: Arch
+		Attribute Name: SystemLoadAverage, Type:double, Description: SystemLoadAverage
+		Attribute Name: ObjectName, Type:javax.management.ObjectName, Description: ObjectName
+
+MBean Found, Class Name:com.paessler.prtg.jmx.mbean.PRTGInterface
+	Object Name:com.paessler.prtg.jmx.mbean.PRTGBean:name=JMXMiniProbe, Information on the management interface of the MBean
+		Attribute Name: ID, Type:long, Description: Attribute exposed for management
+		Attribute Name: QueryCount, Type:long, Description: Attribute exposed for management
+		Attribute Name: AvgExecutionTime, Type:long, Description: Attribute exposed for management
+
+
+JMX: http://eclipse-jmx.googlecode.com/svn/trunk/net.jmesnil.jmx.update/
+  https://code.google.com/p/eclipse-jmx/wiki/HowtoUse
+
+ Tomcat JMX Stuff
+https://tomcat.apache.org/tomcat-8.0-doc/monitoring.html
+
+
+
+
+INFO: Uploading [{"sensorid":2293,"channel":[{"value":19,"name":"QueryCount","mode":"Integer","showchart":1,"showtable":1}]}] to http://192.168.0.172/probe/data?gid=8964ae97-e44d-47ce-aac9-fd1810898385&key=42D79E46299D151D7D777D9BB0A3A577C591A3F3&protocol=1
+May 27, 2015 5:20:20 PM org.apache.catalina.core.ApplicationContext log
+INFO: Error sending data: Data Exception: Access violation at address 0098CD96 in module 'PRTG Server.exe'. Read of address 00000000
+
+INFO: Uploading [{"sensorid":2293,"channel":[{"value":19,"name":"QueryCount","mode":"Integer","showchart":1,"showtable":1}]}] to http://192.168.0.172/probe/data?gid=8964ae97-e44d-47ce-aac9-fd1810898385&key=42D79E46299D151D7D777D9BB0A3A577C591A3F3&protocol=1
+INFO: Uploading [{"sensorid":2293,"channel":[{"value":19,"name":"QueryCount","mode":"Integer","showchart":1,"showtable":1}]}] to http://192.168.0.172/probe/data?gid=8964ae97-e44d-47ce-aac9-fd1810898385&key=42D79E46299D151D7D777D9BB0A3A577C591A3F3&protocol=1
+
+Locating resources using JNDI 
+http://www.developer.com/java/data/article.php/10932_2215571_4/Locating-Resources-Using-JNDI-Java-Naming-and-Directory-Interface.htm
+
+
+Websphere:
+~~~~~~~~~~
+RMI/ Security :
+http://www-01.ibm.com/support/knowledgecenter/SSDTFJ_7.1.0.2/com.ibm.itcamfad.doc_7101/was_agent_install_guide_z/itcam_61_5_was_dc_zos_install_guide34.html
+http://www-01.ibm.com/support/knowledgecenter/SSDTFJ_7.1.0.2/com.ibm.itcamfad.doc_7101/was_agent_install_guide_z/itcam_61_5_was_dc_zos_install_guide32.html
+https://community.oracle.com/thread/1176486
+com.ibm.ws.admin.client_8.5.0
+http://www.ca.com/us/support/ca-support-online/product-content/knowledgebase-articles/tec603877.aspx
+http://www-01.ibm.com/support/knowledgecenter/SSAW57_8.5.5/com.ibm.websphere.nd.doc/ae/txml_adminclient.html
+
+Webspheere SNMP:
+~~~~~~~~~~
+https://www-01.ibm.com/support/knowledgecenter/SSEQTP_8.5.5/com.ibm.websphere.zseries.doc/ae/tprf_snmp_install.html
+If you have an error :
+[6/6/15 11:09:02:141 CDT] 00000090 annotation    W com.ibm.ws.webcontainer.annotation.WASAnnotationHelper collectClasses SRVE8000W: Skipped class that failed to initialize for annotation scanning.
+                                 java.lang.UnsupportedClassVersionError: JVMCFRE003 bad major version; class=com/paessler/prtg/jmx/ServletMain, offset=6
+
+https://www.ibm.com/developerworks/community/forums/html/topic?id=8ec448c0-63a6-426b-9acd-2bac659b60b9
+
+Weblogic:
+~~~~~~~~~~~
+https://blogs.oracle.com/WebLogicServer/entry/managing_weblogic_servers_with
+http://docs.oracle.com/cd/E13222_01/wls/docs90/jmx/accessWLS.html
+# service:jmx:iiop://140.87.10.42:7002/jndi/weblogic.management.mbeanservers.domainruntime
+# service:jmx:iiop://140.87.10.42:12565/jndi/weblogic.management.mbeanservers.runtime
+
+#Feature request...
+http://kb.paessler.com/en/topic/63382-jmx-mini-probe-custom-mbean-monitoring
+
+#Weblogic t3
+http://docs.oracle.com/cd/E11035_01/wls100/client/t3.html
+http://docs.oracle.com/cd/E13222_01/wls/docs90/jmx/accessWLS.html
+
+

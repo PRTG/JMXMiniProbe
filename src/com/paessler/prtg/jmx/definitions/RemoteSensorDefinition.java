@@ -37,11 +37,11 @@ import java.util.List;
 
 public abstract class RemoteSensorDefinition extends SensorDefinition {
 
-	protected FieldDefinition getHostField(){
-        FieldDefinition retVal = new SimpleEditFieldDefinition(SensorConstants.REMOTE_HOST, "Host name"); 
-        retVal.setHelp("DNS(server.domain.com) Name or numeric IP(A.B.C.D) of Host");
-        return retVal;
-	}
+//	protected FieldDefinition getHostField(){
+//        FieldDefinition retVal = new SimpleEditFieldDefinition(SensorConstants.REMOTE_HOST, "Host name"); 
+//        retVal.setHelp("DNS(server.domain.com) Name or numeric IP(A.B.C.D) of Host");
+//        return retVal;
+//	}
 	
 	protected FieldDefinition getPortField(int defaultvalue, String comment){
         // -------------------------
@@ -68,10 +68,11 @@ public abstract class RemoteSensorDefinition extends SensorDefinition {
 		
         GroupDefinition group = new GroupDefinition(SensorConstants.CONNECTION, "Connection Settings");
         addGroup(group);
+        FieldDefinition tmpfld = null;
         // -------------------------
-        FieldDefinition tmpfld = getHostField();         
-        addField(tmpfld);
-        group.fields.add(tmpfld);
+//        tmpfld = getHostField();         
+//        addField(tmpfld);
+//        group.fields.add(tmpfld);
         tmpfld = getTimeoutField(900, 1, 900000, "ms");
         addField(tmpfld);
         group.fields.add(tmpfld);

@@ -165,7 +165,7 @@ public class SNMPSensorSubInterface extends RemoteSensor {
 	protected void init(){
 		SNMPUtil.startSNMPListen();
 		// -----------------------------------------------------
-		snmpTarget = SNMPUtil.getTarget(getRemoteProtocol(), getRemoteHost(), ""+getRemotePort(), community, getSnmpVersion());
+		snmpTarget = SNMPUtil.getTarget(getRemoteProtocol(), getHost(), ""+getRemotePort(), community, getSnmpVersion());
 		ResponseEvent resp = null;
 		PDU pdu = SNMPUtil.getMetaInfoOIDs(-1);
 		OID hostOID = new OID(SNMPUtil.SYSNAME_OID);

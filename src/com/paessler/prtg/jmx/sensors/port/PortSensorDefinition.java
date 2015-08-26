@@ -44,7 +44,7 @@ import com.paessler.prtg.jmx.definitions.SimpleEditFieldDefinition;
  */
 
 public class PortSensorDefinition extends RemoteSensorDefinition {
-	public static final String KIND = "portrangesensor";
+	public static final String KIND = "mjportrangesensor";
 	public static final String TAG  = "mjportrangesensor";
 	public static final String PORT_SENSOR_VALS 	= "portrangesensor";
 	public static final String FIELD_PORT_VECTOR	= "portlist";

@@ -6,6 +6,9 @@
 # Package Files #
 *.war
 *.ear
+*.zip
+*.7z
+
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
@@ -39,3 +42,30 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 
 
+*.jsdtscope
+*.prefs
+
+#-------------------------------------------------------
+#  JR'z
+#-------------------------------------------------------
+.svn/
+.settings/
+bin/
+Backup/
+Paessler/
+lib/
+Junk*
+prtgjmx.properties
+Error.txt
+jssecacerts
+#-------------------------------------------------------
+scripts/
+#-------------------------------------------------------
+target/Assembletest/
+target/classes/
+target/generated-resources/
+target/generated-sources/
+target/JMXProbe/
+target/maven-archiver/
+probe_installer.py
+PRTG_SSL_Negotiation.txt

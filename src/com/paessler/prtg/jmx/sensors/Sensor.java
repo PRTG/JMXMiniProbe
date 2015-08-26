@@ -43,6 +43,8 @@ import com.paessler.prtg.jmx.tasks.TaskFetcherTask;
 
 public abstract class Sensor implements Runnable{
     public int sensorid = -1;
+    protected String host;
+//	protected int 	 port;
     protected String username;
     protected String password;
     protected String kind = "Sensor";
@@ -58,6 +60,8 @@ public abstract class Sensor implements Runnable{
 		sensorName  = tocopy.sensorName;
     	username = tocopy.username;
     	password = tocopy.password;
+    	host = tocopy.host;
+//    	port = tocopy.port;
         kind = tocopy.kind;
         sensordefinition = tocopy.sensordefinition;
     }
@@ -71,6 +75,13 @@ public abstract class Sensor implements Runnable{
 	// --------------------------------------------------------
 	public String 	getName() 			{return getKind();}
 	// --------------------------------------------------------
+//	public int getPort() {return port;}
+//	public void setPort(int port) {	this.port = port;	}
+	// ----------------------
+	public String getHost() {	return host;}
+	public void setHost(String host) {	this.host = host;}
+
+	// ----------------------------------------------------------------------
 	public String toString() {return getSensorName()+";"+getKind()+"["+getSensorid()+"]";}
 	// ----------------------------------------------------------------------
     public SensorDefinition getDefinition() 	{return sensordefinition;};
@@ -249,6 +260,14 @@ public abstract class Sensor implements Runnable{
 	            setPassword(tmpval);
 	        }
             setSensorid(getJsonElementInt(json, SensorConstants.SENSORID, getSensorid()));
+        	tmpval = getJsonElementString(json, SensorConstants.HOST);
+            if (tmpval != null && !tmpval.isEmpty()) {
+	            setHost(tmpval);
+	        }
+//        	tmpval = getJsonElementString(json, SensorConstants.PORT);
+//            if (tmpval != null && !tmpval.isEmpty()) {
+//                setPort(getJsonElementInt(json, SensorConstants.PORT, getPort()));
+//	        }
             // Set JSON for change compare
 	    	setJsonString(json);
         } catch (Exception e) {

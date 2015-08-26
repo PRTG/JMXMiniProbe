@@ -43,7 +43,7 @@ public class JMXSensorDefinition extends SensorDefinition {
 
 // ----------------------------------------------------------------------------------------------------
 	
-    public static String KIND = "jmxsensor";
+    public static String KIND = "mjjmxsensor";
     public static String TAG = "mjjmxsensor";
     
     // ----------------------------------------------------------

@@ -1,0 +1,19 @@
+language: java
+jdk:
+  - oraclejdk8
+  - oraclejdk7
+  - openjdk7
+#  - openjdk8
+# https://github.com/mbonaci/mbo-storm/wiki/Integrate-Travis-CI-with-your-GitHub-repo
+# http://docs.travis-ci.com/user/customizing-the-build/
+#
+# uncomment this line if your project needs to run something other than `rake`:
+# script:    mvn -Pitest -DargLine="-Dcom.basho.riak.search=true -Dcom.basho.riak.2i=true" clean verify
+#notifications:
+  # Email notifications are disabled to not annoy anybody.
+  # See http://about.travis-ci.org/docs/user/build-configuration/ to learn more
+  # about configuring notification recipients and more.
+#  webhooks: http://basho-engbot.herokuapp.com/travis?key=a8f477c8cdaabc8118d2a650281ff4a71eff875f
+#  email: false
+#services:
+#  - riak

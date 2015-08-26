@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import com.paessler.prtg.jmx.sensors.jmx.JMXUtils;
 
 public class VMHealthDefinition extends SensorDefinition {
-    public static String KIND = "jmxvmhealth";
+    public static String KIND = "mjjmxvmhealth";
     public static String TAG = "mjjmxvmhealthsensor";
 
     public VMHealthDefinition() {

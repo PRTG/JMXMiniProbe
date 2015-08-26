@@ -88,7 +88,7 @@ public class PortSensor extends RemoteSensor<IntegerAttribute> {
 		Channel retVal = null;
 		TimingUtility sensorcreationtimer = new TimingUtility();
 		try{
-			s.connect(new InetSocketAddress(getRemoteHost(), port), (int)getTimeout());
+			s.connect(new InetSocketAddress(getHost(), port), (int)getTimeout());
 			retVal = attr.getChannel(sensorcreationtimer.getElapsed());
 		} catch(SocketTimeoutException e){
 			retVal= attr.getChannel(sensorcreationtimer.getElapsed());

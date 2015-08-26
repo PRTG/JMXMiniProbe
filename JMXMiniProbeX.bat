@@ -1,0 +1,5 @@
+SET WEBINFLIB=web\WEB-INF\lib
+SET CLASS_LIBS=%WEBINFLIB%\commons-cli-1.2.jar;%WEBINFLIB%\commons-codec-1.6.jar;%WEBINFLIB%\commons-logging-1.1.1.jar;%WEBINFLIB%\gson-2.2.2.jar;%WEBINFLIB%\httpclient-4.2.5.jar;%WEBINFLIB%\httpclient-cache-4.2.5.jar;%WEBINFLIB%\httpcore-4.2.4.jar;%WEBINFLIB%\httpmime-4.2.5.jar;lib\serverlet-api-2.5.jar
+SET OTHERLIBS=%WEBINFLIB%\jna-3.5.1.jar;%WEBINFLIB%\platform-3.5.1.jar;%WEBINFLIB%\icmp4j.jar;%WEBINFLIB%\snmp4j-2.3.1.jar
+java.exe -cp ,\;.\bin;target\JMXMiniProbe.jar;%CLASS_LIBS%;%OTHERLIBS% -Dcom.sun.management.config.file=data\management.properties -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.authenticate=false  -Dcom.sun.management.jmxremote.ssl=false com.paessler.prtg.jmx.DaemonMain -c data/prtgjmx.properties
+REM java.exe -jar target\JMXMiniProbe.jar -cp .\;%WEBINFLIB% -Dcom.sun.management.config.file=data\management.properties -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.authenticate=false  -Dcom.sun.management.jmxremote.ssl=false com.paessler.prtg.jmx.DaemonMain -c data/prtgjmx.properties

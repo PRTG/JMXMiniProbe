@@ -98,7 +98,7 @@ public abstract class SNMPSensor extends RemoteSensor<SNMPEntry> {
 	//----------------------------------------------------------------------
 	private Target snmpTarget = null;
 	public Target makeSnmpTarget() {
-		return SNMPUtil.getTarget(getRemoteProtocol(), getRemoteHost(), ""+getRemotePort(), getCommunity(), getSnmpVersion());
+		return SNMPUtil.getTarget(getRemoteProtocol(), getHost(), ""+getRemotePort(), getCommunity(), getSnmpVersion());
 	}
 	
 	public Target getSnmpTarget() {	
@@ -322,7 +322,7 @@ public abstract class SNMPSensor extends RemoteSensor<SNMPEntry> {
 	        	this.setCommunity(tmpval);
 	        }
             
-	        tmpval = getJsonElementString(json, SensorConstants.VERSION);
+	        tmpval = getJsonElementString(json, SNMPSensorDefinition.FIELD_VERSION);
             if (tmpval != null && !tmpval.isEmpty()) {
 	        	this.setSnmpVersion(SNMPUtil.getVersion(tmpval));
 	        }

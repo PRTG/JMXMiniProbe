@@ -60,9 +60,8 @@ public class SNMPSensorSubInterfaceDefinition extends SensorDefinition {
 
         groups = new ArrayList<GroupDefinition>();
         GroupDefinition connectionSettings = new GroupDefinition(SensorConstants.CONNECTION, "Connection Settings");
-        connectionSettings.fields.add( new SimpleEditFieldDefinition(SensorConstants.REMOTE_HOST, "Host name"));
         // -------------------------
-        IntegerField tmpIfield = new IPPortField(SensorConstants.REMOTE_PORT, "SNMP Port", "Please provide Port");
+        IntegerField tmpIfield = new IPPortField(SensorConstants.PORT, "SNMP Port", "Please provide Port");
         tmpIfield.setRequired(FieldDefinition.FIELDVALUE_REQUIRED_TRUE);
         tmpIfield.setDefaultValue(161);
         connectionSettings.fields.add( tmpIfield);

@@ -46,7 +46,7 @@ import com.paessler.prtg.jmx.definitions.SimpleEditFieldDefinition;
 public abstract class SNMPSensorDefinition extends RemoteSensorDefinition {
 	public static String KIND = "snmpvector";
 
-	public static final String SNMP_SETTINGS		= "SNMPSettings";
+	public static final String FIELD_VERSION		= "version";
 	public static final String FIELD_SNMP_VECTOR	= "snmpvector";
 	public static final String FIELD_VALUES_DELTA	= "usedelta"; 
 	public static final String FIELD_COMMUNITY 		= "community";
@@ -56,7 +56,7 @@ public abstract class SNMPSensorDefinition extends RemoteSensorDefinition {
 
 	
 	protected FieldDefinition getSNMPVersion(String defaultvalue ){
-        RadioFieldDefinition retVal = new RadioFieldDefinition(SNMPSensorDefinition.SNMP_SETTINGS, "SNMP Version", "Choose your SNMP Version", defaultvalue);
+        RadioFieldDefinition retVal = new RadioFieldDefinition(SNMPSensorDefinition.FIELD_VERSION, "SNMP Version", "Choose your SNMP Version", defaultvalue);
         retVal.setRequired(FieldDefinition.FIELDVALUE_REQUIRED_TRUE);
         retVal.addOption("1", "V1");
         retVal.addOption("2", "V2c");

@@ -40,7 +40,7 @@ import com.paessler.prtg.jmx.definitions.SimpleEditFieldDefinition;
  */
 
 public class SNMPCustomDef extends SNMPSensorDefinition {
-	public static final String KIND = "snmpcustom";
+	public static final String KIND = "mjsnmpcustom";
 	public static final String TAG = "mjsnmpcustomsensor";
 	public static final String CUSTOM_SENSOR_VALS = "CustomSensorParameters";
 	public static final String FIELD_DESCR = "channeldescr";

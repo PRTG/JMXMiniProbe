@@ -43,7 +43,7 @@ import com.paessler.prtg.jmx.definitions.SimpleEditFieldDefinition;
  */
 
 public class HttpSensorDefinition extends RemoteSensorDefinition {
-	public static final String KIND = "httpsensor";
+	public static final String KIND = "mjhttpsensor";
 	public static final String TAG  = "mjhttpsensor";
 	public static final String HTTP_SENSOR_VALS 	= "httpsensorvals";
 	public static final String FIELD_HTTP_VECTOR	= "url";

@@ -24,7 +24,7 @@ Please note, the apache.commons.digester3 is * VERY * case sensitive
         <attributes>
           <attribute>
             <object>389</object>
-            <displayvalue>AD Critical ldap[89]</displayvalue>
+            <displayvalue>AD Critical ldap[389]</displayvalue>
             <description>AD Critical ldap[389]</description>
             <shortdescription/>
             <comment>type=java.lang.long</comment>

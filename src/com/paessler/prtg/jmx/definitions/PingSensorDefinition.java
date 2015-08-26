@@ -36,7 +36,7 @@ import java.util.ArrayList;
  */
 
 public class PingSensorDefinition extends SensorDefinition {
-	public static String KIND	= "ping";
+	public static String KIND	= "mjping";
 	public static String TAG 	= "mjpingsensor";
 
 	
@@ -46,7 +46,7 @@ public class PingSensorDefinition extends SensorDefinition {
 
         groups = new ArrayList<GroupDefinition>();
         GroupDefinition connectionSettings = new GroupDefinition(SensorConstants.CONNECTION, "Connection Settings");
-        connectionSettings.fields.add(new SimpleEditFieldDefinition(SensorConstants.REMOTE_HOST, "Host name", "Numeric IP or DNS Name"));
+//        connectionSettings.fields.add(new SimpleEditFieldDefinition(SensorConstants.REMOTE_HOST, "Host name", "Numeric IP or DNS Name"));
         connectionSettings.fields.add(new SimpleEditFieldDefinition(SensorConstants.COUNT, "Count of icmp echo requests", "Default 4 pings", new Integer(4)));
         connectionSettings.fields.add(new SimpleEditFieldDefinition(SensorConstants.TIMEOUT, "Ping timeout", "Timeout in MS default 1 second", 1000));
         groups.add(connectionSettings);

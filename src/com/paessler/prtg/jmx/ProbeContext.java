@@ -179,10 +179,10 @@ public class ProbeContext {
 	        }
         }
         if(!isErrorStatus()) {
-	        tmp = settings.getProperty(ProbeContext.HOST_STRING);
+	        tmp = settings.getProperty(ProbeContext.HOST_GUID);
 	        if (tmp == null) {
 	        	tmp = UUID.randomUUID().toString();
-	        	settings.put(ProbeContext.HOST_STRING, tmp);
+	        	settings.put(ProbeContext.HOST_GUID, tmp);
 	            try {
 	            	settings.store(new FileOutputStream(configPath), "");
 	            } catch (IOException e) {
