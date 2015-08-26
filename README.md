@@ -1,3 +1,10 @@
+JMXMiniProbe Proof-of-Concept
+
+A PRTG MiniProbe for monitoring Java applications using JMX.
+
+Please note: we do not offer support for the JMXMiniProbe. It is a proof-of-concept that you can adapt to your needs.
+
+
 JMXMiniProbe
 ============
 
@@ -65,6 +72,11 @@ Starting the probe in an application server
 
 Changelog
 =========
+
+2015-08-25
+----------
+-- Fixed Bug: Used host as GID
+-- Fixed Bug: Prefer Device IP address
 
 2015-06-09
 ----------
