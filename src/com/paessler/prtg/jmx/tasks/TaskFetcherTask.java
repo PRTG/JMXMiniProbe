@@ -44,6 +44,8 @@ import com.paessler.prtg.util.TimingUtility;
 
 import javax.servlet.ServletContext;
 
+import org.apache.http.client.HttpResponseException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,18 +90,29 @@ public class TaskFetcherTask extends TimerTask {
 
 			Announcement announcement = new Announcement(context.getProbeName(), context.getVersionString(), context.getBaseInterval(), definitions);
 			String url = announcement.buildUrl(context);
-			try {
-			    String postBody = announcement.toString();
-			    if(context.getDebugLevel() > 0){
-			    	Logger.log("Sending: "+url+" " + postBody);
-			    }
-			    NetworkWrapper.post(url, postBody);
-			    retVal =  true;
-			    reRunAnnouncement = false;
-			} catch (Exception e) {
-			    Logger.log(e.getLocalizedMessage());
+			int maxtries = 5;
+			for(int retryAttempts = 0;!retVal && retryAttempts < maxtries; ++retryAttempts){
+				try {
+				    String postBody = announcement.toString();
+				    if(context.getDebugLevel() > 0){
+				    	Logger.log("Sending: "+url+" " + postBody);
+				    }
+				    NetworkWrapper.post(url, postBody);
+				    retVal =  true;
+				    reRunAnnouncement = false;
+				} catch (HttpResponseException he) {
+					if(he.getStatusCode() < 500){
+					    Logger.log(he.getLocalizedMessage());
+					    Thread.sleep(10000*retryAttempts);
+					} else{
+					    retryAttempts = maxtries;
+					}
+				} catch (Exception e) {
+				    Logger.log(e.getLocalizedMessage());
+				    retryAttempts = maxtries;
+				}
+				
 			}
-
 		} catch (Throwable e) {
 	        Logger.log("Cought Throwable in TaskFetcherTask.run(). "+e.getMessage());
 			e.printStackTrace();

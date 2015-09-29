@@ -31,6 +31,7 @@
 package com.paessler.prtg.jmx;
 
 import com.paessler.prtg.jmx.tasks.AnnouncementTask;
+import com.paessler.prtg.jmx.tasks.TaskFetcherTask;
 import com.paessler.prtg.util.SystemUtility;
 
 import org.apache.commons.cli.*;
@@ -85,7 +86,8 @@ public class DaemonMain {
 					scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 				}
 		//        ScheduledExecutorService 
-		        scheduledExecutorService.schedule(new AnnouncementTask(probeContext, scheduledExecutorService), 1, TimeUnit.SECONDS);
+//		        scheduledExecutorService.schedule(new AnnouncementTask(probeContext, scheduledExecutorService), 1, TimeUnit.SECONDS);
+		        scheduledExecutorService.scheduleWithFixedDelay(new TaskFetcherTask(null, probeContext, scheduledExecutorService), 10, probeContext.getBaseInterval(), TimeUnit.SECONDS);
 			} else {
 				System.out.println(probeContext.getErrorMessage()+" Failiure to launch->"+probeContext.getErrorMessage());
 				Logger.log(probeContext.getErrorMessage());

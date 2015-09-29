@@ -32,6 +32,7 @@
 package com.paessler.prtg.jmx;
 
 import com.paessler.prtg.jmx.tasks.AnnouncementTask;
+import com.paessler.prtg.jmx.tasks.TaskFetcherTask;
 
 import javax.servlet.*;
 
@@ -71,7 +72,8 @@ public class ServletMain extends GenericServlet implements ServletContextListene
 			} else {
 				mScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 			}
-			mScheduledExecutorService.schedule(new AnnouncementTask(probeContext, context, mScheduledExecutorService), 1, TimeUnit.SECONDS);
+//			mScheduledExecutorService.schedule(new AnnouncementTask(probeContext, context, mScheduledExecutorService), 1, TimeUnit.SECONDS);
+			mScheduledExecutorService.scheduleWithFixedDelay(new TaskFetcherTask(context, probeContext, mScheduledExecutorService), 10, probeContext.getBaseInterval(), TimeUnit.SECONDS);
 		} else {
 			System.out.println(probeContext.getErrorMessage()+" Failiure to launch-> [Default Config path="+defCondpath+"]");
             Logger.log(probeContext.getErrorMessage()+" [Default Config path="+defCondpath+"]");
