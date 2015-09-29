@@ -11557,6 +11557,7 @@ The following are all the JMX MBeans found
 						<unit/>
 						<enabled>true</enabled>
 					</attribute>
+				</attributes>
 			</entry>
 		</entries>
 	</profile>

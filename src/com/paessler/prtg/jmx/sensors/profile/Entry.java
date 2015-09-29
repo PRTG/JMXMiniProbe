@@ -54,7 +54,7 @@ public class Entry  implements Comparable<Entry> {
 	public Object addProperty(PropertyEntry prope) 
 	{return propMap.put(prope.getName(), prope.getValue());}
     // ------------------------------------------------------------
-	public List<Attribute<?>>	attributes = new Vector<Attribute<?>>();
+	public List<Attribute<String>>	attributes = new Vector<Attribute<String>>();
 
 	// --------------------------------
 	public String getObject() {return object;}
@@ -77,11 +77,11 @@ public class Entry  implements Comparable<Entry> {
 	}
 	// --------------------------------
 
-	public List<Attribute<?>> getAttributes() {return attributes;}
-	public void setAttributes(List<Attribute<?>> attributes) {
+	public List<Attribute<String>> getAttributes() {return attributes;}
+	public void setAttributes(List<Attribute<String>> attributes) {
 		this.attributes = attributes;
 	}
-	public void addAttribute(Attribute<?> attribute) {
+	public void addAttribute(Attribute<String> attribute) {
 		this.attributes.add(attribute);
 	}
 	// --------------------------------

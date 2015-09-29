@@ -42,7 +42,7 @@ public class DNSLookupEntry {
 		this.name = null;
 	}
 	public DNSLookupEntry(String name, int type) throws TextParseException{
-		this.name = new Name(name);
+		this.name = new Name(name.trim());
 		this.type = type;
 	}
 	public DNSLookupEntry(String name, String type) throws TextParseException{

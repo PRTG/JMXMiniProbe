@@ -154,7 +154,7 @@ public class PingSensor extends RemoteSensor {
 		response.addChannel(lchannel); 
 		if(stats.max < stats.min)	{lchannel.setWarning(1); errcnt++;}
 		FloatChannel fchannel = new FloatChannel("Ping Time Avg", Channel.UNIT_STR_TRESPONSE, stats.avg);
-		if(stats.avg < 0)			{lchannel.setWarning(1); errcnt++;}
+//		if(stats.avg < 0)			{lchannel.setWarning(1); errcnt++;}
 		response.addChannel(fchannel); 
 		lchannel = new LongChannel("Ping Time Max",		Channel.UNIT_STR_TRESPONSE, stats.max);
 		if(stats.max < stats.min)	{lchannel.setWarning(1); errcnt++;}
@@ -164,7 +164,7 @@ public class PingSensor extends RemoteSensor {
 		lchannel  = new LongChannel("Packet Loss", 		Channel.UNIT_STR_PERCENT, stats.loss);
 		response.addChannel(lchannel);
 
-		if(stats.cnt == stats.cnt){
+		if(stats.cnt == stats.loss){
 			lchannel.setWarning(1);
 			if(errcnt > 1)	{response = getErrorResponse("Error", -1, "100 % Packet Loss");}
 			else 			{response.setMessage("100 % Packet Loss");}

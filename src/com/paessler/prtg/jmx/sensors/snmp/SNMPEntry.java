@@ -1,5 +1,6 @@
 package com.paessler.prtg.jmx.sensors.snmp;
 
+import java.util.List;
 import java.util.Vector;
 
 import org.snmp4j.PDU;
@@ -170,7 +171,7 @@ public class SNMPEntry
 	}
 	
 	//----------------------------------------------------------------------
-	public static void addVariableBindings(PDU pdu, Vector<SNMPEntry>  vect){
+	public static void addVariableBindings(PDU pdu, List<SNMPEntry>  vect){
 		OIDHolder tmp;
     	for(SNMPEntry curr :vect){
     		pdu.add(new VariableBinding(curr.getOid()));
@@ -178,7 +179,7 @@ public class SNMPEntry
 		
 	}
 	// -----------------------------------------------------------
-	public static PDU getPDU(Vector<SNMPEntry> vect){
+	public static PDU getPDU(List<SNMPEntry> vect){
 		PDU retVal = new PDU();
 		addVariableBindings(retVal, vect);
     	return retVal;
