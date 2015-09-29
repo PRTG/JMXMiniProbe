@@ -44,7 +44,7 @@
                     </goals>
                     <configuration>
                         <!-- config for file 1 -->
-    					<file>${project.basedir}/../lib/sblim-cim-client2.jar</file>
+    					<file>${project.basedir}/../web/WEB-INF/lib/sblim-cim-client2-2.2.5.jar</file>
 						<groupId>org.sblim</groupId>
 		                <artifactId>sblim-cim-client2</artifactId>
 		                <packaging>jar</packaging>
