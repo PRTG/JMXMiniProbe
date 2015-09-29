@@ -37,11 +37,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.JsonObject;
+import com.paessler.prtg.jmx.channels.Channel;
 import com.paessler.prtg.jmx.channels.FloatChannel;
 import com.paessler.prtg.jmx.channels.LongChannel;
 import com.paessler.prtg.jmx.definitions.SensorConstants;
 import com.paessler.prtg.jmx.definitions.PingSensorDefinition;
 import com.paessler.prtg.jmx.responses.DataResponse;
+
 // ----------------------
 import org.icmp4j.IcmpPingUtil;
 import org.icmp4j.IcmpPingRequest;
@@ -76,7 +78,7 @@ public class PingSensor extends RemoteSensor {
 	//----------------------------------------------------------------------
 	protected List<IcmpPingResponse> doPings(){
 		List<IcmpPingResponse> retVal = null;
-	    try {
+//	    try {
 
 		      final IcmpPingRequest request = IcmpPingUtil.createIcmpPingRequest ();
 		      request.setHost (getHost());
@@ -87,11 +89,12 @@ public class PingSensor extends RemoteSensor {
 		    	retVal.add(IcmpPingUtil.executePingRequest (request));
 		        Thread.yield();
 		      }
-	    }
-	    catch (final Throwable t){
+//	    }
+//	    catch (final Throwable t){
 	      // log
-	      t.printStackTrace ();
-	    }
+//	    if(get)
+//	      t.printStackTrace ();
+//	    }
 		return retVal;
 	}
 
@@ -146,18 +149,26 @@ public class PingSensor extends RemoteSensor {
 	//----------------------------------------------------------------------
 	protected DataResponse calcStats(DataResponse response, List<IcmpPingResponse> pingResponses){
 		PingStats stats = calcStats(pingResponses);
-		
-		LongChannel lchannel = new LongChannel("Ping Time Min", "TimeResponse", stats.min);
+		int errcnt = 0;
+		LongChannel lchannel = new LongChannel("Ping Time Min", Channel.UNIT_STR_TRESPONSE, stats.min);
 		response.addChannel(lchannel); 
-		FloatChannel fchannel = new FloatChannel("Ping Time Avg", "TimeResponse", stats.avg);
+		if(stats.max < stats.min)	{lchannel.setWarning(1); errcnt++;}
+		FloatChannel fchannel = new FloatChannel("Ping Time Avg", Channel.UNIT_STR_TRESPONSE, stats.avg);
+		if(stats.avg < 0)			{lchannel.setWarning(1); errcnt++;}
 		response.addChannel(fchannel); 
-		lchannel = new LongChannel("Ping Time Max", "TimeResponse", stats.max);
+		lchannel = new LongChannel("Ping Time Max",		Channel.UNIT_STR_TRESPONSE, stats.max);
+		if(stats.max < stats.min)	{lchannel.setWarning(1); errcnt++;}
 		response.addChannel(lchannel); 
-		fchannel = new FloatChannel("Ping Time MDEV", "TimeResponse", stats.mDev);
+		fchannel = new FloatChannel("Ping Time MDEV",	Channel.UNIT_STR_TRESPONSE, stats.mDev);
 		response.addChannel(fchannel); 
-		lchannel  = new LongChannel("Packet Loss", "Percent", stats.loss);
+		lchannel  = new LongChannel("Packet Loss", 		Channel.UNIT_STR_PERCENT, stats.loss);
 		response.addChannel(lchannel);
-		
+
+		if(stats.cnt == stats.cnt){
+			lchannel.setWarning(1);
+			if(errcnt > 1)	{response = getErrorResponse("Error", -1, "100 % Packet Loss");}
+			else 			{response.setMessage("100 % Packet Loss");}
+		}
 		return response;
 	}
 	
@@ -179,7 +190,7 @@ public class PingSensor extends RemoteSensor {
 	    // handle exceptions
 		try {
 			List<IcmpPingResponse> pingResponses = doPings();
-			calcStats(response, pingResponses);
+			response = calcStats(response, pingResponses);
 		} catch (Exception e) {
 			response = getErrorResponse("Exception", -1, e.getLocalizedMessage());
 		}

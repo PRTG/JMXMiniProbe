@@ -73,6 +73,14 @@ Starting the probe in an application server
 Changelog
 =========
 
+2015-09-28
+----------
+-- Added: Limit Channels to 25
+
+2015-09-20
+----------
+-- Added: SNMP Profile
+
 2015-08-25
 ----------
 -- Fixed Bug: Used host as GID

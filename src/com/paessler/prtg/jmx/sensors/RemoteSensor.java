@@ -1,8 +1,10 @@
 package com.paessler.prtg.jmx.sensors;
 
+import java.util.List;
 import java.util.Vector;
 
 import com.google.gson.JsonObject;
+import com.paessler.prtg.jmx.Logger;
 import com.paessler.prtg.jmx.definitions.PingSensorDefinition;
 import com.paessler.prtg.jmx.definitions.SensorConstants;
 import com.paessler.prtg.jmx.sensors.profile.Profile;
@@ -15,7 +17,7 @@ public abstract class RemoteSensor<T> extends Sensor {
 	protected long 		timeout = 1000;
 	protected String	vectorPropertyName = "namevector";
 	protected String	vectorSeparator = ",";
-	Vector<T> vectorOfValues = null;
+	List<T> vectorOfValues = null;
 	// ----------------------------------------------------
 	public RemoteSensor(){
 		super();
@@ -34,20 +36,26 @@ public abstract class RemoteSensor<T> extends Sensor {
 	}
 
 	// ----------------------------------------------------
-	public Vector<T> getVectorOfValues() 
+	public List<T> getVectorOfValues() 
 	{
 		if(vectorOfValues == null){
+//			vectorOfValues = new Vector<T>(); 
 			vectorOfValues = new Vector<T>(); 
 		}
 		return vectorOfValues;	
 	}
 	// ---------------------------
-	public void setVectorOfValues(Vector<T> vect) {
+	public void setVectorOfValues(List<T> vect) {
 		this.vectorOfValues = vect;
 	}
 	// ---------------------------
 	protected void addVectorEntry(T value){
-		getVectorOfValues().add(value);
+		List<T> vect = getVectorOfValues();
+		if(vect != null && vect.size() <25){
+			getVectorOfValues().add(value);
+		} else {
+            Logger.log("List too big, failes to AddEntry("+value.toString()+")");
+		}
 	}
 	// ----------------------------------------------------
 	
@@ -93,6 +101,12 @@ public abstract class RemoteSensor<T> extends Sensor {
 			}
 	    }
 	}
+	//----------------------------------------------------------------------
+	public void loadVectorFromJson(JsonObject json) {
+	    if (json != null && !json.isJsonNull()) {
+	    	loadVectorFromJson(getJsonElementString(json, getVectorPropertyName()));
+	    }
+	}
 
 	//----------------------------------------------------------------------
 	@Override
@@ -110,7 +124,7 @@ public abstract class RemoteSensor<T> extends Sensor {
         setRemotePort(getJsonElementInt(json, SensorConstants.REMOTE_PORT, getRemotePort()));
         setTimeout(getJsonElementLong(json, SensorConstants.REMOTE_PORT, getTimeout()));
         
-        loadVectorFromJson(getJsonElementString(json, getVectorPropertyName()));        
+        loadVectorFromJson(json);        
 		// Delegate
 		super.loadFromJson(json);
 	}
@@ -119,9 +133,6 @@ public abstract class RemoteSensor<T> extends Sensor {
     public void loadFrom(Profile profile) {
     	super.loadFrom(profile);
     	
-    	setSensorName(profile.getName());
-    	setKind(profile.getKind());
-    	String tmptag = profile.getTag();
     	Object prop = profile.getProperty(SensorConstants.REMOTE_HOST);
     	if(prop != null){
     		getDefinition().setFieldDefaultValue(SensorConstants.REMOTE_HOST, prop.toString());
@@ -130,9 +141,9 @@ public abstract class RemoteSensor<T> extends Sensor {
     	if(prop != null){
     		getDefinition().setFieldDefaultValue(SensorConstants.REMOTE_PORT, prop.toString());
     	}
-    	prop = profile.getProperty(SensorConstants.REMOTE_HOST);
+    	prop = profile.getProperty(SensorConstants.REMOTE_PROTOCOL);
     	if(prop != null){
-    		getDefinition().setFieldDefaultValue(SensorConstants.REMOTE_HOST, prop.toString());
+    		getDefinition().setFieldDefaultValue(SensorConstants.REMOTE_PROTOCOL, prop.toString());
     	}
     	
     }

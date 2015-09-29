@@ -25,6 +25,7 @@ import org.snmp4j.smi.Null;
 import org.snmp4j.smi.OID;
 import org.snmp4j.smi.OctetString;
 import org.snmp4j.smi.TimeTicks;
+import org.snmp4j.smi.UdpAddress;
 import org.snmp4j.smi.UnsignedInteger32;
 import org.snmp4j.smi.Variable;
 import org.snmp4j.smi.VariableBinding;
@@ -33,11 +34,17 @@ import org.snmp4j.transport.DefaultUdpTransportMapping;
 import com.paessler.prtg.util.snmp.OIDHolder.SNMPDataType;
 
 public class SNMPUtil {
+	public static enum SNMPCounterType {Counter32bit, Counter64bit};
 	public static final String	STARTING_OID = "1.3.6.1.2.1.2.1.0";
-	private static TransportMapping transport = null;
+	private static TransportMapping<?> transport = null;
 	private static Snmp	snmp = null;
 	
+	private static UdpAddress localUDPAddress = null;
 	
+	public static UdpAddress getUdpAddress() {return localUDPAddress;}
+	public static void setUdpAddress(UdpAddress udpaddr) {localUDPAddress = udpaddr;}
+	/** Source and return address of the form "<ip>/<port>" */
+	public static void setUdpAddress(String udpaddr) {setUdpAddress(new UdpAddress(udpaddr));}
 	// -----------------------------------------------------
 	// 1.3.6.1.2.1.1.1.0	Value: Linux TS-870 4.1.2
 	public static final String	SYSNAME_ID 		= "hostName";
@@ -224,11 +231,20 @@ public class SNMPUtil {
 		return retVal;
 	}
 	// -----------------------------------------------------
-	public static OIDHolder  getIFOIDHolder(int index){
-		OIDHolder retVal = 
-				makeOIDHolder(OIDHolder.SNMPDataType.STRING, IFnNAME_OID, IFnNAME_ID, IFnNAME_STRING, index);
-		OIDHolder meta =
-				makeOIDHolder(OIDHolder.SNMPDataType.STRING, IFnDESCR_OID, IFnDESCR_ID, IFnDESCR_STRING, index);
+	public static OIDHolder  getIFOIDHolder(int index, SNMPCounterType type){
+		OIDHolder retVal = null; 
+		OIDHolder meta = null;
+
+		switch(type){
+			case  Counter32bit:
+				retVal	= makeOIDHolder(OIDHolder.SNMPDataType.STRING, IFnNAME_OID, IFnNAME_ID, IFnNAME_STRING, index);
+				meta 	= makeOIDHolder(OIDHolder.SNMPDataType.STRING, IFnDESCR_OID, IFnDESCR_ID, IFnDESCR_STRING, index);
+				break;
+			case  Counter64bit:
+				retVal	= makeOIDHolder(OIDHolder.SNMPDataType.STRING, IFnNAME_OID, IFnNAME_ID, IFnNAME_STRING, index);
+				meta 	= makeOIDHolder(OIDHolder.SNMPDataType.STRING, IFnDESCR_OID, IFnDESCR_ID, IFnDESCR_STRING, index);
+				break;
+		}
 		retVal.setDescriptionHolder(meta);
 		return retVal;
 	}	
@@ -243,14 +259,24 @@ public class SNMPUtil {
 	}
 	
 	// -----------------------------------------------------
-	public static List<OIDHolder>  getIFOIDHolderInst(List<OIDHolder> retVal, int index, boolean inoutonly){
+	public static List<OIDHolder>  getIFOIDHolderInst(List<OIDHolder> retVal, int index, SNMPCounterType type, boolean inoutonly){
 		if(!inoutonly){
 			retVal.add(makeOIDHolder(OIDHolder.SNMPDataType.OCTIN, 	IFINOCT_OID, 	IFINOCT_ID,		IFINOCT_STRING, index));
 			retVal.add(makeOIDHolder(OIDHolder.SNMPDataType.OCTOUT, IFOUTOCT_OID,	IFOUTOCT_ID,	IFOUTOCT_STRING, index));
 			retVal.add(makeOIDHolder(OIDHolder.SNMPDataType.COUNT,	IFERRORS_OID,	IFERRORS_ID,	IFERRORS_STRING, index));
 		} 
-		retVal.add(makeOIDHolder(OIDHolder.SNMPDataType.OCTIN,	IFHCINOCT_OID,	IFHCINOCT_ID,	IFHCINOCT_STRING, index));
-		retVal.add(makeOIDHolder(OIDHolder.SNMPDataType.OCTOUT,	IFHCOUTOCT_OID,	IFHCOUTOCT_ID,	IFHCOUTOCT_STRING, index));
+		
+		switch(type){
+			case  Counter32bit:
+				retVal.add(makeOIDHolder(OIDHolder.SNMPDataType.OCTIN,	IFINOCT_OID,	IFINOCT_ID,		IFINOCT_STRING, index));
+				retVal.add(makeOIDHolder(OIDHolder.SNMPDataType.OCTOUT,	IFOUTOCT_OID,	IFOUTOCT_ID,	IFOUTOCT_STRING, index));
+				break;
+			case  Counter64bit:
+				retVal.add(makeOIDHolder(OIDHolder.SNMPDataType.OCTIN,	IFHCINOCT_OID,	IFHCINOCT_ID,	IFHCINOCT_STRING, index));
+				retVal.add(makeOIDHolder(OIDHolder.SNMPDataType.OCTOUT,	IFHCOUTOCT_OID,	IFHCOUTOCT_ID,	IFHCOUTOCT_STRING, index));
+				break;
+		}
+		
 		return retVal; 
 	}
 	
@@ -309,15 +335,36 @@ public class SNMPUtil {
 	 // -----------------------------------------------------
 	//
 	public static boolean isListning(){return transport != null;}
+	protected static TransportMapping<?> getTransportMapping()
+	   throws IOException
+	{
+		TransportMapping<?> retVal = transport;
+		if(retVal == null){
+			try {
+				if(getUdpAddress() != null){
+					retVal = new DefaultUdpTransportMapping(getUdpAddress());
+				} else {
+					retVal = new DefaultUdpTransportMapping();
+				}
+			} catch (IOException e) {
+				System.out.println("SNMPUtil.getTransportMapping(): Failed to create Transport Mapping "+getUdpAddress());
+				throw e;
+			}
+			transport = retVal;
+		}
+		return retVal;
+	}
+	// ---------------------------------------------------------
 //	public 
 	public static void startSNMPListen(){
 		if(!isListning()){
 			try {
-		        transport = new DefaultUdpTransportMapping();
+		        transport = getTransportMapping();
 		        snmp = new Snmp(transport);
 		        // Do not forget this line!
 		        transport.listen();
 			} catch (IOException e) {
+				System.out.println("SNMPUtil.startSNMPListen(): Failed to create Transport Mapping "+getUdpAddress());
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

@@ -71,8 +71,8 @@ public class UnitFieldDefinition extends RadioFieldDefinition {
         addOption(Channel.UNIT_STR_TRESPONSE, "Response Time");
         addOption(Channel.UNIT_STR_TSEC, "Time Seconds");
         addOption(Channel.UNIT_STR_THOURS, "Time Hours");
+        addOption(Channel.UNIT_STR_TEMP, "Temperature");
 //        addOption(Channel.UNIT_STR_CUSTOM, "Custom");
-//      addOption(Channel.UNIT_STR_TEMP, "Temperature");
 
     }
 }

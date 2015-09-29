@@ -277,13 +277,8 @@ public abstract class Sensor implements Runnable{
     }
 	// ----------------------------------------------------------------------
     public void loadFrom(Profile profile) {
-    	
     	setSensorName(profile.getName());
     	setKind(profile.getKind());
-    	String tmptag = profile.getTag();
-//    	String tmp2 = profile.getTags();
-//    	if()
-    	
     }
     
 }

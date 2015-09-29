@@ -37,11 +37,17 @@ package com.paessler.prtg.jmx.sensors;
 import com.google.gson.JsonObject;
 import com.paessler.prtg.jmx.Logger;
 import com.paessler.prtg.jmx.channels.Channel;
+import com.paessler.prtg.jmx.sensors.port.PortSensorDefinition;
+import com.paessler.prtg.jmx.sensors.profile.Attribute;
+import com.paessler.prtg.jmx.sensors.profile.Entry;
+import com.paessler.prtg.jmx.sensors.profile.IntegerAttribute;
+import com.paessler.prtg.jmx.sensors.profile.Profile;
 import com.paessler.prtg.jmx.sensors.snmp.SNMPCustomDef;
 import com.paessler.prtg.jmx.sensors.snmp.SNMPEntry;
 import com.paessler.prtg.util.snmp.OIDHolder.SNMPDataType;
 
 public class SNMPCustom extends SNMPSensor {
+	protected Channel.Unit	unit = Channel.Unit.COUNT;
 	protected String		customUnit = null;
 	protected Channel.Mode	valueType;
 
@@ -62,6 +68,11 @@ public class SNMPCustom extends SNMPSensor {
     public Sensor copy(){
 		return new SNMPCustom(this);
 	}
+
+	// -------------------------------
+	public Channel.Unit getUnit() 			{return unit;	}
+	public void setUnit(Channel.Unit unit)	{this.unit = unit;}
+	public void setUnit(String unit)		{setUnit(Channel.toUnit(unit));	}
 
 	// -------------------------------
 	public String getCustomUnit() 				{return customUnit;	}
@@ -93,10 +104,13 @@ public class SNMPCustom extends SNMPSensor {
 		}
 		SNMPEntry snmpe = new SNMPEntry(SNMPDataType.OTHER, getSensorName(), value, description);
 		if(snmpe != null){
-			snmpe.setDivFactor(divFactor);
-			snmpe.setMpyFactor(mpyFactor);
-			snmpe.setMode(getValueType());
-			//snmpe.setUnit(getCustomUnit())
+			snmpe.setDiv(divFactor);
+			snmpe.setMpy(mpyFactor);
+			snmpe.setModeEnum(getValueType());
+			snmpe.setUnitEnum(getUnit());
+			snmpe.setCustomUnit(getCustomUnit());
+			// Kick the type adjustment
+			snmpe.setDataType(SNMPDataType.OTHER);
 			addVectorEntry(snmpe);
 		}
 	}
@@ -111,8 +125,13 @@ public class SNMPCustom extends SNMPSensor {
     		
 	        String tmpstr = getJsonElementString(json, SNMPCustomDef.FIELD_UNIT);
             if (tmpstr != null && !tmpstr.isEmpty()) {
+	        	this.setUnit(tmpstr);
+	        }
+	        tmpstr = getJsonElementString(json, SNMPCustomDef.FIELD_CUSTOMUNIT);
+            if (tmpstr != null && !tmpstr.isEmpty()) {
 	        	this.setCustomUnit(tmpstr);
 	        }
+            
     		int tmpint = getJsonElementInt(json, SNMPCustomDef.FIELD_VALUE_TYPE, -1);
             if (tmpint > -1) {
             	Channel.Mode lmode = Channel.Mode.COUNTER; 

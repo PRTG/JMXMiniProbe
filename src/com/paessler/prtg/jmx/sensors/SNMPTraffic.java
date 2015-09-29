@@ -44,14 +44,31 @@ import com.paessler.prtg.jmx.Logger;
 import com.paessler.prtg.jmx.channels.Channel;
 import com.paessler.prtg.jmx.channels.LongChannel;
 import com.paessler.prtg.jmx.channels.Channel.Unit;
+import com.paessler.prtg.jmx.sensors.snmp.SNMPSensorDefinition;
 import com.paessler.prtg.jmx.sensors.snmp.SNMPTrafficDef;
 import com.paessler.prtg.jmx.definitions.SensorDefinition;
 import com.paessler.prtg.jmx.responses.DataResponse;
 import com.paessler.prtg.jmx.sensors.snmp.SNMPGetHolder;
 import com.paessler.prtg.util.NumberUtility;
+import com.paessler.prtg.util.snmp.SNMPUtil.SNMPCounterType;
 
 public class SNMPTraffic extends SNMPSensor {
-	protected boolean	sumChannels = false;
+	
+	protected boolean			sumChannels = false;
+	protected SNMPCounterType	trafficCounterType = SNMPCounterType.Counter64bit;   
+	
+	// --------------------------------------
+	public SNMPCounterType getTrafficCounter()	{return trafficCounterType;}
+	public void setTrafficCounter(SNMPCounterType val){
+		trafficCounterType = val;
+	}
+	public void setTrafficCounter(int val){
+		if(val == 1){
+			trafficCounterType = SNMPCounterType.Counter32bit;
+		} else {
+			trafficCounterType = SNMPCounterType.Counter64bit;
+		}
+	}
 	
 	// --------------------------------------
 	public boolean getSumChannels()	{return sumChannels;}
@@ -110,7 +127,7 @@ public class SNMPTraffic extends SNMPSensor {
 	// ---------------------------
 	protected void addVectorEntry(String value, boolean inoutonly){
 		int currint = Integer.parseInt(value);
-		SNMPGetHolder tmp = new SNMPGetHolder(currint, true);
+		SNMPGetHolder tmp = new SNMPGetHolder(currint, true, getTrafficCounter());
 		if(tmp != null)
 			addVectorIndex(tmp);
 	}
@@ -118,8 +135,6 @@ public class SNMPTraffic extends SNMPSensor {
 	//----------------------------------------------------------------------
 	@Override
 	public void loadFromJson(JsonObject json)  throws Exception{
-		// Delegate to parent
-		super.loadFromJson(json);
 		// Local
 //		TRAFFIC_SENSOR_VALS
     	try{
@@ -129,11 +144,19 @@ public class SNMPTraffic extends SNMPSensor {
 	        	this.setSumChannels(tmpVal == 1);
 	        }
             
+	        tmpval = getJsonElementString(json, SNMPTrafficDef.TRAFFIC_COUNTER);
+            if (tmpval != null && !tmpval.isEmpty()) {
+            	int tmpVal = NumberUtility.getInt(tmpval, 0);
+	        	this.setTrafficCounter(tmpVal);
+	        }
+            
         } catch (Exception e) {
             Logger.log("Error parsing sensor["+getName()+"] JSON##"+json+"##: " + e.getLocalizedMessage());
             throw e;
         }
 		
+		// Delegate to parent
+		super.loadFromJson(json);
         
         init();
 	}

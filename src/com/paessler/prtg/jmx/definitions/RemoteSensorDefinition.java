@@ -55,7 +55,7 @@ public abstract class RemoteSensorDefinition extends SensorDefinition {
 	protected FieldDefinition getTimeoutField(int defaultvalue, int min, int max, String units){
         // -------------------------
         IntegerField retVal = new IntegerField(SensorConstants.TIMEOUT, "timeout");
-        retVal.setHelp("Enter a timeout in"+units+". If the reply takes longer than this value, the request is aborted and triggers an error message. The maximum value is "+max+".");
+        retVal.setHelp("Enter a timeout in "+units+". If the reply takes longer than this value, the request is aborted and triggers an error message. The maximum value is "+max+".");
         retVal.setMinimum(min);
         retVal.setMaximum(max);
         retVal.setDefaultValue(defaultvalue);

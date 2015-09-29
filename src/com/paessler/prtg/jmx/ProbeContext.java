@@ -60,6 +60,7 @@ import com.paessler.prtg.jmx.sensors.profile.Profile;
 import com.paessler.prtg.jmx.sensors.profile.ProfileFactory;
 import com.paessler.prtg.jmx.sensors.profile.Profiles;
 import com.paessler.prtg.util.ClassUtility;
+import com.paessler.prtg.util.snmp.SNMPUtil;
 
 //import sun.org.mozilla.javascript.internal.ast.TryStatement;
 
@@ -81,6 +82,7 @@ public class ProbeContext {
 	public static final String WEBPROTO_STRING = "webprotocol";
 	public static final String WORKERTHREADS_STRING = "workerthreads";
 	public static final String TS_ENABLED_STRING = "timestampenabled";
+	public static final String SNMP_IPADDRESS = "snmpaddress";
 	
     // -------------------------------------------------------------------------------
 	public String probeName = "PRTG JMX Probe";
@@ -250,6 +252,12 @@ public class ProbeContext {
 	        if (tmp != null) {
 	        	setTimestampEnabled(Integer.parseInt(tmp));
 	        }
+	        
+        	tmp = settings.getProperty(SNMP_IPADDRESS);
+	        if (tmp != null) {
+	        	SNMPUtil.setUdpAddress(tmp);
+	        }
+	        
         }
         // END Optional parameters
         // ------------------------------------

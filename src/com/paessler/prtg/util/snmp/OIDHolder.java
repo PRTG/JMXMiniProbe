@@ -92,7 +92,7 @@ public class OIDHolder {
 	public void setDataType(SNMPDataType dataType) 	{this.dataType = dataType;}
 	
 	// ------------------------------------------
-	public boolean isSubIFNeeded() {	return subIFNeeded;	}
+	public boolean isSubIFNeeded() 				{return subIFNeeded;	}
 	// ------------------------------------------
 	public void setSubIFNeeded(boolean subIFNeeded) {	this.subIFNeeded = subIFNeeded;	}
 	// ------------------------------------------

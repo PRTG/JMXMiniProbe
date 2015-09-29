@@ -43,7 +43,7 @@ import com.paessler.prtg.jmx.definitions.SimpleEditFieldDefinition;
  * @Author JR Andreassen
  */
 
-public abstract class SNMPSensorDefinition extends RemoteSensorDefinition {
+public class SNMPSensorDefinition extends RemoteSensorDefinition {
 	public static String KIND = "snmpvector";
 
 	public static final String FIELD_VERSION		= "version";

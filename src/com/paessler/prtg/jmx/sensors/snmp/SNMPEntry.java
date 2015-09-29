@@ -11,19 +11,39 @@ import org.snmp4j.smi.VariableBinding;
 import com.paessler.prtg.jmx.Logger;
 import com.paessler.prtg.jmx.channels.Channel;
 import com.paessler.prtg.jmx.channels.Channel.Mode;
+import com.paessler.prtg.jmx.channels.FloatChannel;
 import com.paessler.prtg.jmx.channels.LongChannel;
 import com.paessler.prtg.jmx.channels.Channel.Unit;
+import com.paessler.prtg.jmx.sensors.profile.Attribute;
+import com.paessler.prtg.jmx.sensors.profile.Profile;
 import com.paessler.prtg.util.snmp.OIDHolder;
 import com.paessler.prtg.util.snmp.OIDHolder.SNMPDataType;
 import com.paessler.prtg.util.snmp.SNMPUtil;
 
-public class SNMPEntry{
+public class SNMPEntry
+	extends Attribute<String>
+{
+    // -------------------------------------------
+	@Override
+    public String toObjectType(Object objectstr){
+//		Integer retVal = Integer.valueOf(objectstr.toString()); 
+    	return (objectstr != null ? objectstr.toString() : null);
+    }
+    // -------------------------------------------
+    @Override
+    public int compareTo(Attribute<String> other){
+    	return object.compareTo(other.getObject());
+    }
 	
-	public SNMPEntry(SNMPDataType dtype, String name, OID oid, String oidString, String descr){
-		this.name = name;
-		this.oidString = oidString;
+    // -------------------------------------------
+    // -------------------------------------------
+	public SNMPEntry(SNMPDataType dtype, String name, OID oid, String oidString, String comment){
+		super();
+		setName(name);
+		setDescription(name);
+		setOidString(oidString);
 		this.oid = oid;		
-		this.description = descr;
+		setComment(comment);
 		setDataType(dtype);
 	}
 	// -----------------------------------------
@@ -31,32 +51,25 @@ public class SNMPEntry{
 		this(dtype, name, new OID(oidString), oidString, descr);
 	}
 	// -----------------------------------------
+	public SNMPEntry(Attribute<?> attr){
+		super(attr);
+		setName(attr.getComment());
+		setDataType(SNMPDataType.OTHER);
+	}
+	
+	// -----------------------------------------
+//	public SNMPEntry(Attribute attribute){
+//		this(SNMPDataType.OTHER, attribute.getDescription(), new OID(attribute.getObject()), attribute.getObject(), attribute.getComment());
+//	}
+	// -----------------------------------------
 	public String		name;
-	public String		oidString;
 	public OID 			oid;
-	public String 		description;
 	public SNMPDataType dataType;
-	public int			mpyFactor = 1;
-	public int			divFactor = 1;
-	public Channel.Mode	mode = Channel.Mode.INTEGER;
-	public Channel.Unit	unit = Channel.Unit.COUNT;
-	// --------------------------------
-	public Channel.Mode getMode() 			{return mode;}
-	public void setMode(Channel.Mode mode)	{this.mode = mode;}
-	// --------------------------------
-	public Channel.Unit getUnit() 			{return unit;	}
-	public void setUnit(Channel.Unit unit)	{this.unit = unit;}
-	// -------------------------------
-	public int getMpyFactor()				{return mpyFactor;}
-	public void setMpyFactor(int mpyFactor)	{this.mpyFactor = mpyFactor;}
-
-	// -------------------------------
-	public int getDivFactor() 				{return divFactor;}
-	public void setDivFactor(int divFactor) {this.divFactor = divFactor;}
 	// ------------------------------------------
 	public SNMPDataType getDataType() 		{return dataType;}
 	// ----------------------------------
 	public void setDataType(SNMPDataType dataType) {
+		Unit eunit =getUnitEnum();
 		switch(dataType){
 		case INT:
 		case LONG:
@@ -64,16 +77,16 @@ public class SNMPEntry{
 		case OCTIN:
 		case OCTOUT:
 //			retVal = new LongChannel(name, getUnit(), value, getMode());
-			setMode(Mode.COUNTER);
-			setUnit(Unit.BANDWIDTH);
+			setModeEnum(Mode.COUNTER);
+			setUnitEnum(Unit.BANDWIDTH);
 			break;
 		case TICKS:
-			if(getUnit() != Unit.TIME_SECONDS 
-			|| getUnit() != Unit.TIME_HOURS 
-			|| getUnit() != Unit.TIME_RESPONSE){
-				setUnit(Unit.TIME_SECONDS);
-				if(getDivFactor() == 1){
-					setDivFactor(100);
+			if(eunit != Unit.TIME_SECONDS 
+			|| eunit != Unit.TIME_HOURS 
+			|| eunit != Unit.TIME_RESPONSE){
+				setUnitEnum(Unit.TIME_SECONDS);
+				if(getDiv() == 1.0d){
+					setDiv(100.0d);
 				}
 			}
 			break;
@@ -85,6 +98,21 @@ public class SNMPEntry{
 //				break;
 //			lchannel  = new LongChannel("Packet Loss", Unit.PERCENT, stats.loss);
 	
+		case OTHER:
+			{
+				if(eunit != null){
+				  switch(eunit) {
+				  		case CPU:
+				  			setDataType(SNMPDataType.FLOAT);
+				  			setCustomUnit("%");
+				  		default:
+				  }
+				}
+			}
+			break;
+		default:
+			break;
+			
 		}
 		this.dataType = dataType;
 	}
@@ -94,47 +122,49 @@ public class SNMPEntry{
 	// ----------------------------------
 	public void setName(String name) 	{this.name = name;}
 	// ----------------------------------
-	public String getOidString() 		{return oidString;	}
+	public String getOidString() 		{return getObject();	}
 	// ----------------------------------
-	public void setOidString(String oidString) {this.oidString = oidString;	}
+	public void setObject(String object) {super.setObject(object);	setOid(new OID(object));}
+
+	public void setOidString(String oidString) {setObject(oidString);}
 	// ----------------------------------
 	public OID getOid() 				{return oid;}
 	// ----------------------------------
 	public void setOid(OID oid) 		{this.oid = oid;}
 	// ----------------------------------
-	public String getDescription() 		{return description;}
-	// ----------------------------------
-	public void setDescription(String description) {this.description = description;	}
 
-	// ----------------------------------
-	public long getValue(long val){
-		long retVal = val;
-		if(getDivFactor() != 1){
-			retVal = retVal / getDivFactor();
-		}
-		if(getMpyFactor() != 1){
-			retVal = retVal * getMpyFactor();
-		}
-		return retVal;
-	}
 	// -----------------------------------------------
-	public Channel getChannelInfo(Variable var){
+	public Channel getChannel(Variable var){
 		Channel retVal = null;
 		long value = -1;
 		if(var instanceof Null){
 			String tmp = var.toString();
 			retVal = new LongChannel(getName(), Unit.BANDWIDTH, -1);
-			String logString = "OID["+getOidString()+"] "+getName()+" returned: "+tmp;
+			String logString = "OID["+getObject()+"] "+getName()+" returned: "+tmp;
 			retVal.setMessage(logString);
 			retVal.setWarning(1);
             Logger.log(logString );
 		} else {
-			if(getDataType() == SNMPDataType.OTHER){
-				setDataType(SNMPUtil.getDataType(var));
+			SNMPDataType type = getDataType();
+			String valueStr = var.toString();
+//			var.
+			switch(type){
+				case FLOAT:
+					{
+						float valueFloat = Float.parseFloat(valueStr);
+						retVal = super.getChannel(valueFloat);
+					}
+					break;
+				case OTHER:
+					setDataType(SNMPUtil.getDataType(var));
+				case LONG:
+				case INT:
+				default:
+					retVal = super.getChannel(var.toLong());
 			}
-			value = getValue(var.toLong());
-//			public enum SNMPDataResponseType {STRING,INT,LONG,FLOAT,TICKS,OCTIN,OCTOUT,COUNT};
-			retVal = new LongChannel(name, getUnit(), value, getMode());
+		}
+		if(retVal != null && retVal.getUnit() == Unit.CUSTOM){
+			retVal.setCustomunit(getCustomUnit());
 		}
 		return retVal;
 	}

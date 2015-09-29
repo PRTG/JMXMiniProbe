@@ -33,8 +33,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.digester3.Digester;
+import org.snmp4j.smi.Null;
 
+import com.paessler.prtg.jmx.Logger;
 import com.paessler.prtg.jmx.channels.Channel;
+import com.paessler.prtg.jmx.channels.Channel.Mode;
 import com.paessler.prtg.jmx.channels.FloatChannel;
 import com.paessler.prtg.jmx.channels.LongChannel;
 import com.paessler.prtg.jmx.channels.Channel.Unit;
@@ -45,8 +48,10 @@ public abstract class Attribute<T extends Comparable<T>> implements Comparable<A
     public String description = null, shortDescription = null;
     public String displayValue;
     public String unit;
+    public String mode;
     public String customUnit;
-	public Unit eUnit = null;
+	public Mode	eMode = Channel.Mode.INTEGER;
+	public Unit eUnit = Unit.COUNT;
     public String comment;
     public double mpy = DEFAULT_NOOPVAL, div = DEFAULT_NOOPVAL;
     public boolean enabled = true;
@@ -76,7 +81,12 @@ public abstract class Attribute<T extends Comparable<T>> implements Comparable<A
     public int limitMode = 0;
     
 	// --------------------------------
-    public Attribute(){}
+    public Attribute()
+    {
+    	setUnitEnum(Unit.COUNT);
+    	unit = getUnitEnum().toString();
+
+    }
 
     public Attribute(Attribute<?> attr){
     	
@@ -84,6 +94,7 @@ public abstract class Attribute<T extends Comparable<T>> implements Comparable<A
     	setDescription(attr.description);
     	setShortDescription(attr.shortDescription);
     	setDisplayValue(attr.displayValue);
+    	setMode(attr.mode);
     	setUnit(attr.unit);
     	setComment(attr.comment);
     	setMpy(attr.mpy);
@@ -111,6 +122,12 @@ public abstract class Attribute<T extends Comparable<T>> implements Comparable<A
 	public void setUnit(String unit) 	{this.unit = unit;	setUnitEnum(Channel.toUnit(unit));}
 	public Unit getUnitEnum()	{return eUnit;	}
 	public void setUnitEnum(Unit eunit)	{eUnit = eunit;	}
+//	public void setUnit(String mUnit)	{this.unit = Channel.toUnit(mUnit);	}
+	// --------------------------------
+	public String getMode() {return mode;}
+	public void setMode(String mode) 	{this.mode = mode;	setModeEnum(Channel.toMode(mode));}
+	public Mode getModeEnum()	{return eMode;	}
+	public void setModeEnum(Mode emode)	{eMode = emode;	}
 //	public void setUnit(String mUnit)	{this.unit = Channel.toUnit(mUnit);	}
 	// --------------------------------
     public String getCustomUnit() {	return customUnit;}
@@ -201,9 +218,25 @@ public abstract class Attribute<T extends Comparable<T>> implements Comparable<A
 		return (float)retVal;
 	}
 	// --------------------------------------------------
+	public Channel checkInvalid(Object obj){
+		Channel retVal = null;
+		if(obj == null){
+			String tmp = obj.toString();
+			retVal = new LongChannel(getDescription(), getUnit(), -1);
+			String logString = "["+getObject()+"] "+getDescription()+" returned: "+obj;
+			retVal.setMessage(logString);
+			retVal.setWarning(1);
+            Logger.log(logString );
+		}
+		return retVal;
+	}
+	// --------------------------------------------------
 	private boolean haveSetChannels = false;
 	public Channel getChannel(Object obj){
-		Channel retVal = null;
+		Channel retVal = checkInvalid(obj);
+		if(retVal != null)
+		{	return retVal;}
+		// ------------------------------
         if (obj instanceof Number) {
             Number number = (Number) obj;
             if (obj instanceof Integer || obj instanceof Long) {
@@ -224,6 +257,10 @@ public abstract class Attribute<T extends Comparable<T>> implements Comparable<A
         	retVal.setLimitWarningMsg(getLimitWarningMsg());
         	haveSetChannels = true;
         }
+		if(retVal != null && retVal.getUnit() == Unit.CUSTOM){
+			retVal.setCustomunit(getCustomUnit());
+		}
+        
 		return retVal;
 	}
 	
@@ -236,6 +273,7 @@ public abstract class Attribute<T extends Comparable<T>> implements Comparable<A
         digester.addBeanPropertySetter( base+"/shortdescription", "shortDescription" );
         digester.addBeanPropertySetter( base+"/enabled", "enabled" );
         digester.addBeanPropertySetter( base+"/unit", "unit" );
+        digester.addBeanPropertySetter( base+"/mode", "mode" );
         digester.addBeanPropertySetter( base+"/customunit", "customunit" );
         
 //        digester.addCallMethod(base+"/unit", "setUnit", 1,  new String[]{"java.lang.String"});
@@ -272,6 +310,7 @@ public abstract class Attribute<T extends Comparable<T>> implements Comparable<A
 		ProfileFactory.addXMLElement(target, "shortdescription", getShortDescription(), tmp, suffix);
 		ProfileFactory.addXMLElement(target, "comment", getComment(), tmp, suffix);
 		ProfileFactory.addXMLElement(target, "unit", getUnit(), tmp, suffix);
+		ProfileFactory.addXMLElement(target, "mode", getMode(), tmp, suffix);
 		ProfileFactory.addXMLElement(target, "customunit", getCustomUnit(), tmp, suffix);
 		ProfileFactory.addXMLElement(target, "enabled", isEnabled(), tmp, suffix);
 		if(getMpy() != DEFAULT_NOOPVAL){

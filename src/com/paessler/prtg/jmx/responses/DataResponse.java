@@ -42,6 +42,7 @@ public class DataResponse {
     public transient String sensorName = "";
     protected List<Channel> channel;
     
+   
     // --------------------------------------------
     public int getChannelCount(){
     	int retVal = -1;

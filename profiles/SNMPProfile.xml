@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- ###########################################################
+Unit Values[BANDWIDTH, MEMORY, DISK, FILE, TIME_RESPONSE, TIME_SECONDS, TIME_HOURS, TEMP, PERCENT, COUNT,CPU,CUSTOM]
+***************************************************************
+ This file contains the definition of the PRTG JMXMiniProbe MBean
+*** PLEASE DO NOT MODIFY ***
+Please note, the apache.commons.digester3 is * VERY * case sensitive
+########################################################### -->
+<profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Profile.xsd">
+	<profile>
+		<name>SNMP Custom OID Test</name>
+		<kind>mjtestcustomsnmpsensor</kind>
+		<tag>mjmxsensor,mjportrangesensor</tag>
+		<description>Test of Custom OIDs Profile</description>
+		<baseclass>com.paessler.prtg.jmx.sensors.SNMPSensor</baseclass>
+		<help>Monitors a list of OIDs </help>
+		<entries>
+      <entry>
+        <object>Custom SNMP Object</object>
+        <displayvalue>Custom SNMP Display</displayvalue>
+        <description>SNMP: Custom</description>
+        <shortdescription>SNMP:Junk</shortdescription>
+        <help>Custom SNMP Obj, Help</help>
+        <attributes>
+          <attribute>
+            <object>1.3.6.1.4.1.9.2.1.58.0</object>
+            <displayvalue>CPU TotMonInt Busy</displayvalue>
+            <description>CPU TotMonInt Busy indicator</description>
+            <shortdescription/>
+            <comment>type=java.lang.int</comment>
+			<!--unit>{BANDWIDTH|MEMORY|DISK|FILE|TIME_RESPONSE|TIME_SECONDS|TIME_HOURS|TEMP|PERCENT|COUNT|CPU|CUSTOM}</unit-->
+            <unit>CPU</unit>
+			<!--customunit>Custom Unit name like "Unicorns"</customunit>
+			<enabled>true</enabled>
+			<mpy>1.0</mpy>
+			<div>1.0</div-->
+            <limitmode>1</limitmode>
+            <limitmaxerror>95</limitmaxerror>
+            <limitmaxwarning>75</limitmaxwarning>
+            <limiterrormsg>CPU 1min at unacceptable level</limiterrormsg>
+            <limitwarningmsg>CPU 1min approaching unacceptable level</limitwarningmsg>
+          </attribute>
+          <attribute>
+            <object>1.3.6.1.4.1.9.2.1.56.0</object>
+            <displayvalue>CPU 5sec Busy</displayvalue>
+            <description>CPU 5/Sec Busy indicator</description>
+            <shortdescription/>
+            <comment>type=java.lang.int</comment>
+            <unit>CPU</unit>
+            <limitmode>1</limitmode>
+            <limitmaxerror>95</limitmaxerror>
+            <limitmaxwarning>75</limitmaxwarning>
+            <limiterrormsg>CPU 5/sec at unacceptable level</limiterrormsg>
+            <limitwarningmsg>CPU 5/sec approaching unacceptable level</limitwarningmsg>
+          </attribute>
+          <attribute>
+            <object>1.3.6.1.4.1.9.2.1.57.0</object>
+            <displayvalue>CPU 1min Busy</displayvalue>
+            <description>CPU 1min Busy indicator</description>
+            <shortdescription/>
+            <comment>type=java.lang.int</comment>
+            <unit>CPU</unit>
+            <limitmode>1</limitmode>
+            <limitmaxerror>95</limitmaxerror>
+            <limitmaxwarning>75</limitmaxwarning>
+            <limiterrormsg>CPU 1min at unacceptable level</limiterrormsg>
+            <limitwarningmsg>CPU 1min approaching unacceptable level</limitwarningmsg>
+          </attribute>
+        </attributes>
+      </entry>
+		</entries>
+	</profile>
+	
+</profiles>

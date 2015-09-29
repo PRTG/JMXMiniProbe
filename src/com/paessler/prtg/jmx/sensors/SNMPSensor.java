@@ -34,6 +34,7 @@
 package com.paessler.prtg.jmx.sensors;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
@@ -48,16 +49,22 @@ import org.snmp4j.smi.Variable;
 import com.google.gson.JsonObject;
 import com.paessler.prtg.jmx.Logger;
 import com.paessler.prtg.jmx.channels.Channel;
+import com.paessler.prtg.jmx.sensors.port.PortSensorDefinition;
+import com.paessler.prtg.jmx.sensors.profile.Attribute;
+import com.paessler.prtg.jmx.sensors.profile.Entry;
+import com.paessler.prtg.jmx.sensors.profile.IntegerAttribute;
+import com.paessler.prtg.jmx.sensors.profile.Profile;
 import com.paessler.prtg.jmx.sensors.snmp.SNMPSensorDefinition;
 import com.paessler.prtg.jmx.definitions.SensorConstants;
 import com.paessler.prtg.jmx.responses.DataResponse;
+import com.paessler.prtg.jmx.sensors.snmp.SNMPCustomDef;
 import com.paessler.prtg.jmx.sensors.snmp.SNMPEntry;
 import com.paessler.prtg.jmx.sensors.snmp.SNMPGetHolder;
 import com.paessler.prtg.util.NumberUtility;
 import com.paessler.prtg.util.snmp.SNMPUtil;
 import com.paessler.prtg.util.snmp.OIDHolder;
 
-public abstract class SNMPSensor extends RemoteSensor<SNMPEntry> {
+public class SNMPSensor extends RemoteSensor<SNMPEntry> {
 	protected String	community;
 //	protected boolean	useDelta;
 	protected int		snmpVersion;
@@ -84,8 +91,12 @@ public abstract class SNMPSensor extends RemoteSensor<SNMPEntry> {
 		mpyFactor = toclone.mpyFactor;
 		divFactor = toclone.divFactor;
 	}
-	
 	// ----------------------------
+	public Sensor copy(){
+		return new SNMPSensor(this);
+	}
+	
+	//----------------------------------------------------------------------
 	public int getMpyFactor()				{return mpyFactor;}
 	public void setMpyFactor(int mpyFactor) {this.mpyFactor = mpyFactor;}
 	// ----------------------------
@@ -127,9 +138,9 @@ public abstract class SNMPSensor extends RemoteSensor<SNMPEntry> {
 */	
 	// ----------------------------------------------------
 	
-	protected Vector<SNMPGetHolder> vectorIndecies;
+	protected List<SNMPGetHolder> vectorIndecies;
 	// ----------------------------------------------------
-	public Vector<SNMPGetHolder> getVectorIndecies() 
+	public List<SNMPGetHolder> getVectorIndecies() 
 	{
 		if(vectorIndecies == null){
 			vectorIndecies = new Vector<SNMPGetHolder>();
@@ -137,7 +148,7 @@ public abstract class SNMPSensor extends RemoteSensor<SNMPEntry> {
 		return vectorIndecies;	
 	}
 	// ---------------------------
-	public void setVectorIndecies(Vector<SNMPGetHolder> vectorIndecies) {
+	public void setVectorIndecies(List<SNMPGetHolder> vectorIndecies) {
 		this.vectorIndecies = vectorIndecies;
 	}
 	// ------------------------------------------------------------------------------	
@@ -229,9 +240,9 @@ public abstract class SNMPSensor extends RemoteSensor<SNMPEntry> {
 	    				SNMPEntry snmpe = new SNMPEntry(currc.dataType, currc.name, currc.oid, currc.oidString, currc.description);
 	    				if(snmpe != null){
 	    					if(divFactor != 1)
-	    						snmpe.setDivFactor(divFactor);
+	    						snmpe.setDiv(divFactor);
 	    					if(mpyFactor != 1)
-	    						snmpe.setMpyFactor(mpyFactor);
+	    						snmpe.setMpy(mpyFactor);
 	    					addVectorEntry(snmpe);
 	    				}
 	    			}
@@ -254,7 +265,7 @@ public abstract class SNMPSensor extends RemoteSensor<SNMPEntry> {
 	// --------------------------------------------------------------
 	protected void addChannel(DataResponse response, SNMPEntry snmpe, Map<OID, Variable> vars){
 		Channel channel;
-		channel = snmpe.getChannelInfo(vars.get(snmpe.getOid()));
+		channel = snmpe.getChannel(vars.get(snmpe.getOid()));
 		if(channel != null){
 			response.addChannel(channel);
 		}
@@ -353,5 +364,24 @@ public abstract class SNMPSensor extends RemoteSensor<SNMPEntry> {
         }
 		
 	}
+	// ----------------------------------------------------------------------
+    @Override
+    public void loadFrom(Profile profile) {
+    	String tmptag = profile.getTag();
+    	SNMPSensorDefinition def =  new SNMPSensorDefinition(profile.getKind(), profile.getName(), profile.getDescription(), 
+    			tmptag, profile.getHelp());
+		setDefinition(def);
+    	super.loadFrom(profile);
 
+    	SNMPEntry attr;
+    	for(Entry curr : profile.getEntries()){
+        	for(Attribute<?> curra : curr.getAttributes()){
+            	attr = new SNMPEntry(curra);
+        		if(attr != null){
+        			addVectorEntry(attr);
+        		}
+        		
+        	}
+    	}
+    } 
 }

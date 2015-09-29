@@ -45,7 +45,22 @@ import com.paessler.prtg.util.enums.EnumMapUtil;
 public abstract class Channel {
 	
 	public static enum Mode  {@SerializedName("counter") COUNTER, @SerializedName("Integer") INTEGER, @SerializedName("float") FLOAT};
-	
+	public static Map<String, Mode> modeMap = (Map<String, Mode>)EnumMapUtil.getEnumValuesMap(Mode.class.getEnumConstants());  
+    
+	public static Mode toMode(String val){
+		Mode retVal = null;
+		if(val != null){
+			retVal = modeMap.get(val);
+			if(retVal == null){
+				int ival = NumberUtility.convertToInt(val, -1);
+//				if(ival > 0){
+//					retVal = Unit.ival
+//				}
+			}
+		}
+		return retVal;
+	}
+	// -----------------------------------------------------------------
 	public static final String UNIT_STR_BANDWIDTH	= "BytesBandwidth";
 	public static final String UNIT_STR_MEMORY 		= "BytesMemory";
 	public static final String UNIT_STR_DISK 		= "BytesDisk";
@@ -56,7 +71,7 @@ public abstract class Channel {
 	public static final String UNIT_STR_TEMP		= "Temperature";
 	public static final String UNIT_STR_PERCENT 	= "Percent";
 	public static final String UNIT_STR_COUNT 		= "Count";
-	public static final String UNIT_STR_CPU 		= "CPU (*)";
+	public static final String UNIT_STR_CPU 		= "CPU";
 	public static final String UNIT_STR_CUSTOM		= "Custom";
 	public static String[] getUnitSerializedNames(){
 		return new String[] {
@@ -114,7 +129,7 @@ public abstract class Channel {
 		if(val != null){
 			retVal = unitMap.get(val);
 			if(retVal == null){
-				int ival = NumberUtility.convertToInt(val, -1);;
+				int ival = NumberUtility.convertToInt(val, -1);
 //				if(ival > 0){
 //					retVal = Unit.ival
 //				}
@@ -122,6 +137,8 @@ public abstract class Channel {
 		}
 		return retVal;
 	}
+	// -----------------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------
 	static{
 		ConvertUtils.register(new Converter(){
 
@@ -134,8 +151,23 @@ public abstract class Channel {
 		        return retVal;
 			}
 			
-		}, Unit.class);		
+		}, Unit.class);
+		// -------------------
+		ConvertUtils.register(new Converter(){
+
+			@Override
+			public Object convert(Class toType, Object object) {
+				Object retVal = null;
+		        if (object != null && toType.equals(Mode.class)) {
+		        	retVal = toMode(object.toString());
+			    }
+		        return retVal;
+			}
+			
+		}, Mode.class);		
 	}
+	// -----------------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------
     public String name;
     /* The type of the value. Please make sure that it matches the provided value, otherwise PRTG will show 0 values. */
     public Mode mode;

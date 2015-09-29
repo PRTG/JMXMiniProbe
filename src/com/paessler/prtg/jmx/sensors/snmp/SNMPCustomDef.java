@@ -29,11 +29,14 @@
  */
 package com.paessler.prtg.jmx.sensors.snmp;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import com.paessler.prtg.jmx.definitions.FieldDefinition;
 import com.paessler.prtg.jmx.definitions.GroupDefinition;
 import com.paessler.prtg.jmx.definitions.RadioFieldDefinition;
 import com.paessler.prtg.jmx.definitions.SimpleEditFieldDefinition;
+import com.paessler.prtg.jmx.definitions.UnitFieldDefinition;
 
 /**
  * @Author JR Andreassen
@@ -45,6 +48,7 @@ public class SNMPCustomDef extends SNMPSensorDefinition {
 	public static final String CUSTOM_SENSOR_VALS = "CustomSensorParameters";
 	public static final String FIELD_DESCR = "channeldescr";
 	public static final String FIELD_UNIT = "unit";
+	public static final String FIELD_CUSTOMUNIT = "customunit";
 	public static final String FIELD_VALUE_TYPE = "value_type";
 
     // -----------------------------------------------------------------------
@@ -63,10 +67,11 @@ public class SNMPCustomDef extends SNMPSensorDefinition {
 //        tmpfield.setRequired(FieldDefinition.FIELDVALUE_REQUIRED_TRUE);
         group.fields.add(tmpfield);
         // -------------------------
-        tmpfield = new SimpleEditFieldDefinition(FIELD_UNIT, "Unit String");
+        //UnitFieldDefinition(String name, String caption, String help, String defaultvalue)
+        tmpfield = new UnitFieldDefinition(FIELD_UNIT, "Unit String", "Pick Unit to display", null);
         tmpfield.setRequired(FieldDefinition.FIELDVALUE_REQUIRED_TRUE);
-        tmpfield.setHelp("Enter a 'unit' string, e.g. 'ms', 'Kbyte' (for display purposes only).");
-        tmpfield.setDefaultValue("#");
+//        tmpfield.setHelp("Enter a 'unit' string, e.g. 'ms', 'Kbyte' (for display purposes only).");
+//        tmpfield.setDefaultValue("#");
         group.fields.add(tmpfield);
         // -------------------------
         RadioFieldDefinition radio = new RadioFieldDefinition(FIELD_VALUE_TYPE, "Value Type", "Choose Guage/Delta", "1");
@@ -81,8 +86,13 @@ public class SNMPCustomDef extends SNMPSensorDefinition {
         retVal.add(group);
 		return retVal;
 	}	
+    // -----------------------------------------------------------------------
+    public SNMPCustomDef(String kind, String name, String description, String tag, String help) {
+        super(kind, name, description, tag, help);
+        setGroups(getGroups( new ArrayList<GroupDefinition>()));
+    }
     public SNMPCustomDef() {
-    	super(KIND, "SNMP Custom Sensor", "Monitors a numerical value returned by a specific OID using SNMP", TAG, 
+    	this(KIND, "SNMP Custom Sensor", "Monitors a numerical value returned by a specific OID using SNMP", TAG, 
     		"Monitors a numerical value returned by a specific OID using SNMP");
 
     }

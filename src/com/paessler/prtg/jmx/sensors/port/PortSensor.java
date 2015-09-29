@@ -188,12 +188,12 @@ public class PortSensor extends RemoteSensor<IntegerAttribute> {
 	// ----------------------------------------------------------------------
     @Override
     public void loadFrom(Profile profile) {
-    	super.loadFrom(profile);
-
     	String tmptag = profile.getTag();
     	PortSensorDefinition def =  new PortSensorDefinition(profile.getKind(), profile.getName(), profile.getDescription(), 
     			tmptag, profile.getHelp(), false);
     	setDefinition(def);
+    	super.loadFrom(profile);
+
     	IntegerAttribute attr;
     	for(Entry curr : profile.getEntries()){
         	for(Attribute<?> curra : curr.getAttributes()){

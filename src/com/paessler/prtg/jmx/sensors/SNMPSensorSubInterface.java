@@ -58,6 +58,7 @@ import com.paessler.prtg.jmx.definitions.SensorDefinition;
 import com.paessler.prtg.jmx.responses.DataResponse;
 import com.paessler.prtg.util.snmp.SNMPUtil;
 import com.paessler.prtg.util.snmp.OIDHolder;
+import com.paessler.prtg.util.snmp.SNMPUtil.SNMPCounterType;
 
 public class SNMPSensorSubInterface extends RemoteSensor {
 	protected String community;
@@ -100,8 +101,8 @@ public class SNMPSensorSubInterface extends RemoteSensor {
 		// ------------------------------------
 		public snmpGetHolder(int idx, boolean inoutonly){
 			ifIndex = idx;
-			ifHolder = SNMPUtil.getIFOIDHolder(ifIndex);
-			channels = SNMPUtil.getIFOIDHolderInst(new Vector<OIDHolder>(), ifIndex, inoutonly);
+			ifHolder = SNMPUtil.getIFOIDHolder(ifIndex, SNMPCounterType.Counter64bit);
+			channels = SNMPUtil.getIFOIDHolderInst(new Vector<OIDHolder>(), ifIndex, SNMPCounterType.Counter64bit, inoutonly);
 		}
 	} // class snmpGetHolder
 	protected Vector<snmpGetHolder> vectorIndecies;

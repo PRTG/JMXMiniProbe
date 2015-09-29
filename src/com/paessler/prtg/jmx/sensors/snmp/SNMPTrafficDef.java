@@ -30,9 +30,11 @@
 package com.paessler.prtg.jmx.sensors.snmp;
 
 import java.util.List;
+
 import com.paessler.prtg.jmx.definitions.FieldDefinition;
 import com.paessler.prtg.jmx.definitions.GroupDefinition;
 import com.paessler.prtg.jmx.definitions.RadioFieldDefinition;
+import com.paessler.prtg.jmx.definitions.SensorConstants;
 import com.paessler.prtg.jmx.definitions.SimpleEditFieldDefinition;
 
 /**
@@ -44,6 +46,7 @@ public class SNMPTrafficDef extends SNMPSensorDefinition {
 	public static String TAG = "mjsnmptrafficsensor";
 	public static String TRAFFIC_SENSOR_VALS = "TrafficSensorParameters";
 	public static final String SUM_CHANNELS		= "sumchannels";
+	public static final String TRAFFIC_COUNTER		= "snmp_counter";
 
     // -----------------------------------------------------------------------
 	@Override
@@ -51,6 +54,13 @@ public class SNMPTrafficDef extends SNMPSensorDefinition {
 		List<GroupDefinition> retVal = super.getGroups(groups);
 
         GroupDefinition group = new GroupDefinition(TRAFFIC_SENSOR_VALS, "Interface and Channel Settings");
+        // -------------------------
+        RadioFieldDefinition snmpCounter = new RadioFieldDefinition(SNMPTrafficDef.TRAFFIC_COUNTER, "SNMP Counter Type", "Choose the Counter Type to be used", "2");
+        snmpCounter.setRequired(FieldDefinition.FIELDVALUE_REQUIRED_TRUE);
+        snmpCounter.addOption("1", "32 bit");
+        snmpCounter.addOption("2", "64 bit");
+//        snmpVersion.setDefaultValue("2");
+        group.fields.add(snmpCounter);
         // -------------------------
         SimpleEditFieldDefinition tmpfield = new SimpleEditFieldDefinition(SNMPSensorDefinition.FIELD_SNMP_VECTOR, "SNMP Interface index");
         tmpfield.setRequired(FieldDefinition.FIELDVALUE_REQUIRED_TRUE);
