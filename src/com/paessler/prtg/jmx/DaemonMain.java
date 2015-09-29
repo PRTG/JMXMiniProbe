@@ -31,13 +31,10 @@
 package com.paessler.prtg.jmx;
 
 import com.paessler.prtg.jmx.tasks.AnnouncementTask;
+import com.paessler.prtg.util.SystemUtility;
+
 import org.apache.commons.cli.*;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Properties;
-import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -53,56 +50,51 @@ public class DaemonMain {
     public static void main(String[] args) {
         Options options = new Options();
         options.addOption("c", true, "Config file");
-        if (args.length == 0) {
-            showHelp(options);
-        }
-
+        options.addOption("h", true, "Show help and exit");
+        String configFile = null;
         CommandLineParser parser = new PosixParser();
         CommandLine cmdLine;
-        String host = null, key = null, configPath = null, guid = null;
+        String configPath = null;
         try {
             cmdLine = parser.parse(options, args);
-            if (!cmdLine.hasOption("c"))
+            if (cmdLine.hasOption("h"))
                 showHelp(options);
-            configPath = cmdLine.getOptionValue("c");
+            if (cmdLine.hasOption("c")) {
+            	configPath = cmdLine.getOptionValue("c");
+            }
+            if (configFile == null) {
+                configFile = ProbeContext.getConfigFile(System.getProperty("user.dir"));
+            }
         } catch (Exception e) {
             showHelp(options);
         }
-
-        if (configPath == null || configPath.length() == 0)
-            showHelp(options);
-
-
-        Properties settings = new Properties();
-        try {
-            settings.load(new FileInputStream(configPath));
-        } catch (IOException e) {
-            errorOut("Invalid configuration file: " + configPath);
+        try{
+	        ProbeContext probeContext = ProbeContext.getProbeContext(configFile);
+	        
+	        if(probeContext.getDebugLevel() > 0){
+	        	Logger.log("The current OS String is:\'"+
+	        				System.getProperty(SystemUtility.SYS_PROPERTY_OS_NAME)+"\" version:"+
+	        				System.getProperty(SystemUtility.SYS_PROPERTY_OS_VER));
+	        }
+	        
+			if(!probeContext.isErrorStatus()){
+				ScheduledExecutorService scheduledExecutorService = null; 
+				if(probeContext.getWorkerThreads() > 1){
+					scheduledExecutorService = Executors.newScheduledThreadPool(probeContext.getWorkerThreads());
+				} else {
+					scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+				}
+		//        ScheduledExecutorService 
+		        scheduledExecutorService.schedule(new AnnouncementTask(probeContext, scheduledExecutorService), 1, TimeUnit.SECONDS);
+			} else {
+				System.out.println(probeContext.getErrorMessage()+" Failiure to launch->"+probeContext.getErrorMessage());
+				Logger.log(probeContext.getErrorMessage());
+			}
         }
-        host = settings.getProperty("host");
-        key = settings.getProperty("key");
-        if (host == null) {
-            errorOut("Invalid host");
+        catch(Throwable e){
+            Logger.log(e.getMessage());
+            e.printStackTrace();
         }
-
-        if (key == null) {
-            errorOut("Invalid key");
-        }
-        guid = settings.getProperty("guid");
-
-        if (guid == null) {
-            guid = UUID.randomUUID().toString();
-            settings.put("guid", guid);
-            try {
-                settings.store(new FileOutputStream(configPath), "");
-            } catch (IOException e) {
-                errorOut("Could not write to " + configPath);
-            }
-        }
-
-        ProbeContext probeContext = new ProbeContext(host, guid, key);
-        ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-        scheduledExecutorService.schedule(new AnnouncementTask(probeContext, scheduledExecutorService), 1, TimeUnit.SECONDS);
     }
 
     private static void errorOut(String message) {

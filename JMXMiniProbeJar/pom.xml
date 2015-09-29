@@ -1,0 +1,344 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+  	<groupId>com.paessler.prtg</groupId>
+  	<artifactId>JavaMiniProbe</artifactId>
+  	<version>1.0</version>
+  </parent>
+  <artifactId>JMXMiniProbe</artifactId>
+  <packaging>jar</packaging>
+  <name>JMXMiniProbe</name>
+  <url>https://github.com/PaesslerAG/JMXMiniProbe</url>
+
+
+ <properties> 
+<!--  *******************  Package Versions  ******************* -->
+      <snmp4j.version>2.3.1</snmp4j.version>		
+	  <platform-jna.version>3.5.1</platform-jna.version>
+	  <icmp4j.version>16.0.1017-1</icmp4j.version>
+	  <junit.version>3.8.1</junit.version> 
+      <javax.servlet.version>3.1.0</javax.servlet.version>
+      <commons-cli.version>1.2</commons-cli.version>
+      <commons-codec.version>1.6</commons-codec.version>
+      <commons-logging.version>1.1.1</commons-logging.version>
+      <gson.version>2.2.2</gson.version>
+      <apache.httpcore.version>4.4.1</apache.httpcore.version>
+      <apache.httpcomponents.version>4.4.1</apache.httpcomponents.version>
+      <!-- apache.httpclient-cache.version>4.4.1</apache.httpclient-cache.version-->
+      <apache.httpmime.version>4.4.1</apache.httpmime.version>
+      <appassembler.version>1.10</appassembler.version>
+<!--  *******************  Package Versions  ******************* -->
+    <groupId>${project.groupId}</groupId>
+    <artifactId>${project.name}</artifactId>
+    <version>${project.version}</version>
+    <packaging>${project.packaging}</packaging>
+    <file>${project.basedir}/../target/${project.name}.jar</file>
+
+      <daemonmain.classname>com.paessler.prtg.jmx.DaemonMain</daemonmain.classname>		
+      <servletnmain.classname>com.paessler.prtg.jmx.ServletMain</servletnmain.classname>		
+      <scantoolmain.classname>com.paessler.prtg.jmx.sensors.jmx.JMXUtils</scantoolmain.classname>		
+    <jswDir>${project.build.directory}/jsw/${rpm.appname}</jswDir>
+    <rpm.username>JMXMiniProbe</rpm.username>
+    <rpm.groupname>PRTG</rpm.groupname>
+    <rpm.appname>JMXMiniProbe</rpm.appname>
+    <rpm.path>/opt/Paessler/${rpm.appname}</rpm.path>
+
+  </properties>
+
+  
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+
+    <!--
+      Provided in the repo:
+       - commons-cli-1.2.jar
+       - commons-codec-1.6.jar
+       - commons-logging-1.1.1.jar
+       - gson-2.2.2.jar
+       - httpclient-4.2.5.jar
+       - httpclient-cache-4.2.5.jar
+       - httpcore-4.2.4.jar
+       - httpmime-4.2.5.jar
+    -->
+    <dependency>
+      <groupId>commons-cli</groupId>
+      <artifactId>commons-cli</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.6</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.2.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>${apache.httpcomponents.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient-cache</artifactId>
+      <version>${apache.httpcomponents.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpcore</artifactId>
+      <version>${apache.httpcore.version}</version>
+    </dependency>
+ 
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpmime</artifactId>
+      <version>${apache.httpcomponents.version}</version>
+    </dependency>
+    <!-- ##### XML Parsing ##### -->
+	<dependency>
+	  <groupId>org.apache.commons</groupId>
+	  <artifactId>commons-digester3</artifactId>
+	  <version>3.2</version>
+	  <classifier>with-deps</classifier>
+	</dependency>
+	    
+    <dependency>
+	  <groupId>org.apache.commons</groupId>
+	  <artifactId>commons-lang3</artifactId>
+	  <version>3.4</version>
+    </dependency>
+    <!-- ##### XML Parsing ##### -->
+    <!-- SNMP4J -->
+	<dependency>
+		<groupId>org.snmp4j</groupId>
+		<artifactId>snmp4j</artifactId>
+		<version>${snmp4j.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.snmp4j</groupId>
+		<artifactId>snmp4j-agent</artifactId>
+		<version>${snmp4j.version}</version>
+	</dependency>
+  <!-- icmp4j/ShortPasta-ICMP -->
+  <dependency>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>platform</artifactId>
+	  <version>${platform-jna.version}</version>
+  </dependency>
+  
+  <dependency>
+      <groupId>org.icmp4j</groupId>
+      <artifactId>icmp4j</artifactId>
+      <version>${icmp4j.version}</version>
+      <!-- type>system</type>
+      <scope>system</scope>
+      <systemPath>${project.build.directory}/../web/WEB-INF/lib/icmp4j.jar</systemPath-->
+  </dependency>
+
+   <dependency>
+      <groupId>org.codehaus.mojo.appassembler</groupId>
+      <artifactId>appassembler-maven-plugin</artifactId>
+      <version>${appassembler.version}</version>
+    </dependency>
+   <dependency>
+      <groupId>org.codehaus.mojo.appassembler</groupId>
+      <artifactId>appassembler-booter</artifactId>
+      <version>${appassembler.version}</version>
+    </dependency>
+
+ </dependencies>
+</dependencyManagement>
+<!--  ##################################################################### -->
+
+ <build>
+   <sourceDirectory>../src</sourceDirectory>
+   <finalName>${project.artifactId}</finalName>
+   <directory>${project.basedir}/../target</directory>
+   <outputDirectory>${project.build.directory}/classes</outputDirectory>
+   <resources>
+     <resource>
+       <directory>web</directory>
+     </resource>
+   </resources>
+   <plugins>
+		<plugin>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-compiler-plugin</artifactId>
+		    <version>2.3.2</version>
+		    <configuration>
+		        <!--source>1.6</source>
+		        <target>1.6</target-->
+		        <showDeprecation>true</showDeprecation>
+		        <compilerArguments>
+		            <d>${project.build.outputDirectory}</d>
+		        </compilerArguments>
+		    </configuration>
+		</plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.6</version>
+        <configuration>
+          <finalName>${project.name}</finalName>
+          <archive>
+            <index>true</index>
+            <manifest>
+		        <mainClass>${daemonmain.classname}</mainClass>
+		        <addClasspath>true</addClasspath>
+			    <classpathPrefix>WEB-INF/lib/</classpathPrefix>
+            </manifest>
+            <manifestEntries>
+            	<mode>development</mode>
+            	<Name>JavaJMXProbe</Name>
+            	<url>${project.url}</url>
+				<!--Custom-Title>PRTG JavaJMXProbe</Custom-Title>
+				<Custom-Version>${project.parent.version}</Custom-Version> 
+				<Custom-Vendor>Paessler AG</Custom-Vendor>
+				<Custom-Description>Copyright 2014-2015. Paessler AG. Provided AS-IS, no warranty expressed or implied.</Custom-Description-->
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+      
+	  <!--  ##################################################################### -->
+      <!-- http://stackoverflow.com/questions/10802280/multiple-installinstall-file-in-a-single-pom-xml -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-install-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>inst_1</id>
+                    <phase>install</phase>
+                    <goals>
+                        <goal>install-file</goal>
+                    </goals>
+                    <configuration>
+                        <!-- config for file 1 -->
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+        
+	  <!--  ##################################################################### -->
+      <!-- http://stackoverflow.com/questions/10224631/how-do-you-create-a-standalone-application-with-dependencies-intact-using-maven
+      	   https://wiki.cantara.no/display/dev/Example+JSW+and+RPM 
+      	   
+      -->
+		<plugin>
+		    <groupId>org.codehaus.mojo</groupId>
+		    <artifactId>appassembler-maven-plugin</artifactId>
+		    <version>${appassembler.version}</version>
+		    <configuration>
+		        <repositoryName>WEB-INF/lib</repositoryName>
+		        <repositoryLayout>flat</repositoryLayout>
+		        <!-- assembleDirectory>${project.build.directory}/JMXProbe</assembleDirectory-->
+		        <assembleDirectory>${project.build.directory}/Assembletest</assembleDirectory>
+          		<includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+	  <!--  ##################################################################### -->
+         <defaultJvmSettings>
+            <initialMemorySize>32M</initialMemorySize>
+            <maxMemorySize>256M</maxMemorySize>
+            <systemProperties>
+              <systemProperty>com.sun.management.jmxremote</systemProperty>
+              <systemProperty>com.sun.management.jmxremote.port=1099</systemProperty>
+              <systemProperty>com.sun.management.jmxremote.authenticate=false</systemProperty>
+              <systemProperty>com.sun.management.jmxremote.ssl=false</systemProperty>
+              <systemProperty>log4j.configuration=WEB-INF/log4j.properties</systemProperty>
+            </systemProperties>
+            <extraArguments>
+              <extraArgument>-server</extraArgument>
+            </extraArguments>
+          </defaultJvmSettings>
+          <daemons>
+            <daemon>
+              <id>${rpm.appname}</id>
+              <mainClass>${daemonmain.classname}</mainClass>
+              <commandLineArguments>
+                <commandLineArgument>start</commandLineArgument>
+              </commandLineArguments>
+              <generatorConfigurations>
+                <generatorConfiguration>
+                  <generator>jsw</generator>
+                  <includes>
+                    <include>linux-x86-32</include>
+                    <include>linux-x86-64</include>
+                    <include>linux-arm</include>
+                    <include>macosx-universal-32</include>
+                    <include>macosx-universal-64</include>
+                    <include>windows-x86-32</include>
+                    <include>windows-x86-64</include>
+                  </includes>
+                  <configuration>
+                  	<property>
+                  		<name>app.long.name</name>
+                  		<value>Paessler PRTG JMXMiniProbe</value>
+                  	</property>
+                  	<property>
+                  		<name>app.description</name>
+                  		<value>Paessler PRTG Remote Java/JMX MiniProbe</value>
+                  	</property>
+                  </configuration>
+                </generatorConfiguration>
+              </generatorConfigurations>
+
+              <platforms>
+                <platform>jsw</platform>
+		        <!--platform>booter-unix</platform>
+		        <platform>booter-windows</platform-->
+              </platforms>
+            </daemon>
+          </daemons>
+          <programs>
+             <program>
+              <mainClass>${scantoolmain.classname}</mainClass>
+              <id>genJMXProfile</id>
+            </program>
+             <program>
+              <mainClass>${daemonmain.classname}</mainClass>
+              <id>run${rpm.appname}</id>
+            </program>
+          </programs>
+        </configuration>
+        <executions>
+          <execution>
+            <id>libsAndScripts</id>
+            <phase>package</phase>
+            <goals>
+              <goal>generate-daemons</goal>
+              <goal>assemble</goal>
+            </goals>
+          </execution>
+        </executions>
+	  <!--  ##################################################################### -->
+		</plugin>        
+	  <!--  ##################################################################### -->
+   </plugins>
+ </build>
+
+</project>

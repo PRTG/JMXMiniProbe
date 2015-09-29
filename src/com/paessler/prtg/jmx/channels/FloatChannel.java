@@ -30,11 +30,23 @@
 
 package com.paessler.prtg.jmx.channels;
 
+import com.paessler.prtg.jmx.channels.Channel.Mode;
+
 public class FloatChannel extends Channel {
     float value;
 
+    public void setValue(float val){value = val;}
+    
+    public FloatChannel(String name, Unit unit, Mode mode, float value) {
+        super(name, unit, mode);
+        setValue(value);
+    }
+    public FloatChannel(String name, Unit unit, float value) {
+    	this(name, unit, Mode.FLOAT, value);
+    	
+    }
     public FloatChannel(String name, String unit, float value) {
-        super(name, unit, "float");
-        this.value = value;
+    	this(name, toUnit(unit), Mode.FLOAT, value);
+    	
     }
 }

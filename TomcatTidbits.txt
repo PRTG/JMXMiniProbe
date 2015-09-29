@@ -1,0 +1,39 @@
+http://localhost:8080/jasperserver/login.html
+
+Tomcat Users:
+  <role rolename="manager-gui"/>
+  <user username="tomcat" password="tomcat" roles="tomcat,manager-gui"/>
+
+Service add:
+-Dcom.sun.management.jmxremote.port=9010
+-Dcom.sun.management.jmxremote.authenticate=false
+-Dcom.sun.management.jmxremote.ssl=false
+
+
+Import PRTG Cert:
+"C:\Jaspersoft\jasperreports-server-cp-6.0.1\java\jre\bin\keytool" -import -alias PRTG -file prtg.crt -keystore "C:\Jaspersoft\jasperreports-server-cp-6.0.1\java\jre\lib\security\cacerts" 
+
+
+
+JMXMiniProbe[Tomcat 7.0.42/jdk1.8.42] (62.146.75.210) 
+
+service:jmx:rmi:///jndi/rmi://localhost:9010/jmxrmi
+Catalina:type=GlobalRequestProcessor,name="http-apr-8080"
+JMX: Tomcat Port 8080 Traffic
+bytesSent
+bytesReceived
+requestCount
+errorCount
+processingTime
+
+JMX: Tomcat Port 8080 Stats
+service:jmx:rmi:///jndi/rmi://localhost:9010/jmxrmi
+Catalina:type=Connector,port=8080
+acceptCount
+
+HP Switch[SNMP Traffic Sensor]
+10.0.255.5
+Channels: 1,2,3
+
+AD Critical 
+10.0.0.91

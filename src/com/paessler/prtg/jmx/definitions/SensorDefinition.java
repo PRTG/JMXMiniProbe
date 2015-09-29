@@ -30,10 +30,153 @@
 
 package com.paessler.prtg.jmx.definitions;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class SensorDefinition {
     public String kind = "Unknown";
     public String name = "Unknown";
-    public List<GroupDefinition> groups;
+    public String description;
+	public String help;
+    public String tag;
+    public List<GroupDefinition> groups = null;
+    
+    // -----------------------------------------------------------------------
+    protected Map<String,FieldDefinition> fields = new HashMap<String,FieldDefinition>();
+    public FieldDefinition addField(FieldDefinition val){
+    	FieldDefinition retVal = null;
+    	if(val != null){
+    		retVal = fields.put(val.getName(), val);
+    	}
+    	return retVal;
+    }
+    // --------------------------------
+    public FieldDefinition getField(String name){
+    	FieldDefinition retVal = null;
+    	if(name != null){
+    		retVal = fields.get(name);
+    	}
+    	return retVal;
+    }
+    // -----------------------------------------------------------------------
+    public void setFieldDefaultValue(String name, Object value){
+    	FieldDefinition field = getField(name);
+    	if(field != null && value != null){
+    		field.setDefaultValue(value.toString());
+    	}
+    }
+    // -----------------------------------------------------------------------
+    public void setFieldCaption(String name, Object value){
+    	FieldDefinition field = getField(name);
+    	if(field != null && value != null){
+    		field.setCaption(value.toString());
+    	}
+    }
+    // -----------------------------------------------------------------------
+    public void setFieldHelp(String name, Object value){
+    	FieldDefinition field = getField(name);
+    	if(field != null && value != null){
+    		field.setHelp(value.toString());
+    	}
+    }
+    // -----------------------------------------------------------------------
+	protected FieldDefinition getUserNameField(String help, boolean required){
+        FieldDefinition retVal = new SimpleEditFieldDefinition(SensorConstants.USERNAME, "Username/Login");
+        // -------------------------
+        retVal.setHelp(help);
+        if(required){
+            retVal.setRequired(FieldDefinition.FIELDVALUE_REQUIRED_TRUE);
+        }
+        return retVal;
+	}
+    // -----------------------------------------------------------------------
+	protected FieldDefinition getPasswordField(String help, boolean required){
+        FieldDefinition retVal = new SimpleEditFieldDefinition(SensorConstants.PASSWORD, "Password");
+        if(required){
+            retVal.setRequired(FieldDefinition.FIELDVALUE_REQUIRED_TRUE);
+        }
+        retVal.setHelp(help);
+        return retVal;
+	}
+
+    
+    // -----------------------------------------------------------------------
+	public List<GroupDefinition> getGroups(List<GroupDefinition> groups){
+		return groups;
+	}
+    // -----------------------------------------------------------------------
+    public SensorDefinition(String kind, String name, String description, String tag, String help){
+        this.kind = kind;
+        this.name = name;
+        this.description = description;
+        this.help = help;
+        this.tag = tag;
+        
+        setGroups(getGroups( new ArrayList<GroupDefinition>()));
+    }
+/*    public SensorDefinition(String kind, String name, String description, String tag){
+        this(kind, name, description, tag, null);
+    }
+*/    
+    // -----------------------------------------------------------------------
+    public String getKind() {
+		return kind;
+	}
+    // -------------------------------------------
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+    // -----------------------------------------------------------------------
+	public String getName() {
+		return name;
+	}
+    // -------------------------------------------
+	public void setName(String name) {
+		this.name = name;
+	}
+    // -----------------------------------------------------------------------
+	public String getDescription() {
+		return description;
+	}
+    // -------------------------------------------
+	public void setDescription(String description) {
+		this.description = description;
+	}
+    // -----------------------------------------------------------------------
+	public String getHelp() {
+		return help;
+	}
+    // -------------------------------------------
+	public void setHelp(String help) {
+		this.help = help;
+	}
+    // -----------------------------------------------------------------------
+	public String getTag() {
+		return tag;
+	}
+    // -----------------------------------------------------------------------
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+    // -----------------------------------------------------------------------
+	public boolean addGroup(GroupDefinition toadd) {
+		boolean retVal = false;
+		if(groups != getGroups()){
+	        groups.add(toadd);
+		}
+		return retVal;
+	}
+    // -----------------------------------------------------------------------
+	public List<GroupDefinition> getGroups() {
+		if(groups == null){
+	        groups = new ArrayList<GroupDefinition>();
+		}
+		return groups;
+	}
+    // -------------------------------------------
+	public void setGroups(List<GroupDefinition> groups) {
+		this.groups = groups;
+	}
 }

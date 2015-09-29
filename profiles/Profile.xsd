@@ -1,0 +1,224 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="profiles">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="profile" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="kind" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Unique Identifier for the sensor(should start with 'mjjmx*'")</xs:documentation>
+				</xs:annotation>
+			   </xs:element>
+              <xs:element type="xs:string" name="name" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Name of the sensor. Will become the default name</xs:documentation>
+				</xs:annotation>
+			   </xs:element>
+              <xs:element type="xs:string" name="tag" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Tags values. Should include the tag of the parrent</xs:documentation>
+				</xs:annotation>
+			   </xs:element>
+              <xs:element type="xs:string" name="description" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>What is displayed in the description in the Add Sensor Dialog</xs:documentation>
+				</xs:annotation>
+			   </xs:element>
+              <!--xs:element type="xs:string" name="baseclass" minOccurs="1"/-->
+			  <xs:element name="baseclass" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The class that implements the sensor used</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+				  <xs:restriction base="xs:string">
+					<!-- Tags: jmxsensor,mjjmxsensor -->
+					<xs:enumeration value="com.paessler.prtg.jmx.sensors.JMXSensor"/>
+					<!-- Tags: jmxsensor,mjjmxsensor -->
+					<xs:enumeration value="com.paessler.prtg.jmx.sensors.port.PortSensor"/>
+				  </xs:restriction>
+				</xs:simpleType>
+			  </xs:element>
+              <xs:element type="xs:string" name="help"/>
+              <!-- Properties -->
+			  <xs:element name="properties" minOccurs="0">
+				<xs:complexType>
+				  <xs:sequence>
+					<xs:element name="property" type="PropertyType"/>
+				  </xs:sequence>
+				</xs:complexType>
+			  </xs:element>
+              <!-- Properties -->
+              <!-- Please note, the total number of Attributes for all the entries in a Profile, 
+			  is limited to PRTG Channels per Sensor -->
+              <xs:element name="entries">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="entry">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="object" minOccurs="1">
+							<xs:annotation>
+								<xs:documentation>Name of Entry</xs:documentation>
+							</xs:annotation>
+						  </xs:element>
+                          <xs:element type="xs:string" name="displayvalue" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Value to be displayed</xs:documentation>
+							</xs:annotation>
+						  </xs:element>
+                          <xs:element type="xs:string" name="description" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Description of entry</xs:documentation>
+							</xs:annotation>
+						  </xs:element>
+                          <xs:element type="xs:string" name="shortdescription" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Short description, will be used to indicate entry for a Channel</xs:documentation>
+							</xs:annotation>
+						  </xs:element>
+                          <xs:element type="xs:string" name="comment" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Arbitrary comment</xs:documentation>
+							</xs:annotation>
+						  </xs:element>
+              			<!-- Properties -->
+						<xs:element name="properties" minOccurs="0">
+							<xs:complexType>
+							  <xs:sequence>
+								<xs:element name="property" type="PropertyType"/>
+							  </xs:sequence>
+							</xs:complexType>
+						</xs:element>
+              			<!-- Properties -->
+                          <xs:element name="attributes" minOccurs="1" maxOccurs="50">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="attribute">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element type="xs:string" name="object" minOccurs="1"/>
+                                      <xs:element type="xs:string" name="displayvalue" minOccurs="0"/>
+                                      <xs:element type="xs:string" name="description" minOccurs="0"/>
+                                      <xs:element type="xs:string" name="shortdescription" minOccurs="0"/>
+                                      <xs:element type="xs:string" name="comment" minOccurs="0"/>
+                                      <xs:element name="unit" minOccurs="1">
+										<xs:annotation>
+											<xs:documentation>Valid Units for PRTG</xs:documentation>
+										</xs:annotation>
+								        <xs:simpleType>
+								          <xs:restriction base="xs:string">
+										    <xs:enumeration value="BANDWIDTH"/>		<!-- BytesBandwidth -->
+										    <xs:enumeration value="MEMORY"/>		<!-- BytesMemory -->
+										    <xs:enumeration value="DISK"/>			<!-- BytesDisk -->
+										    <xs:enumeration value="FILE"/>			<!-- BytesFile -->
+										    <xs:enumeration value="TIME_RESPONSE"/>	<!-- TimeResponse[ms] -->
+										    <xs:enumeration value="TIME_SECONDS"/>	<!-- TimeSeconds -->
+										    <xs:enumeration value="TIME_HOURS"/>	<!-- TimeHours -->
+										    <xs:enumeration value="TEMP"/>			<!-- Temperature -->
+										    <xs:enumeration value="PERCENT"/>		<!-- Percent -->
+										    <xs:enumeration value="COUNT"/>			<!-- Count -->
+										    <xs:enumeration value="CPU"/>  			<!-- CPU (*) -->
+										    <xs:enumeration value="CUSTOM"/>		<!-- Custom (define the name of the unit using the additional field customunit) -->
+								          </xs:restriction>
+								        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element type="xs:string" name="customunit" minOccurs="0"/>
+                                      <xs:element type="xs:boolean" name="enabled" minOccurs="0"/>
+                                      <xs:element type="xs:float" name="mpy" default="1.0" minOccurs="0"/>
+                                      <xs:element type="xs:float" name="div" default="1.0" minOccurs="0"/>
+                                      <xs:element type="xs:int" name="limitmaxerror" minOccurs="0"/>
+                                      <xs:element type="xs:int" name="limitmaxwarning" minOccurs="0"/>
+                                      <xs:element type="xs:int" name="limitminwarning" minOccurs="0"/>
+                                      <xs:element type="xs:int" name="limitminerror" minOccurs="0"/>
+                                      <xs:element type="xs:string" name="limiterrormsg" minOccurs="0"/>
+                                      <xs:element type="xs:string" name="limitwarningmsg" minOccurs="0"/>
+                                      <xs:element type="xs:int" name="limitmode" default="0" minOccurs="0"/>
+                                      <xs:element name="properties" minOccurs="0">
+                                        <xs:complexType>
+                                          <xs:sequence>
+											<xs:element name="property" type="PropertyType"/>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <!-- Properties -->
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <!-- Attribute -->
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <!-- Attributes -->
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <!-- Element -->
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <!-- Profile -->
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <!-- Profiles -->
+  
+	<!-- Name Value Pairs-->
+    <xs:complexType name="NameValuePairsType">
+		<xs:annotation>
+			<xs:documentation>Arbitrary name value pair</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+		  <xs:element type="xs:string" name="name">
+			<xs:annotation>
+				<xs:documentation>Property name</xs:documentation>
+			</xs:annotation>
+		   </xs:element>
+		  <xs:element type="xs:string" name="value">
+			<xs:annotation>
+				<xs:documentation>Property value</xs:documentation>
+			</xs:annotation>
+		   </xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Name Value Pairs-->
+	<!-- Property-->
+    <xs:complexType name="PropertyType">
+		<xs:annotation>
+			<xs:documentation>Sequence of name value pair</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="property" type="NameValuePairsType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+
+<!--
+                          <xs:element name="properties">
+                            <xs:complexType>
+                              <xs:sequence>
+								<xs:element name="property">
+									<xs:annotation>
+										<xs:documentation>Arbitrary attribute to be set on the sensor</xs:documentation>
+									</xs:annotation>
+								  <xs:complexType>
+									<xs:sequence>
+									  <xs:element type="xs:string" name="name">
+										<xs:annotation>
+											<xs:documentation>Property name</xs:documentation>
+										</xs:annotation>
+									   </xs:element>
+									  <xs:element type="xs:string" name="value">
+										<xs:annotation>
+											<xs:documentation>Property value</xs:documentation>
+										</xs:annotation>
+									   </xs:element>
+									</xs:sequence>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+ -->	
+</xs:schema>

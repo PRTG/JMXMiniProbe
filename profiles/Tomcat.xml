@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- ###########################################################
+Unit Values[BANDWIDTH, MEMORY, DISK, FILE, TIME_RESPONSE, TIME_SECONDS, TIME_HOURS, TEMP, PERCENT, COUNT,CPU,CUSTOM]
+***************************************************************
+Please note, the apache.commons.digester3 is case sensitive.
+All XML TAGS should be in lower case.
+Profile Tags * MUST * be unique.
+***************************************************************
+The following are JMX MBeans for Tomcat 7.x
+########################################################### -->
+<profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Profile.xsd">
+	<profile>
+		<kind>jmxtcatsensor</kind>
+		<name>JMX Tomcat 7.x</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<description>Tomcat 7.x metrics</description>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help>Performance metrics for the Tomcat 7.x</help>
+		<entries>
+      <entry>
+        <object>Catalina:type=GlobalRequestProcessor,name="http-apr-8080"</object>
+        <displayvalue/>
+        <description>JMX: Tomcat Port[8080] stats</description>
+        <shortdescription>PRTG</shortdescription>
+        <attributes>
+          <attribute>
+            <object>bytesSent</object>
+            <displayvalue>Bytes Sent</displayvalue>
+            <description>Bytes Sent.</description>
+            <comment>type=java.lang.long</comment>
+            <unit>BANDWIDTH</unit>
+          </attribute>
+          <attribute>
+            <object>bytesReceived</object>
+            <displayvalue>Bytes Received</displayvalue>
+            <description>Bytes Received.</description>
+            <shortdescription/>
+            <comment>type=java.lang.long</comment>
+            <unit>BANDWIDTH</unit>
+          </attribute>
+          <attribute>
+            <object>requestCount</object>
+            <displayvalue>Number of HTTP requests</displayvalue>
+            <description>Number of HTTP requests.</description>
+            <shortdescription/>
+            <comment>type=java.lang.long</comment>
+            <unit>COUNT</unit>
+          </attribute>
+          <attribute>
+            <object>errorCount</object>
+            <displayvalue>Number Errors</displayvalue>
+            <description>Number Errors.</description>
+            <shortdescription/>
+            <comment>type=java.lang.long</comment>
+            <unit>COUNT</unit>
+          </attribute>
+          <attribute>
+            <object>maxTime</object>
+            <displayvalue>Max request response time</displayvalue>
+            <description>Max request response time</description>
+            <shortdescription/>
+            <comment>type=java.lang.int</comment>
+            <unit>TIME_RESPONSE</unit>
+          </attribute>
+          <attribute>
+            <object>processingTime</object>
+            <displayvalue>Time spent Processing reqs</displayvalue>
+            <description>Time spent Processing reqs</description>
+            <shortdescription/>
+            <comment>type=java.lang.int</comment>
+            <unit>TIME_SECONDS</unit>
+          </attribute>
+        </attributes>
+      </entry>
+      <entry>
+        <object>Catalina:type=Connector,port=8080</object>
+        <displayvalue/>
+        <description>JMX: Tomcat Port[8080] stats</description>
+        <shortdescription>PRTG</shortdescription>
+        <attributes>
+          <attribute>
+            <object>acceptCount</object>
+            <displayvalue>Request Count[8080]</displayvalue>
+            <description>Bytes Sent.</description>
+            <comment>type=java.lang.long</comment>
+            <unit>COUNT</unit>
+          </attribute>
+		</attributes>
+      </entry>
+      <entry>
+        <object>Catalina:type=Connector,port=8009</object>
+        <displayvalue/>
+        <description>JMX: Tomcat Port[8009] stats</description>
+        <shortdescription>Tcat Port[8009]</shortdescription>
+        <attributes>
+          <attribute>
+            <object>acceptCount</object>
+            <displayvalue>Request Count[8009]</displayvalue>
+            <description>Bytes Sent.</description>
+            <comment>type=java.lang.long</comment>
+            <unit>COUNT</unit>
+          </attribute>
+		</attributes>
+      </entry>
+	</entries>
+</profile>
+	
+</profiles>

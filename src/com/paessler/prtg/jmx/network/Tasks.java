@@ -34,11 +34,13 @@ import com.paessler.prtg.jmx.ProbeContext;
 
 public class Tasks {
     public static String buildUrl(ProbeContext probeContext) {
-        return String.format("https://%s/probe/tasks?gid=%s&key=%s&protocol=%d",
+        return probeContext.getURLPrefix("/probe/tasks");
+/*        return String.format("https://%s/probe/tasks?gid=%s&key=%s&protocol=%d",
                 probeContext.host,
                 probeContext.gid,
                 probeContext.key,
                 probeContext.protocol);
+*/                
     }
 
 }

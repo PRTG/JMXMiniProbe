@@ -1,0 +1,67 @@
+<!-- ###########################################################
+Unit Values[BytesBandwidth, BytesMemory, BytesDisk, BytesFile, TimeResponse, TimeSeconds, TimeHours, Temperature, Percent, Count, CPU (*), Custom]
+***************************************************************
+Please note, the apache.commons.digester3 is case sensitive.
+All XML TAGS should be in lower case.
+Profile Tags * MUST * be unique.
+***************************************************************
+The following are all the JMX MBeans found
+########################################################### -->
+<profiles>
+	<profile>
+		<name>Name of the Profile</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description>Description as displayed in the add Sensor Dialog</description>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help>This is the help as displayed in the add Sensor Dialog help popup</help>
+		<properties>
+			<property>
+				<name>Propery_name</name>
+				<value>Propery Value</value>
+			</property>
+		</properties>
+		<entries>
+			<entry>
+				<object>Object name</object>
+				<displayvalue>Display value</displayvalue>
+				<description>Description of the Entry</description>
+				<shortdescription>"JMX" short discription, will be used to indicate entry</shortdescription>
+				<comment>Comment, anything you want</comment>
+				<properties>
+					<property>
+						<name>Propery_name</name>
+						<value>Propery Value</value>
+					</property>
+				</properties>
+				<attributes>
+					<attribute>
+						<object>Name of object, JMX Attribute/PortNumber</object>
+						<displayvalue>Value to display in Channel</displayvalue>
+						<description>Field description</description>
+						<shortdescription>Short Descr</shortdescription>
+						<comment>Comment</comment>
+						<unit>{BANDWIDTH|MEMORY|DISK|FILE|TIME_RESPONSE|TIME_SECONDS|TIME_HOURS|TEMP|PERCENT|COUNT|CPU|CUSTOM}</unit>
+						<customunit>Custom Unit name like "Unicorns"</customunit>
+						<enabled>true</enabled>
+						<mpy>1.0</mpy>
+						<div>1.0</div>
+						<limitmaxerror>95</limitmaxerror>
+						<limitmaxwarning>75</limitmaxwarning>
+						<limitminwarning>10</limitminwarning>
+						<limitminerror>5</limitminerror>
+						<limiterrormsg>This is the error message</limiterrormsg>
+						<limitwarningmsg>This is the Warning message</limitwarningmsg>
+						<limitmode>0</limitmode>
+						<properties>
+							<property>
+								<name>Propery_name</name>
+								<value>Propery Value</value>
+							</property>
+						</properties>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+</profiles>

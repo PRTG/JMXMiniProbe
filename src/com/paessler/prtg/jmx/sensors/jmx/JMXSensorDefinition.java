@@ -28,34 +28,44 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.paessler.prtg.jmx.definitions;
+package com.paessler.prtg.jmx.sensors.jmx;
 
 import java.util.ArrayList;
 
-public class CustomJMXSensorDefinition extends SensorDefinition {
-    public static String KIND = "jmxcustomattributes";
-    public String description = "Monitors custom attribute values";
-    public String help = "";
-    public String tag = "jmx";
-    public CustomJMXSensorDefinition() {
-        kind = KIND;
-        name = "Custom MBean Attributes Sensor";
+import com.paessler.prtg.jmx.definitions.FieldDefinition;
+import com.paessler.prtg.jmx.definitions.GroupDefinition;
+import com.paessler.prtg.jmx.definitions.PasswordFieldDefinition;
+import com.paessler.prtg.jmx.definitions.SensorConstants;
+import com.paessler.prtg.jmx.definitions.SensorDefinition;
+import com.paessler.prtg.jmx.definitions.SimpleEditFieldDefinition;
 
+public class JMXSensorDefinition extends SensorDefinition {
+
+// ----------------------------------------------------------------------------------------------------
+	
+    public static String KIND = "mjjmxsensor";
+    public static String TAG = "mjjmxsensor";
+    
+    // ----------------------------------------------------------
+    public JMXSensorDefinition(String kind, String name, String description, String tag, String help) {
+        super(kind, name, description, tag, help);
+    	FieldDefinition tmpfld;
         groups = new ArrayList<GroupDefinition>();
         GroupDefinition rmiGroupDefinition = new GroupDefinition("Connection", "Connection Settings");
-        rmiGroupDefinition.fields.add( new SimpleEditFieldDefinition("rmi_string", "RMI Connection String"));
-        rmiGroupDefinition.fields.add(new SimpleEditFieldDefinition("rmi_username", "Username"));
-        rmiGroupDefinition.fields.add(new PasswordFieldDefinition("rmi_password", "Password", ""));
-        rmiGroupDefinition.fields.add(new SimpleEditFieldDefinition("mbean", "MBean"));
+        tmpfld = new SimpleEditFieldDefinition(SensorConstants.RMISTRING, "RMI Connection String", JMXUtils.RMI_STRING_DEFAULT);
+        tmpfld.setDefaultValue(JMXUtils.makeRMIString(null,null));
+        addField(tmpfld);
+        rmiGroupDefinition.fields.add( tmpfld);
+        // -----------------------------
+        tmpfld = new SimpleEditFieldDefinition(SensorConstants.USERNAME, "Username");
+        addField(tmpfld);
+        rmiGroupDefinition.fields.add(tmpfld);
+        tmpfld = new PasswordFieldDefinition(SensorConstants.PASSWORD, "Password", "");
+        addField(tmpfld);
+        rmiGroupDefinition.fields.add(tmpfld);
+//        tmpfld = new SimpleEditFieldDefinition("mbean", "MBean", "Name of MBean Locally available:["+tmpstr+"]");
         groups.add(rmiGroupDefinition);
-
-        for (int i = 1; i < 11; i++) {
-            GroupDefinition attributeDefinition = new GroupDefinition("Attribute #" + i, "Attribute");
-            SimpleEditFieldDefinition objectName = new SimpleEditFieldDefinition("object_name_" + i, "Object name");
-            attributeDefinition.fields.add(objectName);
-            UnitFieldDefinition units = new UnitFieldDefinition("unit_name_" + i, "Unit types", "Choose the type of value the attribute returns");
-            attributeDefinition.fields.add(units);
-            groups.add(attributeDefinition);
-        }
     }
+    
+// 
 }

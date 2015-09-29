@@ -1,0 +1,38 @@
+http://blog.mafr.de/2011/03/12/enabling-jmx-acces-on-tomcat/
+https://www.mulesoft.com/tcat/tomcat-jmx
+http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html#remote
+
+However, if you're reading this article, you're most likely looking for 
+a solution that you can use from any location to monitor your servers, 
+in which case you'll need to enable remote connections, 
+and configure security to keep your network information private.  
+To do so, use the following settings, substituting the appropriate port 
+numbers and paths:
+
+JAVA_OPTS="Dcom.sun.management.jmxremote.port=8008 \
+-Dcom.sun.mangement.jmxremote.ssl=false \
+-Dcom.sun.management.jmxremote.authenticate=true \
+-Dcom.sun.management.jmxremote.password.file=/path/to/pw/file
+-Dcom.sun.management.jmxremote.access.file=/path/to/access/file"
+
+-Dcom.sun.management.jmxremote.port=8008 \
+-Dcom.sun.mangement.jmxremote.ssl=false \
+-Dcom.sun.management.jmxremote.authenticate=true \
+-Dcom.sun.management.jmxremote.password.file=$CATALINA_HOME/conf/
+-Dcom.sun.management.jmxremote.access.file=$CATALINA_HOME/conf/"
+$CATALINA_HOME/conf/
+
+You can place the password and permissions files in any logical location, 
+such as "$CATALINA_HOME/conf/".
+Make sure to modify the permissions of these files so that 
+they can only be viewed by users with appropriate access:
+
+$ chmod 600 /path/to/pw/file
+$ chmod 600 /path/to/access/file
+
+Restart Tomcat and run a client program such as JConsole.  Enter your 
+server information and attempt to connect.  If you are successful, 
+JMX has been configured correctly, and you should be able to start 
+exploring the kinds of data offered by JMX management.
+
+- See more at: https://www.mulesoft.com/tcat/tomcat-jmx#sthash.pb7kt4ev.dpuf

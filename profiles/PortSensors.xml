@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- ###########################################################
+Unit Values[BANDWIDTH, MEMORY, DISK, FILE, TIME_RESPONSE, TIME_SECONDS, TIME_HOURS, TEMP, PERCENT, COUNT,CPU,CUSTOM]
+***************************************************************
+ This file contains the definition of the PRTG JMXMiniProbe MBean
+*** PLEASE DO NOT MODIFY ***
+Please note, the apache.commons.digester3 is * VERY * case sensitive
+########################################################### -->
+<profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Profile.xsd">
+	<profile>
+		<name>Ports AD Critical 5</name>
+		<kind>adcritical5portssensor</kind>
+		<tag>jmxsensor,mjportrangesensor</tag>
+		<description>Active directory Critical 5[389,88,53,445,464] ports</description>
+		<baseclass>com.paessler.prtg.jmx.sensors.port.PortSensor</baseclass>
+		<help>Monitors the critical 5 ports for Active Directory [ldap(389),kerberos(88),DNS(53),microsoft-ds(445),kpasswd(464)]</help>
+		<entries>
+      <entry>
+        <object>AD Critical Ports</object>
+        <displayvalue>AD Critical 5</displayvalue>
+        <description>AD: Critical Ports</description>
+        <shortdescription>MSAD</shortdescription>
+        <help>Monitoring ports ldap[389],kerberos[88],DNS[53],microsoft-ds[445],kpasswd[464]</help>
+        <attributes>
+          <attribute>
+            <object>389</object>
+            <displayvalue>AD Critical ldap[389]</displayvalue>
+            <description>AD Critical ldap[389]</description>
+            <shortdescription/>
+            <comment>type=java.lang.long</comment>
+            <unit>TimeResponse</unit>
+            <limitmode>1</limitmode>
+            <limitmaxerror>100</limitmaxerror>
+            <limitmaxwarning>75</limitmaxwarning>
+            <limiterrormsg>AD Critical ldap[389] responses approaching unacceptable level</limiterrormsg>
+            <limitwarningmsg>AD Critical ldap[389] responses at unacceptable level</limitwarningmsg>
+          </attribute>
+          <attribute>
+            <object>88</object>
+            <displayvalue>AD Critical kerberos[88]</displayvalue>
+            <description>AD Critical kerberos[88]</description>
+            <shortdescription/>
+            <comment>type=java.lang.long</comment>
+            <unit>TimeResponse</unit>
+            <limitmaxerror>100</limitmaxerror>
+            <limitmaxwarning>75</limitmaxwarning>
+            <limiterrormsg>AD Critical kerberos[88] responses approaching unacceptable level</limiterrormsg>
+            <limitwarningmsg>AD Critical kerberos[88] responses at unacceptable level</limitwarningmsg>
+          </attribute>
+          <attribute>
+            <object>53</object>
+            <displayvalue>AD Critical dns[53]</displayvalue>
+            <description>AD Critical dns[53]</description>
+            <shortdescription/>
+            <comment>type=java.lang.long</comment>
+            <unit>TimeResponse</unit>
+            <limitmaxerror>100</limitmaxerror>
+            <limitmaxwarning>75</limitmaxwarning>
+            <limiterrormsg>AD Critical dns[53] responses approaching unacceptable level</limiterrormsg>
+            <limitwarningmsg>AD Critical dns[53] responses at unacceptable level</limitwarningmsg>
+          </attribute>
+          <attribute>
+            <object>445</object>
+            <displayvalue>AD Critical microsoft-ds[445]</displayvalue>
+            <description>AD Critical microsoft-ds[445]</description>
+            <shortdescription/>
+            <comment>type=java.lang.long</comment>
+            <unit>TimeResponse</unit>
+            <limitmaxerror>100</limitmaxerror>
+            <limitmaxwarning>75</limitmaxwarning>
+            <limiterrormsg>AD Critical microsoft-ds[445] responses approaching unacceptable level</limiterrormsg>
+            <limitwarningmsg>AD Critical microsoft-ds[445] responses at unacceptable level</limitwarningmsg>
+          </attribute>
+          <attribute>
+            <object>464</object>
+            <displayvalue>AD Critical kpasswd[464]</displayvalue>
+            <description>AD Critical kpasswd[464]</description>
+            <shortdescription/>
+            <comment>type=java.lang.long</comment>
+            <unit>TimeResponse</unit>
+            <limitmaxerror>100</limitmaxerror>
+            <limitmaxwarning>75</limitmaxwarning>
+            <limiterrormsg>AD Critical kpasswd[464] responses approaching unacceptable level</limiterrormsg>
+            <limitwarningmsg>AD Critical kpasswd[464] responses at unacceptable level</limitwarningmsg>
+          </attribute>
+        </attributes>
+      </entry>
+		</entries>
+	</profile>
+	
+</profiles>

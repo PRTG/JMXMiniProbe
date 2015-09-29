@@ -1,0 +1,2034 @@
+<!-- ###########################################################
+Unit Values[BytesBandwidth, BytesMemory, BytesDisk, BytesFile, TimeResponse, TimeSeconds, TimeHours, Temperature, Percent, Count, CPU (*), Custom]
+***************************************************************
+Please note, the apache.commons.digester3 is case sensitive.
+All XML TAGS should be in lower case.
+Profile Tags * MUST * be unique.
+***************************************************************
+RMI Connection Strings:
+Generic:	service:jmx:{rmi|iiop}:///jndi/rmi://{TARGET_MACHINE}:{RMI_REGISTRY_PORT def:1099}/jmxrmiWeblogic:	service:jmx:iiop://{ServerIP}:{Port}/jndi/weblogic.management.mbeanservers.domainruntimeWebsphere:	service:jmx:iiop://{ServerIP}:{Port}/jndi/JMXConnector***************************************************************
+The following are all the JMX MBeans found
+########################################################### -->
+<profiles>
+	<profile>
+		<name>IBM WebSphere MQ classes for JMS:type=CommonServices,name=TraceControl</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>IBM WebSphere MQ classes for JMS:type=CommonServices,name=TraceControl</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.msg.client.commonservices.trace.TraceControlImpl</comment>
+				<attributes>
+					<attribute>
+						<object>On</object>
+						<displayvalue/>
+						<description>Attribute exposed for management</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>JMImplementation:type=MBeanServerDelegate</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>JMImplementation:type=MBeanServerDelegate</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.ws.management.PlatformMBeanServerDelegate</comment>
+				<attributes>
+					<attribute>
+						<object>ImplementationName</object>
+						<displayvalue/>
+						<description>Attribute exposed for management</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=JMX</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ImplementationVendor</object>
+						<displayvalue/>
+						<description>Attribute exposed for management</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=Sun Microsystems</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ImplementationVersion</object>
+						<displayvalue/>
+						<description>Attribute exposed for management</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=pwa6460_26sr8fp3-20141218_02 (SR8 FP3)</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MBeanServerId</object>
+						<displayvalue/>
+						<description>Attribute exposed for management</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=WebSphere_1</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SpecificationName</object>
+						<displayvalue/>
+						<description>Attribute exposed for management</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=Java Management Extensions</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SpecificationVendor</object>
+						<displayvalue/>
+						<description>Attribute exposed for management</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=Sun Microsystems</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SpecificationVersion</object>
+						<displayvalue/>
+						<description>Attribute exposed for management</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=1.4</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>MQ Classes for Java:type=Jmqi CommonServices,name=TraceControl</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>MQ Classes for Java:type=Jmqi CommonServices,name=TraceControl</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.mq.jmqi.monitoring.TraceControlImpl</comment>
+				<attributes>
+					<attribute>
+						<object>FlightRecorderOn</object>
+						<displayvalue/>
+						<description>Attribute exposed for management</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>TraceOn</object>
+						<displayvalue/>
+						<description>Attribute exposed for management</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>WebSphere:type=ExtClassLoader</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>WebSphere:type=ExtClassLoader</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.ws.bootstrap.ExtClassLoader</comment>
+				<attributes>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>com.paessler.prtg.jmx.mbean.PRTGBean:name=JMXMiniProbe</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>com.paessler.prtg.jmx.mbean.PRTGBean:name=JMXMiniProbe</object>
+				<displayvalue/>
+				<description>JMX: PRTG JMXMiniProbe statistics</description>
+				<shortdescription/>
+				<comment>Class Name:com.paessler.prtg.jmx.mbean.PRTGInterface</comment>
+				<attributes>
+					<attribute>
+						<object>AvgExecutionTime</object>
+						<displayvalue/>
+						<description>AvgExecutionTime, Average query Execution Time[ms].</description>
+						<shortdescription/>
+						<comment>type=java.lang.long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>AvgSenorCreationTime</object>
+						<displayvalue/>
+						<description>AvgSenorCreationTime, Average sensor creation Execution.</description>
+						<shortdescription/>
+						<comment>type=java.lang.long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>AvgUploadTime</object>
+						<displayvalue/>
+						<description>avgUploadTime, Average time to upload data Time[ms].</description>
+						<shortdescription/>
+						<comment>type=java.lang.long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>QueryCount</object>
+						<displayvalue/>
+						<description>QueryCount, Number of queries run.</description>
+						<shortdescription/>
+						<comment>type=java.lang.long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>sensorCount</object>
+						<displayvalue/>
+						<description>SensorCount, Number of sensors.</description>
+						<shortdescription/>
+						<comment>type=java.lang.int,unit=COUNT; Value=No such attribute: sensorCount</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=ClassLoading</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=ClassLoading</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.lang.management.ClassLoadingMXBeanImpl</comment>
+				<attributes>
+					<attribute>
+						<object>LoadedClassCount</object>
+						<displayvalue/>
+						<description>LoadedClassCount</description>
+						<shortdescription/>
+						<comment>type=int,unit=COUNT; Value=24766</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>TotalLoadedClassCount</object>
+						<displayvalue/>
+						<description>TotalLoadedClassCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=25609</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UnloadedClassCount</object>
+						<displayvalue/>
+						<description>UnloadedClassCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=843</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Verbose</object>
+						<displayvalue/>
+						<description>Verbose</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=Compilation</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=Compilation</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.lang.management.CompilationMXBeanImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CompilationTimeMonitoringSupported</object>
+						<displayvalue/>
+						<description>CompilationTimeMonitoringSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=j9jit26</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>TotalCompilationTime</object>
+						<displayvalue/>
+						<description>TotalCompilationTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=80937</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=GarbageCollector,name=Copy</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=GarbageCollector,name=Copy</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.lang.management.GarbageCollectorMXBeanImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CollectionCount</object>
+						<displayvalue/>
+						<description>CollectionCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=235</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionTime</object>
+						<displayvalue/>
+						<description>CollectionTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=1742</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>LastCollectionEndTime</object>
+						<displayvalue/>
+						<description>LastCollectionEndTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=1433612586966</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>LastCollectionStartTime</object>
+						<displayvalue/>
+						<description>LastCollectionStartTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=1433612586957</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryPoolNames</object>
+						<displayvalue/>
+						<description>MemoryPoolNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@a7fd0b49</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryUsed</object>
+						<displayvalue/>
+						<description>MemoryUsed</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=9435664</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=Copy</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>TotalCompacts</object>
+						<displayvalue/>
+						<description>TotalCompacts</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>TotalMemoryFreed</object>
+						<displayvalue/>
+						<description>TotalMemoryFreed</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=10146695288</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=GarbageCollector,name=MarkSweepCompact</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=GarbageCollector,name=MarkSweepCompact</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.lang.management.GarbageCollectorMXBeanImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CollectionCount</object>
+						<displayvalue/>
+						<description>CollectionCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=22</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionTime</object>
+						<displayvalue/>
+						<description>CollectionTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=2111</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>LastCollectionEndTime</object>
+						<displayvalue/>
+						<description>LastCollectionEndTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=1433612578525</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>LastCollectionStartTime</object>
+						<displayvalue/>
+						<description>LastCollectionStartTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=1433612578465</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryPoolNames</object>
+						<displayvalue/>
+						<description>MemoryPoolNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@822751ce</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryUsed</object>
+						<displayvalue/>
+						<description>MemoryUsed</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=100800800</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=MarkSweepCompact</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>TotalCompacts</object>
+						<displayvalue/>
+						<description>TotalCompacts</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=8</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>TotalMemoryFreed</object>
+						<displayvalue/>
+						<description>TotalMemoryFreed</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=823092424</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=Memory</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=Memory</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.lang.management.MemoryMXBeanImpl</comment>
+				<attributes>
+					<attribute>
+						<object>GCMode</object>
+						<displayvalue/>
+						<description>GCMode</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=-Xgcpolicy:gencon</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>HeapMemoryUsage</object>
+						<displayvalue/>
+						<description>HeapMemoryUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=249823232, init=52428800, max=268435456, used=148420480})</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MaxHeapSize</object>
+						<displayvalue/>
+						<description>MaxHeapSize</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=268435456</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MaxHeapSizeLimit</object>
+						<displayvalue/>
+						<description>MaxHeapSizeLimit</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=268435456</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MinHeapSize</object>
+						<displayvalue/>
+						<description>MinHeapSize</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=52428800</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>NonHeapMemoryUsage</object>
+						<displayvalue/>
+						<description>NonHeapMemoryUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=260984840, init=0, max=-1, used=162118624})</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectPendingFinalizationCount</object>
+						<displayvalue/>
+						<description>ObjectPendingFinalizationCount</description>
+						<shortdescription/>
+						<comment>type=int,unit=COUNT; Value=0</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SetMaxHeapSizeSupported</object>
+						<displayvalue/>
+						<description>SetMaxHeapSizeSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SharedClassCacheFreeSpace</object>
+						<displayvalue/>
+						<description>SharedClassCacheFreeSpace</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=1024</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SharedClassCacheSize</object>
+						<displayvalue/>
+						<description>SharedClassCacheSize</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=62913952</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Verbose</object>
+						<displayvalue/>
+						<description>Verbose</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=MemoryManager,name=J9 non-heap manager</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=MemoryManager,name=J9 non-heap manager</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.lang.management.MemoryManagerMXBeanImpl</comment>
+				<attributes>
+					<attribute>
+						<object>MemoryPoolNames</object>
+						<displayvalue/>
+						<description>MemoryPoolNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@c87c0df2</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=J9 non-heap manager</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=MemoryPool,name=JIT code cache</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=MemoryPool,name=JIT code cache</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.lang.management.MemoryPoolMXBeanImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CollectionUsage</object>
+						<displayvalue/>
+						<description>CollectionUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThreshold</object>
+						<displayvalue/>
+						<description>CollectionUsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support collection usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdCount</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support collection usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support collection usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdSupported</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryManagerNames</object>
+						<displayvalue/>
+						<description>MemoryManagerNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@2221b172</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=JIT code cache</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>PeakUsage</object>
+						<displayvalue/>
+						<description>PeakUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=20971520, init=0, max=-1, used=20971520})</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>PreCollectionUsage</object>
+						<displayvalue/>
+						<description>PreCollectionUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Type</object>
+						<displayvalue/>
+						<description>Type</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=NON_HEAP</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Usage</object>
+						<displayvalue/>
+						<description>Usage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=20971520, init=0, max=-1, used=20971520})</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThreshold</object>
+						<displayvalue/>
+						<description>UsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdCount</object>
+						<displayvalue/>
+						<description>UsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>UsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdSupported</object>
+						<displayvalue/>
+						<description>UsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=MemoryPool,name=JIT data cache</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=MemoryPool,name=JIT data cache</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.lang.management.MemoryPoolMXBeanImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CollectionUsage</object>
+						<displayvalue/>
+						<description>CollectionUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThreshold</object>
+						<displayvalue/>
+						<description>CollectionUsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support collection usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdCount</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support collection usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support collection usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdSupported</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryManagerNames</object>
+						<displayvalue/>
+						<description>MemoryManagerNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@32d9e5b0</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=JIT data cache</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>PeakUsage</object>
+						<displayvalue/>
+						<description>PeakUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=12582912, init=0, max=-1, used=11279448})</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>PreCollectionUsage</object>
+						<displayvalue/>
+						<description>PreCollectionUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Type</object>
+						<displayvalue/>
+						<description>Type</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=NON_HEAP</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Usage</object>
+						<displayvalue/>
+						<description>Usage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=12582912, init=0, max=-1, used=11279448})</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThreshold</object>
+						<displayvalue/>
+						<description>UsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdCount</object>
+						<displayvalue/>
+						<description>UsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>UsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdSupported</object>
+						<displayvalue/>
+						<description>UsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=MemoryPool,name=Java heap</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=MemoryPool,name=Java heap</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.lang.management.MemoryPoolMXBeanImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CollectionUsage</object>
+						<displayvalue/>
+						<description>CollectionUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=232914944, init=52428800, max=268435456, used=112595872})</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThreshold</object>
+						<displayvalue/>
+						<description>CollectionUsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdCount</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdSupported</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryManagerNames</object>
+						<displayvalue/>
+						<description>MemoryManagerNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@ec87c627</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=Java heap</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>PeakUsage</object>
+						<displayvalue/>
+						<description>PeakUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=221052928, init=52428800, max=268435456, used=208213184})</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>PreCollectionUsage</object>
+						<displayvalue/>
+						<description>PreCollectionUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=249823232, init=52428800, max=268435456, used=170138000})</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Type</object>
+						<displayvalue/>
+						<description>Type</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=HEAP</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Usage</object>
+						<displayvalue/>
+						<description>Usage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=249823232, init=52428800, max=268435456, used=148343592})</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThreshold</object>
+						<displayvalue/>
+						<description>UsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdCount</object>
+						<displayvalue/>
+						<description>UsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>UsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdSupported</object>
+						<displayvalue/>
+						<description>UsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=MemoryPool,name=class storage</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=MemoryPool,name=class storage</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.lang.management.MemoryPoolMXBeanImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CollectionUsage</object>
+						<displayvalue/>
+						<description>CollectionUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThreshold</object>
+						<displayvalue/>
+						<description>CollectionUsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support collection usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdCount</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support collection usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support collection usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdSupported</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryManagerNames</object>
+						<displayvalue/>
+						<description>MemoryManagerNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@735d7978</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=class storage</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>PeakUsage</object>
+						<displayvalue/>
+						<description>PeakUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=140808300, init=0, max=-1, used=125090348})</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>PreCollectionUsage</object>
+						<displayvalue/>
+						<description>PreCollectionUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Type</object>
+						<displayvalue/>
+						<description>Type</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=NON_HEAP</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Usage</object>
+						<displayvalue/>
+						<description>Usage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=140806236, init=0, max=-1, used=125088676})</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThreshold</object>
+						<displayvalue/>
+						<description>UsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdCount</object>
+						<displayvalue/>
+						<description>UsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>UsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdSupported</object>
+						<displayvalue/>
+						<description>UsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=MemoryPool,name=miscellaneous non-heap storage</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=MemoryPool,name=miscellaneous non-heap storage</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.lang.management.MemoryPoolMXBeanImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CollectionUsage</object>
+						<displayvalue/>
+						<description>CollectionUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThreshold</object>
+						<displayvalue/>
+						<description>CollectionUsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support collection usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdCount</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support collection usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support collection usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdSupported</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryManagerNames</object>
+						<displayvalue/>
+						<description>MemoryManagerNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@e786cd41</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=miscellaneous non-heap storage</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>PeakUsage</object>
+						<displayvalue/>
+						<description>PeakUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=78301100, init=0, max=-1, used=6951460})</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>PreCollectionUsage</object>
+						<displayvalue/>
+						<description>PreCollectionUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Type</object>
+						<displayvalue/>
+						<description>Type</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=NON_HEAP</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Usage</object>
+						<displayvalue/>
+						<description>Usage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=86624172, init=0, max=-1, used=6951460})</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThreshold</object>
+						<displayvalue/>
+						<description>UsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdCount</object>
+						<displayvalue/>
+						<description>UsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>UsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=java.lang.UnsupportedOperationException: VM does not support usage threshold.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdSupported</object>
+						<displayvalue/>
+						<description>UsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=OperatingSystem</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=OperatingSystem</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.lang.management.OperatingSystemMXBeanImpl</comment>
+				<attributes>
+					<attribute>
+						<object>Arch</object>
+						<displayvalue/>
+						<description>Arch</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=amd64</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>AvailableProcessors</object>
+						<displayvalue/>
+						<description>AvailableProcessors</description>
+						<shortdescription/>
+						<comment>type=int,unit=COUNT; Value=8</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>FreePhysicalMemorySize</object>
+						<displayvalue/>
+						<description>FreePhysicalMemorySize</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=26599051264</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=Windows 8</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ProcessCpuTime</object>
+						<displayvalue/>
+						<description>ProcessCpuTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=1487187500</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ProcessCpuTimeByNS</object>
+						<displayvalue/>
+						<description>ProcessCpuTimeByNS</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=148750000000</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ProcessPhysicalMemorySize</object>
+						<displayvalue/>
+						<description>ProcessPhysicalMemorySize</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=504356864</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ProcessPrivateMemorySize</object>
+						<displayvalue/>
+						<description>ProcessPrivateMemorySize</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=571539456</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ProcessVirtualMemorySize</object>
+						<displayvalue/>
+						<description>ProcessVirtualMemorySize</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=571539456</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ProcessingCapacity</object>
+						<displayvalue/>
+						<description>ProcessingCapacity</description>
+						<shortdescription/>
+						<comment>type=int,unit=COUNT; Value=800</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SystemCpuLoad</object>
+						<displayvalue/>
+						<description>SystemCpuLoad</description>
+						<shortdescription/>
+						<comment>type=double,unit=COUNT; Value=0.08752977973812694</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SystemLoadAverage</object>
+						<displayvalue/>
+						<description>SystemLoadAverage</description>
+						<shortdescription/>
+						<comment>type=double,unit=COUNT; Value=-1.0</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>TotalPhysicalMemory</object>
+						<displayvalue/>
+						<description>TotalPhysicalMemory</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=34296037376</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Version</object>
+						<displayvalue/>
+						<description>Version</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=6.2</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=Runtime</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=Runtime</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.lang.management.RuntimeMXBeanImpl</comment>
+				<attributes>
+					<attribute>
+						<object>BootClassPath</object>
+						<displayvalue/>
+						<description>BootClassPath</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=D:\Appserver\IBM\WebSphere\AppServer\endorsed_apis\jaxws-api.jar;D:\Appserver\IBM\WebSphere\AppServer\endorsed_apis\jaxb-api.jar;D:\Appserver\IBM\WebSphere\AppServer\endorsed_apis\javax.j2ee.annotation.jar;D:\Appserver\IBM\WebSphere\AppServer/endorsed_apis\jaxws-api.jar;D:\Appserver\IBM\WebSphere\AppServer/endorsed_apis\jaxb-api.jar;D:\Appserver\IBM\WebSphere\AppServer/endorsed_apis\javax.j2ee.annotation.jar;D:\Appserver\IBM\WebSphere\AppServer/java/jre/lib/ibmorb.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\bin\compressedrefs\jclSC160\vm.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\annotation.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\beans.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\java.util.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\jndi.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\logging.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\security.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\sql.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmorb.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmorbapi.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmcfw.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\rt.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\charsets.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\resources.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmpkcs.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmcertpathfw.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmjgssfw.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmjssefw.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmsaslfw.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmjcefw.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmjgssprovider.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmjsseprovider2.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmcertpathprovider.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\management-agent.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\xml.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\jlm.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\javascript.jar</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>BootClassPathSupported</object>
+						<displayvalue/>
+						<description>BootClassPathSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ClassPath</object>
+						<displayvalue/>
+						<description>ClassPath</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=D:\Appserver\IBM\WebSphere\AppServer\profiles\AppSrv01/properties;D:\Appserver\IBM\WebSphere\AppServer/properties;D:\Appserver\IBM\WebSphere\AppServer/lib/startup.jar;D:\Appserver\IBM\WebSphere\AppServer/lib/bootstrap.jar;D:\Appserver\IBM\WebSphere\AppServer/lib/jsf-nls.jar;D:\Appserver\IBM\WebSphere\AppServer/lib/lmproxy.jar;D:\Appserver\IBM\WebSphere\AppServer/lib/urlprotocols.jar;D:\Appserver\IBM\WebSphere\AppServer/deploytool/itp/batchboot.jar;D:\Appserver\IBM\WebSphere\AppServer/deploytool/itp/batch2.jar;D:\Appserver\IBM\WebSphere\AppServer/java/lib/tools.jar</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>InputArguments</object>
+						<displayvalue/>
+						<description>InputArguments</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@3bab693e</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>LibraryPath</object>
+						<displayvalue/>
+						<description>LibraryPath</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=D:\Appserver\IBM\WebSphere\AppServer/lib/native/win/x86_64/;D:\Appserver\IBM\WebSphere\AppServer\java\jre\bin\compressedrefs;D:\Appserver\IBM\WebSphere\AppServer\java\jre\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\Appserver\IBM\WebSphere\AppServer\lib\native\win\x86_64;D:\Appserver\IBM\WebSphere\AppServer\bin;D:\Appserver\IBM\WebSphere\AppServer\java\bin;D:\Appserver\IBM\WebSphere\AppServer\java\jre\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;d:\Tools;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\Nmap;.;</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ManagementSpecVersion</object>
+						<displayvalue/>
+						<description>ManagementSpecVersion</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=1.0</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=10872@JRzWin8</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SpecName</object>
+						<displayvalue/>
+						<description>SpecName</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=Java Virtual Machine Specification</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SpecVendor</object>
+						<displayvalue/>
+						<description>SpecVendor</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=Sun Microsystems Inc.</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SpecVersion</object>
+						<displayvalue/>
+						<description>SpecVersion</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=1.0</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>StartTime</object>
+						<displayvalue/>
+						<description>StartTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=1433610177484</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SystemProperties</object>
+						<displayvalue/>
+						<description>SystemProperties</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.TabularData,unit=COUNT; Value=javax.management.openmbean.TabularDataSupport(tabularType=javax.management.openmbean.TabularType(name=java.util.HashMap,rowType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),indexNames=(key)),contents={[sun.java.command]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.java.command, value=com.ibm.wsspi.bootstrap.WSPreLauncher -nosplash -application com.ibm.ws.bootstrap.WSLauncher com.ibm.ws.runtime.WsServer D:\Appserver\IBM\WebSphere\AppServer\profiles\AppSrv01\config JRzWin8Node01Cell JRzWin8Node01 server1}), [java.specification.name]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.specification.name, value=Java Platform API Specification}), [com.ibm.itp.location]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.itp.location, value=D:\Appserver\IBM\WebSphere\AppServer/bin}), [osgi.nl]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.nl, value=en_US}), [com.ibm.system.agent.path]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.system.agent.path, value=D:\Appserver\IBM\WebSphere\AppServer\java\jre\bin}), [com.ibm.jsse2.suiteB]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.jsse2.suiteB, value=}), [com.ibm.jsse2.checkRevocation]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.jsse2.checkRevocation, value=false}), [user.dir]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=user.dir, value=D:\Appserver\IBM\WebSphere\AppServer\profiles\AppSrv01}), [java.compiler]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.compiler, value=j9jit26}), [sun.java2d.fontpath]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.java2d.fontpath, value=}), [com.ibm.ws.jsp.taglib.annotation.AnnotationHandler]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.ws.jsp.taglib.annotation.AnnotationHandler, value=com.ibm.ws.jsp.annotation.WASAnnotationHandler}), [java.vm.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vm.version, value=2.6}), [was.repository.temp]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=was.repository.temp, value=D:\Appserver\IBM\WebSphere\AppServer\profiles\AppSrv01\config\temp\}), [file.separator]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=file.separator, value=\}), [osgi.checkConfiguration]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.checkConfiguration, value=false}), [java.runtime.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.runtime.version, value=pwa6460_26sr8fp3-20141218_02 (SR8 FP3)}), [eof]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=eof, value=eof}), [org.osgi.framework.system.packages]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=org.osgi.framework.system.packages, value=javax.accessibility,javax.activation,javax.activity,javax.annotation,javax.annotation.processing,javax.annotation.security,javax.annotation.sql,javax.crypto,javax.crypto.interfaces,javax.crypto.spec,javax.imageio,javax.imageio.event,javax.imageio.metadata,javax.imageio.plugins.bmp,javax.imageio.plugins.jpeg,javax.imageio.spi,javax.imageio.stream,javax.jws,javax.jws.soap,javax.lang.model,javax.lang.model.element,javax.lang.model.type,javax.lang.model.util,javax.management,javax.management.loading,javax.management.modelmbean,javax.management.monitor,javax.management.openmbean,javax.management.relation,javax.management.remote,javax.management.remote.rmi,javax.management.timer,javax.naming,javax.naming.directory,javax.naming.event,javax.naming.ldap,javax.naming.spi,javax.net,javax.net.ssl,javax.print,javax.print.attribute,javax.print.attribute.standard,javax.print.event,javax.rmi,javax.rmi.CORBA,javax.rmi.ssl,javax.script,javax.security.auth,javax.security.auth.callback,javax.security.auth.kerberos,javax.security.auth.login,javax.security.auth.spi,javax.security.auth.x500,javax.security.cert,javax.security.sasl,javax.sound.midi,javax.sound.midi.spi,javax.sound.sampled,javax.sound.sampled.spi,javax.sql,javax.sql.rowset,javax.sql.rowset.serial,javax.sql.rowset.spi,javax.swing,javax.swing.border,javax.swing.colorchooser,javax.swing.event,javax.swing.filechooser,javax.swing.plaf,javax.swing.plaf.basic,javax.swing.plaf.metal,javax.swing.plaf.multi,javax.swing.plaf.synth,javax.swing.table,javax.swing.text,javax.swing.text.html,javax.swing.text.html.parser,javax.swing.text.rtf,javax.swing.tree,javax.swing.undo,javax.tools,javax.transaction,javax.transaction.xa,javax.xml,javax.xml.bind,javax.xml.bind.annotation,javax.xml.bind.annotation.adapters,javax.xml.bind.attachment,javax.xml.bind.helpers,javax.xml.bind.util,javax.xml.crypto,javax.xml.crypto.dom,javax.xml.crypto.dsig,javax.xml.crypto.dsig.dom,javax.xml.crypto.dsig.keyinfo,javax.xml.crypto.dsig.spec,javax.xml.datatype,javax.xml.namespace,javax.xml.parsers,javax.xml.soap,javax.xml.stream,javax.xml.stream.events,javax.xml.stream.util,javax.xml.transform,javax.xml.transform.dom,javax.xml.transform.sax,javax.xml.transform.stax,javax.xml.transform.stream,javax.xml.validation,javax.xml.ws,javax.xml.ws.handler,javax.xml.ws.handler.soap,javax.xml.ws.http,javax.xml.ws.soap,javax.xml.ws.spi,javax.xml.ws.wsaddressing,javax.xml.xpath,org.ietf.jgss,org.omg.CORBA,org.omg.CORBA_2_3,org.omg.CORBA_2_3.portable,org.omg.CORBA.DynAnyPackage,org.omg.CORBA.ORBPackage,org.omg.CORBA.portable,org.omg.CORBA.TypeCodePackage,org.omg.CosNaming,org.omg.CosNaming.NamingContextExtPackage,org.omg.CosNaming.NamingContextPackage,org.omg.Dynamic,org.omg.DynamicAny,org.omg.DynamicAny.DynAnyFactoryPackage,org.omg.DynamicAny.DynAnyPackage,org.omg.IOP,org.omg.IOP.CodecFactoryPackage,org.omg.IOP.CodecPackage,org.omg.Messaging,org.omg.PortableInterceptor,org.omg.PortableInterceptor.ORBInitInfoPackage,org.omg.PortableServer,org.omg.PortableServer.CurrentPackage,org.omg.PortableServer.POAManagerPackage,org.omg.PortableServer.POAPackage,org.omg.PortableServer.portable,org.omg.PortableServer.ServantLocatorPackage,org.omg.SendingContext,org.omg.stub.java.rmi,org.w3c.dom,org.w3c.dom.bootstrap,org.w3c.dom.css,org.w3c.dom.events,org.w3c.dom.html,org.w3c.dom.ls,org.w3c.dom.ranges,org.w3c.dom.stylesheets,org.w3c.dom.traversal,org.w3c.dom.views,org.w3c.dom.xpath,org.xml.sax,org.xml.sax.ext,org.xml.sax.helpers}), [was.repository.root]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=was.repository.root, value=D:\Appserver\IBM\WebSphere\AppServer\profiles\AppSrv01\config}), [java.assistive]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.assistive, value=ON}), [osgi.ws]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.ws, value=win32}), [ibm.signalhandling.sigint]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=ibm.signalhandling.sigint, value=true}), [ws.ext.dirs]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=ws.ext.dirs, value=D:\Appserver\IBM\WebSphere\AppServer/java/lib;D:\Appserver\IBM\WebSphere\AppServer\profiles\AppSrv01/classes;D:\Appserver\IBM\WebSphere\AppServer/classes;D:\Appserver\IBM\WebSphere\AppServer/lib;D:\Appserver\IBM\WebSphere\AppServer/installedChannels;D:\Appserver\IBM\WebSphere\AppServer/lib/ext;D:\Appserver\IBM\WebSphere\AppServer/web/help;D:\Appserver\IBM\WebSphere\AppServer/deploytool/itp/plugins/com.ibm.etools.ejbdeploy/runtime}), [com.ibm.oti.configuration]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.oti.configuration, value=scar}), [eclipse.security]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=eclipse.security, value=}), [osgi.noLazyStateLoading]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.noLazyStateLoading, value=true}), [com.ibm.security.jgss.debug]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.security.jgss.debug, value=off}), [org.osgi.framework.executionenvironment]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=org.osgi.framework.executionenvironment, value=OSGi/Minimum-1.0,OSGi/Minimum-1.1,OSGi/Minimum-1.2,JRE-1.1,J2SE-1.2,J2SE-1.3,J2SE-1.4,J2SE-1.5,JavaSE-1.6}), [osgi.bundles]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.bundles, value=com.ibm.cds,com.ibm.ws.eclipse.adaptors,reference:file:org.eclipse.equinox.common_.jar@2:start, reference:file:com.ibm.ws.bootstrap.provisioner.jar@3:start, reference:file:org.eclipse.core.runtime_.jar@start}), [org.osgi.framework.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=org.osgi.framework.version, value=1.5.0}), [console.encoding]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=console.encoding, value=Cp850}), [java.security.auth.login.config]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.security.auth.login.config, value=D:\Appserver\IBM\WebSphere\AppServer\profiles\AppSrv01/properties/wsjaas.conf}), [java.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.version, value=1.6.0}), [osgi.os]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.os, value=win32}), [java.util.logging.configureByServer]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.util.logging.configureByServer, value=true}), [java.io.tmpdir]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.io.tmpdir, value=d:\temp\JR\}), [sun.reflect.inflationThreshold]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.reflect.inflationThreshold, value=250}), [java.vendor.url]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vendor.url, value=http://www.ibm.com/}), [java.protocol.handler.pkgs]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.protocol.handler.pkgs, value=com.ibm.net.ssl.www2.protocol|com.ibm.ws.protocol|com.ibm.net.ssl.internal.www.protocol|com.ibm.crypto.provider}), [osgi.tracefile]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.tracefile, value=D:\Appserver\IBM\WebSphere\AppServer\profiles\AppSrv01\temp\osgi_instance_location\JR\393947674\.metadata\trace.log}), [jxe.lowest.romimage.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=jxe.lowest.romimage.version, value=17}), [user.language]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=user.language, value=en}), [os.encoding]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=os.encoding, value=UTF8}), [osgi.instance.area]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.instance.area, value=file:/D:/Appserver/IBM/WebSphere/AppServer/profiles/AppSrv01/temp/osgi_instance_location/JR/393947674/}), [os.arch]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=os.arch, value=amd64}), [com.ibm.jsse2.usefipsprovider]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.jsse2.usefipsprovider, value=false}), [java.specification.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.specification.version, value=1.6}), [user.home]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=user.home, value=C:\Users\JR}), [java.class.path]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.class.path, value=D:\Appserver\IBM\WebSphere\AppServer\profiles\AppSrv01/properties;D:\Appserver\IBM\WebSphere\AppServer/properties;D:\Appserver\IBM\WebSphere\AppServer/lib/startup.jar;D:\Appserver\IBM\WebSphere\AppServer/lib/bootstrap.jar;D:\Appserver\IBM\WebSphere\AppServer/lib/jsf-nls.jar;D:\Appserver\IBM\WebSphere\AppServer/lib/lmproxy.jar;D:\Appserver\IBM\WebSphere\AppServer/lib/urlprotocols.jar;D:\Appserver\IBM\WebSphere\AppServer/deploytool/itp/batchboot.jar;D:\Appserver\IBM\WebSphere\AppServer/deploytool/itp/batch2.jar;D:\Appserver\IBM\WebSphere\AppServer/java/lib/tools.jar}), [osgi.install.area]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.install.area, value=file:/D:/Appserver/IBM/WebSphere/AppServer/}), [org.osgi.framework.bootdelegation]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=org.osgi.framework.bootdelegation, value=com.ibm.crypto.provider,javax.management,com.ibm.CORBA.iiop,com.ibm.rmi.util, com.ibm.security.x509,com.ibm.jsse2,com.ibm.jtc.orb.map,com.sun.jmx.mbeanserver, org.omg.CORBA,org.apache.xerces.impl.dv.xs,javax.xml.bind.annotation,com.ibm.rmi.corba, org.apache.xml.serializer,com.ibm.rmi.iiop,com.ibm.rmi.io,org.apache.xerces.impl.xs, com.ibm.ws.tcp.channel.impl,org.apache.xerces.util,org.apache.xerces.impl,org.apache.xerces.dom, javax.crypto,javax.net.ssl,javax.naming,com.ibm.xml.xlxp.scan.util, org.omg.PortableInterceptor,org.apache.xerces.xs,com.ibm.security.util,org.apache.xerces.impl.xs.traversers, javax.xml.bind,org.apache.xerces.parsers,org.apache.xerces.impl.xpath.regex,javax.xml.soap, com.ibm.lang.management,javax.xml.ws,javax.security.auth,com.ibm.oti.shared, org.apache.xerces.xni.parser,org.w3c.dom,org.objectweb.asm,javax.xml.stream, com.ibm.xml.xlxp.api.util,com.ibm.ws.channel.framework.impl,com.ibm.tools.attach.javaSE,com.ibm.security.bootstrap, org.xml.sax,org.apache.xerces.impl.dtd,javax.xml.transform,javax.security.auth.login, com.ibm.xtq.xslt.jaxp,com.ibm.misc,org.omg.CORBA.portable,javax.transaction, javax.imageio.spi,com.ibm.wsspi.channel.framework,com.ibm.ws.bootstrap,com.ibm.wsspi.channel,javax.xml.parsers, com.ibm.xml.xlxp.api.stax,com.ibm.wsspi.channel.framework.exception,org.apache.xerces.jaxp.validation,org.apache.xerces.impl.xs.opti, org.apache.xerces.impl.dv,javax.xml.datatype,javax.management.remote.rmi,javax.management.remote, com.ibm.ws.javax.activity,org.omg.CosNaming,org.apache.xerces.xni,javax.rmi.CORBA, javax.management.modelmbean,com.ibm.security.pkcs12,org.apache.xml.serialize,javax.xml.validation, com.ibm.rmi,org.apache.xerces.impl.xs.models,org.apache.xerces.impl.dtd.models,com.sun.naming.internal, com.ibm.rmi.util.ranges,com.ibm.oti.vm,org.xml.sax.helpers,org.omg.IOP, org.omg.CosNaming.NamingContextPackage,org.apache.xerces.impl.dv.dtd,javax.sql,javax.management.openmbean, com.ibm.security.util.calendar,com.ibm.security.jgss,org.apache.xerces.xni.grammars,org.apache.xerces.jaxp, org.apache.xerces.impl.xs.util,org.apache.harmony.luni.util,javax.naming.spi,javax.crypto.spec, com.sun.jmx.interceptor,com.ibm.xml.xlxp.api.util.encoding,com.ibm.wsspi.tcp.channel,com.ibm.ws.orb, com.ibm.security.pkcs7,com.ibm.rmi.ras,com.ibm.rmi.pi,com.ibm.CORBA.transport, javax.xml.bind.annotation.adapters,javax.jws,com.sun.imageio.spi,com.ibm.xtq.xslt.runtime, com.ibm.xml.xlxp.scan,com.ibm.ws.timeutils,com.ibm.ws.channel.framework.internals.impl,com.ibm.ws.channel.framework, com.ibm.websphere.channel.framework,com.ibm.security.util.text,com.ibm.rmi.transport,org.xml.sax.ext, javax.security.auth.callback,javax.annotation,com.sun.jmx.remote.internal,com.ibm.wsspi.runtime, com.ibm.wsspi.channel.base,com.ibm.ws.util.objectpool,com.ibm.security.cert,com.ibm.jvm.io, org.omg.CORBA_2_3.portable,org.ietf.jgss,org.apache.xerces.xs.datatypes,org.apache.xerces.impl.validation, javax.xml.ws.wsaddressing,javax.jws.soap,com.sun.jndi.ldap,com.ibm.xml.xlxp.scan.msg, com.ibm.ws.buffermgmt.impl,com.ibm.security.pkcsutil,com.ibm.security.pkcs9,com.ibm.rmi.util.buffer, com.ibm.nws.ffdc,org.w3c.dom.events,org.omg.IOP.CodecPackage,org.apache.xerces.impl.xs.identity, org.apache.xerces.impl.io,javax.xml.transform.stream,javax.xml.transform.sax,javax.xml.namespace, javax.transaction.xa,javax.rmi,javax.naming.directory,javax.activation, com.sun.jmx.remote.protocol.iiop,com.sun.imageio.plugins.jpeg,com.sun.beans.finder,com.sun.beans, com.ibm.ws.channel.framework.chains.impl,com.ibm.ws.channel.framework.chains,com.ibm.security.validator,com.ibm.security.jgss.mech.spnego, com.ibm.security.ec,com.ibm.oti.util,com.ibm.jvm,com.ibm.jsse, org.omg.stub.javax.management.remote.rmi,org.omg.PortableInterceptor.ORBInitInfoPackage,org.omg.DynamicAny,javax.xml.ws.soap, javax.xml.transform.stax,javax.xml.transform.dom,javax.xml.bind.helpers,javax.security.cert, javax.security.auth.kerberos,javax.net,javax.management.loading,javax.imageio.stream, javax.imageio,com.sun.xml.internal.bind.marshaller,com.sun.jmx.remote.util,com.sun.imageio.plugins.wbmp, com.sun.imageio.plugins.png,com.sun.imageio.plugins.gif,com.sun.imageio.plugins.bmp,com.ibm.xtq.xml.xdm, com.ibm.xml.xlxp.api.stax.msg,com.ibm.xml.enc,com.ibm.wsspi.channel.impl,com.ibm.wsspi.buffermgmt, com.ibm.ws.tcp.channel.resources,com.ibm.ws.channel.resources,com.ibm.ws.channel.framework.internals,com.ibm.ws.buffermgmt.resources, com.ibm.security.sasl,com.ibm.security.pkcs8,com.ibm.security.cmskeystore,com.ibm.security.auth, com.ibm.rmi.util.list,com.ibm.pkcs11,com.ibm.oti.security,com.ibm.nws.ejs.ras, com.ibm.crypto.pkcs11impl.provider,com.ibm.CORBA.ras,com.ibm.CORBA.channel.giop,org.w3c.dom.traversal, org.w3c.dom.ranges,org.w3c.dom.html,org.omg.PortableServer,org.omg.IOP.CodecFactoryPackage, org.omg.CosNaming.NamingContextExtPackage,org.omg.CORBA_2_3,org.omg.CORBA.TypeCodePackage,org.omg.CORBA.ORBPackage, org.apache.xerces.jaxp.datatype,org.apache.xerces.impl.msg,javax.xml.ws.handler,javax.xml.stream.util, javax.security.auth.x500,javax.security.auth.spi,javax.naming.ldap,javax.accessibility, com.sun.xml.internal.stream,com.sun.tools.internal.ws,com.sun.jmx.defaults,com.ibm.xylem.utils, com.ibm.xtq.xslt.runtime.output,com.ibm.xtq.xslt.jaxp.compiler,com.ibm.xtq.xml.xdm.dtm,com.ibm.xtq.ast.parsers.xslt, com.ibm.xml.xlxp.api.sax.impl,com.ibm.xml.crypto,com.ibm.wsspi.channel.ws390,com.ibm.security.krb5, com.ibm.rmi.javax.rmi.CORBA,com.ibm.rmi.javax.rmi,com.ibm.rmi.corba.DynamicAny,com.ibm.rmi.channel.giop, com.ibm.rmi.channel,com.ibm.pkcs11.nat,com.ibm.oti.lang,com.ibm.nws.util, com.ibm.net,com.ibm.jvm.util,com.ibm.jsse2.util,com.ibm.amino.map, com.ibm.Compiler.Internal,com.ibm.CORBA.poa,com.ibm.CORBA.channel.orb,com.ibm.CORBA.channel, sunw.util,sunw.io,org.w3c.dom.xpath,org.w3c.dom.views, org.w3c.dom.stylesheets,org.w3c.dom.ls,org.w3c.dom.css,org.w3c.dom.bootstrap, org.relaxng.datatype.helpers,org.relaxng.datatype,org.omg.stub.java.util,org.omg.stub.java.security, org.omg.stub.java.rmi,org.omg.stub.java.lang,org.omg.stub.java.io,org.omg.SendingContext, org.omg.PortableServer.portable,org.omg.PortableServer.ServantLocatorPackage,org.omg.PortableServer.POAPackage,org.omg.PortableServer.POAManagerPackage, org.omg.PortableServer.CurrentPackage,org.omg.Messaging,org.omg.DynamicAny.DynAnyPackage,org.omg.DynamicAny.DynAnyFactoryPackage, org.omg.Dynamic,org.omg.CORBA.DynAnyPackage,org.objectweb.asm.signature,org.apache.xpath.res, org.apache.xpath.patterns,org.apache.xpath.operations,org.apache.xpath.objects,org.apache.xpath.jaxp, org.apache.xpath.functions,org.apache.xpath.domapi,org.apache.xpath.compiler,org.apache.xpath.axes, org.apache.xpath,org.apache.xmlcommons,org.apache.xml.utils.res,org.apache.xml.utils, org.apache.xml.serializer.utils,org.apache.xml.serializer.unicode,org.apache.xml.serializer.dom3,org.apache.xml.serializer.charmap, org.apache.xml.res,org.apache.xml.dtm.ref.sax2dtm,org.apache.xml.dtm.ref.dom2dtm,org.apache.xml.dtm.ref, org.apache.xml.dtm,org.apache.xerces.xpointer,org.apache.xerces.xinclude,org.apache.xerces.impl.xpath, org.apache.xerces.impl.dv.util,org.apache.xerces.dom3.as,org.apache.xerces.dom.events,org.apache.xalan.xsltc.cmdline.res, org.apache.xalan.xsltc.cmdline.getopt,org.apache.xalan.xsltc.cmdline,org.apache.xalan.xslt,org.apache.xalan.transformer, org.apache.xalan.trace,org.apache.xalan.templates,org.apache.xalan.serialize,org.apache.xalan.res, org.apache.xalan.processor,org.apache.xalan.lib.sql,org.apache.xalan.lib,org.apache.xalan.extensions, org.apache.xalan.client,org.apache.xalan,org.apache.wml.dom,org.apache.wml, org.apache.html.dom,org.apache.harmony.sql.internal.rowset,org.apache.harmony.sql.internal.nls,org.apache.harmony.security.x509, org.apache.harmony.security.x501,org.apache.harmony.security.utils,org.apache.harmony.security.provider.crypto,org.apache.harmony.security.provider, org.apache.harmony.security.internal.nls,org.apache.harmony.security.fortress,org.apache.harmony.security.asn1,org.apache.harmony.security, org.apache.harmony.math.internal.nls,org.apache.harmony.luni.internal.process,org.apache.harmony.luni.internal.nls,org.apache.harmony.logging.internal.nls, org.apache.harmony.kernel.vm,org.apache.harmony.jndi.provider.rmi.registry,org.apache.harmony.jndi.provider.rmi,org.apache.harmony.jndi.provider.dns, org.apache.harmony.jndi.provider,org.apache.harmony.jndi.internal.parser,org.apache.harmony.jndi.internal.nls,org.apache.harmony.jndi.internal, org.apache.harmony.beans.internal.nls,org.apache.harmony.beans.editors,org.apache.harmony.beans,org.apache.harmony.annotation.internal.nls, netscape.security,netscape.javascript,javax.xml.xpath,javax.xml.ws.spi.http, javax.xml.ws.spi,javax.xml.ws.http,javax.xml.ws.handler.soap,javax.xml.stream.events, javax.xml.crypto.enc.spec,javax.xml.crypto.enc.keyinfo,javax.xml.crypto.enc.dom,javax.xml.crypto.enc, javax.xml.crypto.dsig.spec,javax.xml.crypto.dsig.keyinfo,javax.xml.crypto.dsig.dom,javax.xml.crypto.dsig, javax.xml.crypto.dom,javax.xml.crypto,javax.xml.bind.util,javax.xml.bind.attachment, javax.xml,javax.tools,javax.swing.undo,javax.swing.tree, javax.swing.text.rtf,javax.swing.text.html.parser,javax.swing.text.html,javax.swing.text, javax.swing.table,javax.swing.plaf.synth,javax.swing.plaf.nimbus,javax.swing.plaf.multi, javax.swing.plaf.metal,javax.swing.plaf.basic,javax.swing.plaf,javax.swing.filechooser, javax.swing.event,javax.swing.colorchooser,javax.swing.border,javax.swing, javax.sql.rowset.spi,javax.sql.rowset.serial,javax.sql.rowset,javax.sound.sampled.spi, javax.sound.sampled,javax.sound.midi.spi,javax.sound.midi,javax.security.sasl, javax.script,javax.rmi.ssl,javax.print.event,javax.print.attribute.standard, javax.print.attribute,javax.print,javax.naming.event,javax.management.timer, javax.management.relation,javax.management.monitor,javax.lang.model.util,javax.lang.model.type, javax.lang.model.element,javax.lang.model,javax.jnlp,javax.imageio.plugins.jpeg, javax.imageio.plugins.bmp,javax.imageio.metadata,javax.imageio.event,javax.crypto.interfaces, javax.annotation.processing,javax.activity,ibm.tools.attach,ibm.security.internal.spec, ibm.security.internal.interfaces,ibm.security.internal,com.sun.xml.internal.xsom.visitor,com.sun.xml.internal.xsom.util, com.sun.xml.internal.xsom.parser,com.sun.xml.internal.xsom.impl.util,com.sun.xml.internal.xsom.impl.scd,com.sun.xml.internal.xsom.impl.parser.state, com.sun.xml.internal.xsom.impl.parser,com.sun.xml.internal.xsom.impl,com.sun.xml.internal.xsom,com.sun.xml.internal.ws.wsdl.writer.document.xsd, com.sun.xml.internal.ws.wsdl.writer.document.soap12,com.sun.xml.internal.ws.wsdl.writer.document.soap,com.sun.xml.internal.ws.wsdl.writer.document.http,com.sun.xml.internal.ws.wsdl.writer.document, com.sun.xml.internal.ws.wsdl.writer,com.sun.xml.internal.ws.wsdl.parser,com.sun.xml.internal.ws.wsdl,com.sun.xml.internal.ws.util.xml, com.sun.xml.internal.ws.util.pipe,com.sun.xml.internal.ws.util.localization,com.sun.xml.internal.ws.util.exception,com.sun.xml.internal.ws.util, com.sun.xml.internal.ws.transport.http.server,com.sun.xml.internal.ws.transport.http.client,com.sun.xml.internal.ws.transport.http,com.sun.xml.internal.ws.transport, com.sun.xml.internal.ws.streaming,com.sun.xml.internal.ws.spi,com.sun.xml.internal.ws.server.sei,com.sun.xml.internal.ws.server.provider, com.sun.xml.internal.ws.server,com.sun.xml.internal.ws.resources,com.sun.xml.internal.ws.protocol.xml,com.sun.xml.internal.ws.protocol.soap, com.sun.xml.internal.ws.policy.subject,com.sun.xml.internal.ws.policy.spi,com.sun.xml.internal.ws.policy.sourcemodel.wspolicy,com.sun.xml.internal.ws.policy.sourcemodel.attach, com.sun.xml.internal.ws.policy.sourcemodel,com.sun.xml.internal.ws.policy.privateutil,com.sun.xml.internal.ws.policy.jaxws.spi,com.sun.xml.internal.ws.policy.jaxws, com.sun.xml.internal.ws.policy,com.sun.xml.internal.ws.org.objectweb.asm,com.sun.xml.internal.ws.model.wsdl,com.sun.xml.internal.ws.model.soap, com.sun.xml.internal.ws.model,com.sun.xml.internal.ws.message.stream,com.sun.xml.internal.ws.message.source,com.sun.xml.internal.ws.message.saaj, com.sun.xml.internal.ws.message.jaxb,com.sun.xml.internal.ws.message,com.sun.xml.internal.ws.handler,com.sun.xml.internal.ws.fault, com.sun.xml.internal.ws.encoding.xml,com.sun.xml.internal.ws.encoding.soap.streaming,com.sun.xml.internal.ws.encoding.soap,com.sun.xml.internal.ws.encoding.policy, com.sun.xml.internal.ws.encoding.fastinfoset,com.sun.xml.internal.ws.encoding,com.sun.xml.internal.ws.developer,com.sun.xml.internal.ws.config.management.policy, com.sun.xml.internal.ws.client.sei,com.sun.xml.internal.ws.client.dispatch,com.sun.xml.internal.ws.client,com.sun.xml.internal.ws.binding, com.sun.xml.internal.ws.api.wsdl.writer,com.sun.xml.internal.ws.api.wsdl.parser,com.sun.xml.internal.ws.api.streaming,com.sun.xml.internal.ws.api.server, com.sun.xml.internal.ws.api.policy,com.sun.xml.internal.ws.api.pipe.helper,com.sun.xml.internal.ws.api.pipe,com.sun.xml.internal.ws.api.model.wsdl, com.sun.xml.internal.ws.api.model.soap,com.sun.xml.internal.ws.api.model,com.sun.xml.internal.ws.api.message.stream,com.sun.xml.internal.ws.api.message, com.sun.xml.internal.ws.api.handler,com.sun.xml.internal.ws.api.ha,com.sun.xml.internal.ws.api.fastinfoset,com.sun.xml.internal.ws.api.config.management.policy, com.sun.xml.internal.ws.api.config.management,com.sun.xml.internal.ws.api.client,com.sun.xml.internal.ws.api.addressing,com.sun.xml.internal.ws.api, com.sun.xml.internal.ws.addressing.v200408,com.sun.xml.internal.ws.addressing.policy,com.sun.xml.internal.ws.addressing.model,com.sun.xml.internal.ws.addressing, com.sun.xml.internal.ws,com.sun.xml.internal.txw2.output,com.sun.xml.internal.txw2.annotation,com.sun.xml.internal.txw2, com.sun.xml.internal.stream.events,com.sun.xml.internal.stream.buffer.stax,com.sun.xml.internal.stream.buffer.sax,com.sun.xml.internal.stream.buffer, com.sun.xml.internal.rngom.xml.util,com.sun.xml.internal.rngom.xml.sax,com.sun.xml.internal.rngom.util,com.sun.xml.internal.rngom.parse.xml, com.sun.xml.internal.rngom.parse.host,com.sun.xml.internal.rngom.parse.compact,com.sun.xml.internal.rngom.parse,com.sun.xml.internal.rngom.nc, com.sun.xml.internal.rngom.dt.builtin,com.sun.xml.internal.rngom.dt,com.sun.xml.internal.rngom.digested,com.sun.xml.internal.rngom.binary.visitor, com.sun.xml.internal.rngom.binary,com.sun.xml.internal.rngom.ast.util,com.sun.xml.internal.rngom.ast.om,com.sun.xml.internal.rngom.ast.builder, com.sun.xml.internal.org.jvnet.staxex,com.sun.xml.internal.org.jvnet.mimepull,com.sun.xml.internal.org.jvnet.fastinfoset.stax,com.sun.xml.internal.org.jvnet.fastinfoset.sax.helpers, com.sun.xml.internal.org.jvnet.fastinfoset.sax,com.sun.xml.internal.org.jvnet.fastinfoset,com.sun.xml.internal.messaging.saaj.util.transform,com.sun.xml.internal.messaging.saaj.util, com.sun.xml.internal.messaging.saaj.soap.ver1_2,com.sun.xml.internal.messaging.saaj.soap.ver1_1,com.sun.xml.internal.messaging.saaj.soap.name,com.sun.xml.internal.messaging.saaj.soap.impl, com.sun.xml.internal.messaging.saaj.soap.dynamic,com.sun.xml.internal.messaging.saaj.soap,com.sun.xml.internal.messaging.saaj.packaging.mime.util,com.sun.xml.internal.messaging.saaj.packaging.mime.internet, com.sun.xml.internal.messaging.saaj.packaging.mime,com.sun.xml.internal.messaging.saaj.client.p2p,com.sun.xml.internal.messaging.saaj,com.sun.xml.internal.fastinfoset.vocab, com.sun.xml.internal.fastinfoset.util,com.sun.xml.internal.fastinfoset.tools,com.sun.xml.internal.fastinfoset.stax.util,com.sun.xml.internal.fastinfoset.stax.factory, com.sun.xml.internal.fastinfoset.stax.events,com.sun.xml.internal.fastinfoset.stax,com.sun.xml.internal.fastinfoset.sax,com.sun.xml.internal.fastinfoset.org.apache.xerces.util, com.sun.xml.internal.fastinfoset.dom,com.sun.xml.internal.fastinfoset.alphabet,com.sun.xml.internal.fastinfoset.algorithm,com.sun.xml.internal.fastinfoset, com.sun.xml.internal.dtdparser,com.sun.xml.internal.bind.v2.util,com.sun.xml.internal.bind.v2.schemagen.xmlschema,com.sun.xml.internal.bind.v2.schemagen.episode, com.sun.xml.internal.bind.v2.schemagen,com.sun.xml.internal.bind.v2.runtime.unmarshaller,com.sun.xml.internal.bind.v2.runtime.reflect.opt,com.sun.xml.internal.bind.v2.runtime.reflect, com.sun.xml.internal.bind.v2.runtime.property,com.sun.xml.internal.bind.v2.runtime.output,com.sun.xml.internal.bind.v2.runtime,com.sun.xml.internal.bind.v2.model.runtime, com.sun.xml.internal.bind.v2.model.nav,com.sun.xml.internal.bind.v2.model.impl,com.sun.xml.internal.bind.v2.model.core,com.sun.xml.internal.bind.v2.model.annotation, com.sun.xml.internal.bind.v2.bytecode,com.sun.xml.internal.bind.v2,com.sun.xml.internal.bind.util,com.sun.xml.internal.bind.unmarshaller, com.sun.xml.internal.bind.api.impl,com.sun.xml.internal.bind.api,com.sun.xml.internal.bind.annotation,com.sun.xml.internal.bind, com.sun.tracing.dtrace,com.sun.tracing,com.sun.tools.script.shell,com.sun.tools.jdi.resources, com.sun.tools.jdi,com.sun.tools.jconsole,com.sun.tools.javap.resources,com.sun.tools.javap, com.sun.tools.javah.resources,com.sun.tools.javah.oldjavah,com.sun.tools.javah,com.sun.tools.javadoc.resources, com.sun.tools.javadoc,com.sun.tools.javac.zip,com.sun.tools.javac.util,com.sun.tools.javac.tree, com.sun.tools.javac.sym,com.sun.tools.javac.resources,com.sun.tools.javac.processing,com.sun.tools.javac.parser, com.sun.tools.javac.nio,com.sun.tools.javac.model,com.sun.tools.javac.main,com.sun.tools.javac.jvm, com.sun.tools.javac.file,com.sun.tools.javac.comp,com.sun.tools.javac.code,com.sun.tools.javac.api, com.sun.tools.javac,com.sun.tools.internal.xjc.writer,com.sun.tools.internal.xjc.util,com.sun.tools.internal.xjc.runtime, com.sun.tools.internal.xjc.reader.xmlschema.parser,com.sun.tools.internal.xjc.reader.xmlschema.ct,com.sun.tools.internal.xjc.reader.xmlschema.bindinfo,com.sun.tools.internal.xjc.reader.xmlschema, com.sun.tools.internal.xjc.reader.relaxng,com.sun.tools.internal.xjc.reader.internalizer,com.sun.tools.internal.xjc.reader.gbind,com.sun.tools.internal.xjc.reader.dtd.bindinfo, com.sun.tools.internal.xjc.reader.dtd,com.sun.tools.internal.xjc.reader,com.sun.tools.internal.xjc.outline,com.sun.tools.internal.xjc.model.nav, com.sun.tools.internal.xjc.model,com.sun.tools.internal.xjc.generator.util,com.sun.tools.internal.xjc.generator.bean.field,com.sun.tools.internal.xjc.generator.bean, com.sun.tools.internal.xjc.generator.annotation.spec,com.sun.tools.internal.xjc.generator.annotation.ri,com.sun.tools.internal.xjc.api.util,com.sun.tools.internal.xjc.api.impl.s2j, com.sun.tools.internal.xjc.api.impl.j2s,com.sun.tools.internal.xjc.api,com.sun.tools.internal.xjc.addon.sync,com.sun.tools.internal.xjc.addon.locator, com.sun.tools.internal.xjc.addon.episode,com.sun.tools.internal.xjc.addon.code_injector,com.sun.tools.internal.xjc.addon.at_generated,com.sun.tools.internal.xjc.addon.accessors, com.sun.tools.internal.xjc,com.sun.tools.internal.ws.wsdl.parser,com.sun.tools.internal.ws.wsdl.framework,com.sun.tools.internal.ws.wsdl.document.soap, com.sun.tools.internal.ws.wsdl.document.schema,com.sun.tools.internal.ws.wsdl.document.mime,com.sun.tools.internal.ws.wsdl.document.jaxws,com.sun.tools.internal.ws.wsdl.document.http, com.sun.tools.internal.ws.wsdl.document,com.sun.tools.internal.ws.wscompile,com.sun.tools.internal.ws.util.xml,com.sun.tools.internal.ws.util, com.sun.tools.internal.ws.spi,com.sun.tools.internal.ws.resources,com.sun.tools.internal.ws.processor.util,com.sun.tools.internal.ws.processor.modeler.wsdl, com.sun.tools.internal.ws.processor.modeler.annotation,com.sun.tools.internal.ws.processor.modeler,com.sun.tools.internal.ws.processor.model.jaxb,com.sun.tools.internal.ws.processor.model.java, com.sun.tools.internal.ws.processor.model.exporter,com.sun.tools.internal.ws.processor.model,com.sun.tools.internal.ws.processor.generator,com.sun.tools.internal.ws.processor, com.sun.tools.internal.ws.api.wsdl,com.sun.tools.internal.ws.api,com.sun.tools.internal.jxc.model.nav,com.sun.tools.internal.jxc.gen.config, com.sun.tools.internal.jxc.apt,com.sun.tools.internal.jxc,com.sun.tools.extcheck,com.sun.tools.example.debug.tty, com.sun.tools.example.debug.expr,com.sun.tools.doclets.standard,com.sun.tools.doclets.internal.toolkit.util.links,com.sun.tools.doclets.internal.toolkit.util, com.sun.tools.doclets.internal.toolkit.taglets,com.sun.tools.doclets.internal.toolkit.resources,com.sun.tools.doclets.internal.toolkit.builders,com.sun.tools.doclets.internal.toolkit, com.sun.tools.doclets.formats.html.resources,com.sun.tools.doclets.formats.html.markup,com.sun.tools.doclets.formats.html,com.sun.tools.doclets, com.sun.tools.corba.se.idl.toJavaPortable,com.sun.tools.corba.se.idl.som.idlemit,com.sun.tools.corba.se.idl.som.cff,com.sun.tools.corba.se.idl.constExpr, com.sun.tools.corba.se.idl,com.sun.tools.classfile,com.sun.tools.attach.spi,com.sun.tools.attach, com.sun.tools.apt.util,com.sun.tools.apt.resources,com.sun.tools.apt.mirror.util,com.sun.tools.apt.mirror.type, com.sun.tools.apt.mirror.declaration,com.sun.tools.apt.mirror.apt,com.sun.tools.apt.mirror,com.sun.tools.apt.main, com.sun.tools.apt.comp,com.sun.tools.apt,com.sun.swing.internal.plaf.synth.resources,com.sun.swing.internal.plaf.metal.resources, com.sun.swing.internal.plaf.basic.resources,com.sun.source.util,com.sun.source.tree,com.sun.security.cert.internal.x509, com.sun.script.util,com.sun.script.javascript,com.sun.rowset.providers,com.sun.rowset.internal, com.sun.rowset,com.sun.rmi.rmid,com.sun.org.omg.SendingContext.CodeBasePackage,com.sun.org.omg.SendingContext, com.sun.org.omg.CORBA.portable,com.sun.org.omg.CORBA.ValueDefPackage,com.sun.org.omg.CORBA,com.sun.org.glassfish.gmbal.util, com.sun.org.glassfish.gmbal,com.sun.org.glassfish.external.statistics.impl,com.sun.org.glassfish.external.statistics.annotations,com.sun.org.glassfish.external.statistics, com.sun.org.glassfish.external.probe.provider.annotations,com.sun.org.glassfish.external.probe.provider,com.sun.org.glassfish.external.arc,com.sun.org.glassfish.external.amx, com.sun.org.apache.xpath.internal.jaxp,com.sun.org.apache.xml.internal.security.utils.resolver.implementations,com.sun.org.apache.xml.internal.security.utils.resolver,com.sun.org.apache.xml.internal.security.utils, com.sun.org.apache.xml.internal.security.transforms.params,com.sun.org.apache.xml.internal.security.transforms.implementations,com.sun.org.apache.xml.internal.security.transforms,com.sun.org.apache.xml.internal.security.signature, com.sun.org.apache.xml.internal.security.keys.storage.implementations,com.sun.org.apache.xml.internal.security.keys.storage,com.sun.org.apache.xml.internal.security.keys.keyresolver.implementations,com.sun.org.apache.xml.internal.security.keys.keyresolver, com.sun.org.apache.xml.internal.security.keys.content.x509,com.sun.org.apache.xml.internal.security.keys.content.keyvalues,com.sun.org.apache.xml.internal.security.keys.content,com.sun.org.apache.xml.internal.security.keys, com.sun.org.apache.xml.internal.security.exceptions,com.sun.org.apache.xml.internal.security.encryption,com.sun.org.apache.xml.internal.security.c14n.implementations,com.sun.org.apache.xml.internal.security.c14n.helper, com.sun.org.apache.xml.internal.security.c14n,com.sun.org.apache.xml.internal.security.algorithms.implementations,com.sun.org.apache.xml.internal.security.algorithms,com.sun.org.apache.xml.internal.security, com.sun.org.apache.xerces.internal.parsers,com.sun.org.apache.xerces.internal.jaxp.validation,com.sun.org.apache.xerces.internal.jaxp.datatype,com.sun.org.apache.xerces.internal.jaxp, com.sun.org.apache.xerces.internal.dom,com.sun.org.apache.xalan.internal.xsltc.trax,com.sun.nio.zipfs,com.sun.nio.sctp, com.sun.nio.file,com.sun.net.ssl.internal.www.protocol.https,com.sun.net.ssl.internal.ssl,com.sun.net.ssl, com.sun.net.httpserver.spi,com.sun.net.httpserver,com.sun.mirror.util,com.sun.mirror.type, com.sun.mirror.declaration,com.sun.mirror.apt,com.sun.media.sound,com.sun.management.jmx, com.sun.jnlp,com.sun.jndi.url.rmi,com.sun.jndi.url.ldaps,com.sun.jndi.url.ldap, com.sun.jndi.url.iiopname,com.sun.jndi.url.iiop,com.sun.jndi.url.dns,com.sun.jndi.url.corbaname, com.sun.jndi.toolkit.url,com.sun.jndi.toolkit.dir,com.sun.jndi.toolkit.ctx,com.sun.jndi.toolkit.corba, com.sun.jndi.rmi.registry,com.sun.jndi.ldap.sasl,com.sun.jndi.ldap.pool,com.sun.jndi.ldap.ext, com.sun.jndi.dns,com.sun.jndi.cosnaming,com.sun.jmx.trace,com.sun.jmx.snmp.tasks, com.sun.jmx.snmp.mpm,com.sun.jmx.snmp.internal,com.sun.jmx.snmp.defaults,com.sun.jmx.snmp.daemon, com.sun.jmx.snmp.agent,com.sun.jmx.snmp.IPAcl,com.sun.jmx.snmp,com.sun.jmx.remote.security, com.sun.jmx.remote.protocol.rmi,com.sun.jdi.request,com.sun.jdi.event,com.sun.jdi.connect.spi, com.sun.jdi.connect,com.sun.jdi,com.sun.javaws.util,com.sun.javaws.ui, com.sun.javaws.security,com.sun.javaws.progress,com.sun.javaws.net.protocol.jar,com.sun.javaws.jnl, com.sun.javaws.exceptions,com.sun.javaws,com.sun.javadoc,com.sun.java.util.jar.pack, com.sun.java.swing.plaf.windows.resources,com.sun.java.swing.plaf.windows,com.sun.java.swing.plaf.nimbus,com.sun.java.swing.plaf.motif.resources, com.sun.java.swing.plaf.motif,com.sun.java.swing,com.sun.java.browser.plugin2.liveconnect.v1,com.sun.java.browser.plugin2, com.sun.java.browser.net,com.sun.java.browser.dom,com.sun.java.accessibility.util.java.awt,com.sun.java.accessibility.util, com.sun.jarsigner,com.sun.istack.internal.ws,com.sun.istack.internal.tools,com.sun.istack.internal.logging, com.sun.istack.internal.localization,com.sun.istack.internal,com.sun.inputmethods.internal.thaiim,com.sun.inputmethods.internal.indicim, com.sun.imageio.stream,com.sun.imageio.plugins.common,com.sun.imageio.metadata,com.sun.image.codec.jpeg, com.sun.deploy.xml,com.sun.deploy.util,com.sun.deploy.uitoolkit.ui,com.sun.deploy.uitoolkit.impl.text, com.sun.deploy.uitoolkit.impl.awt.ui,com.sun.deploy.uitoolkit.impl.awt,com.sun.deploy.uitoolkit,com.sun.deploy.ui, com.sun.deploy.trace,com.sun.deploy.si,com.sun.deploy.services,com.sun.deploy.security, com.sun.deploy.resources,com.sun.deploy.pings,com.sun.deploy.perf,com.sun.deploy.panel, com.sun.deploy.net.socket,com.sun.deploy.net.proxy,com.sun.deploy.net.protocol.rmi,com.sun.deploy.net.protocol.javascript, com.sun.deploy.net.protocol.https,com.sun.deploy.net.protocol.chrome,com.sun.deploy.net.protocol.about,com.sun.deploy.net.protocol, com.sun.deploy.net.offline,com.sun.deploy.net.cookie,com.sun.deploy.net,com.sun.deploy.jardiff, com.sun.deploy.config,com.sun.deploy.cache,com.sun.deploy.association.utility,com.sun.deploy.association, com.sun.deploy.appcontext,com.sun.deploy,com.sun.demo.jvmti.hprof,com.sun.corba.se.spi.transport, com.sun.corba.se.spi.servicecontext,com.sun.corba.se.spi.resolver,com.sun.corba.se.spi.protocol,com.sun.corba.se.spi.presentation.rmi, com.sun.corba.se.spi.orbutil.threadpool,com.sun.corba.se.spi.orbutil.proxy,com.sun.corba.se.spi.orbutil.fsm,com.sun.corba.se.spi.orbutil.closure, com.sun.corba.se.spi.orb,com.sun.corba.se.spi.oa,com.sun.corba.se.spi.monitoring,com.sun.corba.se.spi.logging, com.sun.corba.se.spi.legacy.interceptor,com.sun.corba.se.spi.legacy.connection,com.sun.corba.se.spi.ior.iiop,com.sun.corba.se.spi.ior, com.sun.corba.se.spi.extension,com.sun.corba.se.spi.encoding,com.sun.corba.se.spi.copyobject,com.sun.corba.se.spi.activation.RepositoryPackage, com.sun.corba.se.spi.activation.LocatorPackage,com.sun.corba.se.spi.activation.InitialNameServicePackage,com.sun.corba.se.spi.activation,com.sun.corba.se.pept.transport, com.sun.corba.se.pept.protocol,com.sun.corba.se.pept.encoding,com.sun.corba.se.pept.broker,com.sun.corba.se.org.omg.CORBA, com.sun.corba.se.internal.iiop,com.sun.corba.se.internal.corba,com.sun.corba.se.internal.POA,com.sun.corba.se.internal.Interceptors, com.sun.corba.se.internal.CosNaming,com.sun.corba.se.impl.util,com.sun.corba.se.impl.transport,com.sun.corba.se.impl.resolver, com.sun.corba.se.impl.protocol.giopmsgheaders,com.sun.corba.se.impl.protocol,com.sun.corba.se.impl.presentation.rmi,com.sun.corba.se.impl.orbutil.threadpool, com.sun.corba.se.impl.orbutil.graph,com.sun.corba.se.impl.orbutil.fsm,com.sun.corba.se.impl.orbutil.concurrent,com.sun.corba.se.impl.orbutil.closure, com.sun.corba.se.impl.orbutil,com.sun.corba.se.impl.orb,com.sun.corba.se.impl.oa.toa,com.sun.corba.se.impl.oa.poa, com.sun.corba.se.impl.oa,com.sun.corba.se.impl.naming.pcosnaming,com.sun.corba.se.impl.naming.namingutil,com.sun.corba.se.impl.naming.cosnaming, com.sun.corba.se.impl.monitoring,com.sun.corba.se.impl.logging,com.sun.corba.se.impl.legacy.connection,com.sun.corba.se.impl.javax.rmi.CORBA, com.sun.corba.se.impl.javax.rmi,com.sun.corba.se.impl.ior.iiop,com.sun.corba.se.impl.ior,com.sun.corba.se.impl.io, com.sun.corba.se.impl.interceptors,com.sun.corba.se.impl.encoding,com.sun.corba.se.impl.dynamicany,com.sun.corba.se.impl.corba, com.sun.corba.se.impl.copyobject,com.sun.corba.se.impl.activation,com.sun.codemodel.internal.writer,com.sun.codemodel.internal.util, com.sun.codemodel.internal.fmt,com.sun.codemodel.internal,com.sun.beans.decoder,com.sun.awt, com.sun.applet2.preloader.event,com.sun.applet2.preloader,com.sun.applet2,com.sun.activation.registries, com.sun.accessibility.internal.resources,com.oracle.net,com.ibm.xylem.types,com.ibm.xylem.res, com.ibm.xylem.parser,com.ibm.xylem.optimizers.partialeval,com.ibm.xylem.optimizers,com.ibm.xylem.interpreter, com.ibm.xylem.instructions,com.ibm.xylem.drivers,com.ibm.xylem.config,com.ibm.xylem.commandline, com.ibm.xylem.codegen.bcel,com.ibm.xylem.codegen,com.ibm.xylem.builders,com.ibm.xylem.annot.meta, com.ibm.xylem.annot,com.ibm.xylem,com.ibm.xtq.xslt.xylem.xpath20.typesystem,com.ibm.xtq.xslt.xylem.xpath20.parser, com.ibm.xtq.xslt.xylem.xpath20.analysis,com.ibm.xtq.xslt.xylem.types,com.ibm.xtq.xslt.xylem.partialeval,com.ibm.xtq.xslt.xylem.parser, com.ibm.xtq.xslt.xylem.output.nodeset,com.ibm.xtq.xslt.xylem.optimizers,com.ibm.xtq.xslt.xylem.interpreter,com.ibm.xtq.xslt.xylem.instructions.number, com.ibm.xtq.xslt.xylem.instructions.nodeconstructors,com.ibm.xtq.xslt.xylem.instructions.nametable,com.ibm.xtq.xslt.xylem.instructions.debug,com.ibm.xtq.xslt.xylem.instructions, com.ibm.xtq.xslt.xylem.codegen,com.ibm.xtq.xslt.xylem.autof,com.ibm.xtq.xslt.xylem,com.ibm.xtq.xslt.typechecker.v2, com.ibm.xtq.xslt.typechecker.v1.types,com.ibm.xtq.xslt.typechecker.v1,com.ibm.xtq.xslt.typechecker,com.ibm.xtq.xslt.translator.v2, com.ibm.xtq.xslt.translator.v1,com.ibm.xtq.xslt.translator,com.ibm.xtq.xslt.runtime.v2,com.ibm.xtq.xslt.runtime.res, com.ibm.xtq.xslt.runtime.extensions,com.ibm.xtq.xslt.runtime.debug,com.ibm.xtq.xslt.res,com.ibm.xtq.xslt.jaxp.interpreter, com.ibm.xtq.xslt.drivers,com.ibm.xtq.xslt.cmdline.utils,com.ibm.xtq.xslt.cmdline,com.ibm.xtq.xslt, com.ibm.xtq.xpath.jaxp.v2,com.ibm.xtq.xpath.jaxp.v1,com.ibm.xtq.xpath.jaxp,com.ibm.xtq.xml.xdm.res, com.ibm.xtq.xml.xdm.ref,com.ibm.xtq.xml.xdm.dom,com.ibm.xtq.xml.xcollator,com.ibm.xtq.xml.utils, com.ibm.xtq.xml.unicode.normalize,com.ibm.xtq.xml.types,com.ibm.xtq.xml.res,com.ibm.xtq.xml.experimental, com.ibm.xtq.xml.dtm.utils,com.ibm.xtq.xml.dtm.ref.xlxp2dtm,com.ibm.xtq.xml.dtm.ref.sax2dtm,com.ibm.xtq.xml.dtm.ref, com.ibm.xtq.xml.dtm,com.ibm.xtq.xml.datamodel,com.ibm.xtq.utils,com.ibm.xtq.scontext, com.ibm.xtq.common.utils.res,com.ibm.xtq.common.utils,com.ibm.xtq.bcel.verifier.structurals,com.ibm.xtq.bcel.verifier.statics, com.ibm.xtq.bcel.verifier.exc,com.ibm.xtq.bcel.verifier,com.ibm.xtq.bcel.util,com.ibm.xtq.bcel.generic, com.ibm.xtq.bcel.classfile,com.ibm.xtq.bcel,com.ibm.xtq.ast.visit,com.ibm.xtq.ast.res, com.ibm.xtq.ast.parsers.xpath.tempconstructors,com.ibm.xtq.ast.parsers.xpath.factories,com.ibm.xtq.ast.parsers.xpath,com.ibm.xtq.ast.nodes, com.ibm.xtq.ast,com.ibm.xtq,com.ibm.xml.xlxp.api.stax.serializer,com.ibm.xml.xlxp.api.stax.events, com.ibm.xml.xlxp.api.sax.impl.parser,com.ibm.xml.xlxp.api.jaxp.impl,com.ibm.xml.xlxp.api.event,com.ibm.xml.resolver.tools, com.ibm.xml.resolver.readers,com.ibm.xml.resolver.helpers,com.ibm.xml.resolver.apps,com.ibm.xml.resolver, com.ibm.xml.jaxp.datatype,com.ibm.xml.enc.dom,com.ibm.xml.crypto.util,com.ibm.xml.crypto.spi, com.ibm.xml.crypto.dsig.gss,com.ibm.xml.crypto.dsig.dom.transform,com.ibm.xml.crypto.dsig.dom,com.ibm.xml.crypto.dsig, com.ibm.ws.compression,com.ibm.tools.rmic.iiop,com.ibm.tools.attach.spi,com.ibm.tools.attach, com.ibm.stax,com.ibm.som.idlemit,com.ibm.som.cff,com.ibm.security.util.text.resources, com.ibm.security.tools,com.ibm.security.smime.jmail,com.ibm.security.smime,com.ibm.security.sequence.bytes, com.ibm.security.sequence,com.ibm.security.sasl.util,com.ibm.security.sasl.ntlm,com.ibm.security.sasl.gsskerb, com.ibm.security.sasl.digest,com.ibm.security.pkcs5,com.ibm.security.pkcs10,com.ibm.security.pkcs1, com.ibm.security.ntlm,com.ibm.security.krb5.internal.util,com.ibm.security.krb5.internal.tools,com.ibm.security.krb5.internal.rcache, com.ibm.security.krb5.internal.ktab,com.ibm.security.krb5.internal.crypto,com.ibm.security.krb5.internal.ccache,com.ibm.security.krb5.internal, com.ibm.security.keystoreutil,com.ibm.security.keystoreski,com.ibm.security.jgss.spi,com.ibm.security.jgss.mech.krb5, com.ibm.security.jgss.i18n,com.ibm.security.crmf,com.ibm.security.cmputil,com.ibm.security.cmp, com.ibm.security.certclient.util,com.ibm.security.certclient.fmt,com.ibm.security.certclient.beans,com.ibm.security.certclient.base, com.ibm.security.certclient,com.ibm.security.cert.ldap,com.ibm.security.auth.module,com.ibm.security.auth.login, com.ibm.security.auth.callback,com.ibm.security,com.ibm.securerandom.provider,com.ibm.rmi.poa, com.ibm.rmi.channel.orb,com.ibm.oti.reflect,com.ibm.org.omg.SendingContext.CodeBasePackage,com.ibm.org.omg.SendingContext, com.ibm.org.omg.CORBA.ValueDefPackage,com.ibm.org.omg.CORBA,com.ibm.nio,com.ibm.net.ssl.www2.protocol.https, com.ibm.misc.resources,com.ibm.math,com.ibm.le.conditionhandling,com.ibm.keymanager.util.a, com.ibm.keymanager.util,com.ibm.keymanager.transport.b,com.ibm.keymanager.transport.a,com.ibm.keymanager.transport, com.ibm.keymanager.tools,com.ibm.keymanager.logic,com.ibm.keymanager.keystore,com.ibm.keymanager.keygroups.b, com.ibm.keymanager.keygroups.a,com.ibm.keymanager.keygroups,com.ibm.keymanager.i18n,com.ibm.keymanager.drivetable.a, com.ibm.keymanager.drivetable,com.ibm.keymanager.datacollection,com.ibm.keymanager.config,com.ibm.keymanager.b, com.ibm.keymanager.audit.a,com.ibm.keymanager.audit,com.ibm.keymanager.admin.cli,com.ibm.keymanager.admin, com.ibm.keymanager.a,com.ibm.keymanager,com.ibm.jvm.trace.format.api,com.ibm.jvm.trace, com.ibm.jvm.j9.dump.systemdump,com.ibm.jvm.j9.dump.saxhandler,com.ibm.jvm.j9.dump.indexsupport,com.ibm.jvm.j9.dump.extract, com.ibm.jvm.j9.dump.commandconsole,com.ibm.jvm.j9.dump.command.trace,com.ibm.jvm.j9.dump.command.heapdump,com.ibm.jvm.j9.dump.command, com.ibm.jvm.heapdump.portableheapdump,com.ibm.jvm.heapdump.classicheapdump,com.ibm.jvm.heapdump,com.ibm.jvm.format, com.ibm.jvm.dtfjview.heapdump.portable,com.ibm.jvm.dtfjview.heapdump.classic,com.ibm.jvm.dtfjview.heapdump,com.ibm.jvm.dtfjview.commands.xcommands, com.ibm.jvm.dtfjview.commands.showcommands,com.ibm.jvm.dtfjview.commands.setcommands,com.ibm.jvm.dtfjview.commands.infocommands,com.ibm.jvm.dtfjview.commands.helpers, com.ibm.jvm.dtfjview.commands,com.ibm.jvm.dtfjview,com.ibm.jtc.orb.nio,com.ibm.jtc.orb.iiop, com.ibm.jtc.orb.asynch,com.ibm.jsse2.krb5,com.ibm.jsse2.a,com.ibm.java.diagnostics.plugins, com.ibm.java.diagnostics.healthcenter.agent.mbean,com.ibm.java.diagnostics.healthcenter.agent.dataproviders.methoddictionary,com.ibm.java.diagnostics.healthcenter.agent.dataproviders.memory,com.ibm.java.diagnostics.healthcenter.agent.dataproviders.environment, com.ibm.java.diagnostics.healthcenter.agent.dataproviders.capabilities,com.ibm.java.diagnostics.healthcenter.agent.dataproviders,com.ibm.java.diagnostics.healthcenter.agent,com.ibm.java.diagnostics.commands, com.ibm.java.diagnostics.collector.healthcenter.version,com.ibm.java.diagnostics.collector,com.ibm.java.diagnostics,com.ibm.j9ddr.vm26.view.dtfj.java.j9, com.ibm.j9ddr.vm26.view.dtfj.java.corrupt,com.ibm.j9ddr.vm26.view.dtfj.java,com.ibm.j9ddr.vm26.view.dtfj,com.ibm.j9ddr.vm26.types, com.ibm.j9ddr.vm26.tools.ddrinteractive.structureformat.extensions,com.ibm.j9ddr.vm26.tools.ddrinteractive.structureformat.base,com.ibm.j9ddr.vm26.tools.ddrinteractive.commands,com.ibm.j9ddr.vm26.tools.ddrinteractive, com.ibm.j9ddr.vm26.pointer.helper,com.ibm.j9ddr.vm26.pointer.generated,com.ibm.j9ddr.vm26.pointer,com.ibm.j9ddr.vm26.j9.walkers, com.ibm.j9ddr.vm26.j9.stackwalker,com.ibm.j9ddr.vm26.j9.stackmap,com.ibm.j9ddr.vm26.j9.gc,com.ibm.j9ddr.vm26.j9, com.ibm.j9ddr.vm26.events,com.ibm.j9ddr.vm24.view.dtfj.java.j9,com.ibm.j9ddr.vm24.view.dtfj.java.corrupt,com.ibm.j9ddr.vm24.view.dtfj.java, com.ibm.j9ddr.vm24.view.dtfj,com.ibm.j9ddr.vm24.types,com.ibm.j9ddr.vm24.tools.ddrinteractive.structureformat.extensions,com.ibm.j9ddr.vm24.tools.ddrinteractive.structureformat.base, com.ibm.j9ddr.vm24.tools.ddrinteractive.commands,com.ibm.j9ddr.vm24.tools.ddrinteractive,com.ibm.j9ddr.vm24.pointer.helper,com.ibm.j9ddr.vm24.pointer.generated, com.ibm.j9ddr.vm24.pointer,com.ibm.j9ddr.vm24.j9.walkers,com.ibm.j9ddr.vm24.j9.stackwalker,com.ibm.j9ddr.vm24.j9.stackmap, com.ibm.j9ddr.vm24.j9.gc,com.ibm.j9ddr.vm24.j9,com.ibm.j9ddr.vm24.events,com.ibm.j9ddr.vm23.view.dtfj.java.j9, com.ibm.j9ddr.vm23.view.dtfj.java.corrupt,com.ibm.j9ddr.vm23.view.dtfj.java,com.ibm.j9ddr.vm23.view.dtfj,com.ibm.j9ddr.vm23.types, com.ibm.j9ddr.vm23.tools.ddrinteractive.structureformat.extensions,com.ibm.j9ddr.vm23.tools.ddrinteractive.structureformat.base,com.ibm.j9ddr.vm23.tools.ddrinteractive.commands,com.ibm.j9ddr.vm23.tools.ddrinteractive, com.ibm.j9ddr.vm23.pointer.helper,com.ibm.j9ddr.vm23.pointer.generated,com.ibm.j9ddr.vm23.pointer,com.ibm.j9ddr.vm23.j9.walkers, com.ibm.j9ddr.vm23.j9.stackwalker,com.ibm.j9ddr.vm23.j9.stackmap,com.ibm.j9ddr.vm23.j9.gc,com.ibm.j9ddr.vm23.j9, com.ibm.j9ddr.vm23.events,com.ibm.j9ddr.view.dtfj.java.helper,com.ibm.j9ddr.view.dtfj.java,com.ibm.j9ddr.view.dtfj.image, com.ibm.j9ddr.view.dtfj,com.ibm.j9ddr.util,com.ibm.j9ddr.tools.xml,com.ibm.j9ddr.tools.store, com.ibm.j9ddr.tools.logging,com.ibm.j9ddr.tools.ddrinteractive.plugins,com.ibm.j9ddr.tools.ddrinteractive.commands,com.ibm.j9ddr.tools.ddrinteractive.annotations, com.ibm.j9ddr.tools.ddrinteractive,com.ibm.j9ddr.tools.ant.tasks,com.ibm.j9ddr.tools.ant,com.ibm.j9ddr.tools, com.ibm.j9ddr.logging,com.ibm.j9ddr.libraries,com.ibm.j9ddr.exceptions,com.ibm.j9ddr.events, com.ibm.j9ddr.corereaders.tdump.zebedee.util,com.ibm.j9ddr.corereaders.tdump.zebedee.mvs,com.ibm.j9ddr.corereaders.tdump.zebedee.le,com.ibm.j9ddr.corereaders.tdump.zebedee.dumpreader, com.ibm.j9ddr.corereaders.tdump,com.ibm.j9ddr.corereaders.osthread,com.ibm.j9ddr.corereaders.minidump,com.ibm.j9ddr.corereaders.memory, com.ibm.j9ddr.corereaders.elf,com.ibm.j9ddr.corereaders.debugger,com.ibm.j9ddr.corereaders.aix,com.ibm.j9ddr.corereaders, com.ibm.j9ddr.command,com.ibm.j9ddr,com.ibm.idl.toJavaPortable,com.ibm.idl.constExpr, com.ibm.idl,com.ibm.gsk.ikeyman.util,com.ibm.gsk.ikeyman.sequence.bytes,com.ibm.gsk.ikeyman.sequence, com.ibm.gsk.ikeyman.messages,com.ibm.gsk.ikeyman.keystore.ext,com.ibm.gsk.ikeyman.keystore.entry,com.ibm.gsk.ikeyman.keystore, com.ibm.gsk.ikeyman.io,com.ibm.gsk.ikeyman.gui.panels,com.ibm.gsk.ikeyman.gui.controls,com.ibm.gsk.ikeyman.gui, com.ibm.gsk.ikeyman.event,com.ibm.gsk.ikeyman.error,com.ibm.gsk.ikeyman.command.password,com.ibm.gsk.ikeyman.command.gui, com.ibm.gsk.ikeyman.command.cli,com.ibm.gsk.ikeyman.command,com.ibm.gsk.ikeyman.certrequest.cmscertrequest,com.ibm.gsk.ikeyman.certrequest, com.ibm.gsk.ikeyman,com.ibm.dtfj.runtime,com.ibm.dtfj.phd.util,com.ibm.dtfj.phd.parser, com.ibm.dtfj.phd,com.ibm.dtfj.javacore.parser.j9.section.title,com.ibm.dtfj.javacore.parser.j9.section.thread,com.ibm.dtfj.javacore.parser.j9.section.stack, com.ibm.dtfj.javacore.parser.j9.section.platform,com.ibm.dtfj.javacore.parser.j9.section.nativememory,com.ibm.dtfj.javacore.parser.j9.section.monitor,com.ibm.dtfj.javacore.parser.j9.section.memory, com.ibm.dtfj.javacore.parser.j9.section.environment,com.ibm.dtfj.javacore.parser.j9.section.common,com.ibm.dtfj.javacore.parser.j9.section.classloader,com.ibm.dtfj.javacore.parser.j9.registered, com.ibm.dtfj.javacore.parser.j9,com.ibm.dtfj.javacore.parser.framework.tag,com.ibm.dtfj.javacore.parser.framework.scanner,com.ibm.dtfj.javacore.parser.framework.parser, com.ibm.dtfj.javacore.parser.framework.input,com.ibm.dtfj.javacore.parser.framework,com.ibm.dtfj.javacore.builder.javacore,com.ibm.dtfj.javacore.builder, com.ibm.dtfj.java.javacore,com.ibm.dtfj.java.j9,com.ibm.dtfj.java,com.ibm.dtfj.image.javacore, com.ibm.dtfj.image.j9.corrupt,com.ibm.dtfj.image.j9,com.ibm.dtfj.image,com.ibm.dtfj.corereaders.zos.util, com.ibm.dtfj.corereaders.zos.mvs,com.ibm.dtfj.corereaders.zos.le,com.ibm.dtfj.corereaders.zos.dumpreader,com.ibm.dtfj.corereaders.j9, com.ibm.dtfj.corereaders,com.ibm.dtfj.binaryreaders,com.ibm.dtfj.addressspace,com.ibm.crypto.tools, com.ibm.crypto.provider.safkeyring,com.ibm.crypto.pkcs11impl.module,com.ibm.crypto.fips.provider,com.ibm.compat, com.ibm.bidiTools.bdlayout,com.ibm.amino.refq,com.ibm.CosNaming,com.ibm.CORBA.nio, com.ibm.CORBA,com.ibm}), [eclipse.application]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=eclipse.application, value=com.ibm.ws.bootstrap.WSLauncher}), [java.home]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.home, value=D:\Appserver\IBM\WebSphere\AppServer\java\jre}), [osgi.manifest.cache]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.manifest.cache, value=D:\Appserver\IBM\WebSphere\AppServer\profiles\AppSrv01\servers\server1\configuration\org.eclipse.osgi\manifests}), [osgi.resolver.preferSystemPackages]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.resolver.preferSystemPackages, value=false}), [osgi.framework.extensions]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.framework.extensions, value=com.ibm.cds,com.ibm.ws.eclipse.adaptors}), [java.runtime.name]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.runtime.name, value=Java(TM) SE Runtime Environment}), [editionSupport]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=editionSupport, value=false}), [FFDCProcessLevel]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=FFDCProcessLevel, value=4}), [javax.rmi.CORBA.UtilClass]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=javax.rmi.CORBA.UtilClass, value=com.ibm.ws.orb.WSUtilDelegateImpl}), [was.install.root]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=was.install.root, value=D:\Appserver\IBM\WebSphere\AppServer}), [provision.exclude.local.repository]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=provision.exclude.local.repository, value=true}), [java.vm.specification.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vm.specification.version, value=1.0}), [org.osgi.framework.processor]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=org.osgi.framework.processor, value=x86-64}), [ibm.signalhandling.rs]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=ibm.signalhandling.rs, value=false}), [java.awt.fonts]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.awt.fonts, value=}), [com.ibm.util.extralibs.properties]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.util.extralibs.properties, value=}), [osgi.syspath]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.syspath, value=d:\Appserver\IBM\WebSphere\AppServer\plugins}), [awt.toolkit]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=awt.toolkit, value=sun.awt.windows.WToolkit}), [eclipse.commands]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=eclipse.commands, value=-nosplash
+-application
+com.ibm.ws.bootstrap.WSLauncher
+}), [osgi.configuration.cascaded]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.configuration.cascaded, value=false}), [sun.jnu.encoding]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.jnu.encoding, value=Cp1252}), [osgi.splashPath]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.splashPath, value=platform:/base/plugins/org.eclipse.platform}), [os.name]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=os.name, value=Windows 8}), [ibm.signalhandling.sigchain]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=ibm.signalhandling.sigchain, value=true}), [com.ibm.jcl.checkClassPath]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.jcl.checkClassPath, value=}), [osgi.parentClassloader]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.parentClassloader, value=app}), [org.osgi.framework.os.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=org.osgi.framework.os.version, value=6.2.0}), [path.separator]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=path.separator, value=;}), [java.vm.specification.name]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vm.specification.name, value=Java Virtual Machine Specification}), [user.variant]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=user.variant, value=}), [org.osgi.framework.language]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=org.osgi.framework.language, value=en}), [eclipse.startTime]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=eclipse.startTime, value=1433610177584}), [FFDCLogDirectory]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=FFDCLogDirectory, value=D:\Appserver\IBM\WebSphere\AppServer\profiles\AppSrv01/logs/ffdc}), [com.ibm.cpu.endian]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.cpu.endian, value=little}), [sun.io.unicode.encoding]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.io.unicode.encoding, value=UnicodeLittle}), [org.osgi.supports.framework.requirebundle]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=org.osgi.supports.framework.requirebundle, value=true}), [line.separator]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=line.separator, value=
+}), [com.ibm.security.krb5.Krb5Debug]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.security.krb5.Krb5Debug, value=off}), [excludeSteps]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=excludeSteps, value=EditionOptions}), [java.jcl.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.jcl.version, value=20141216_01}), [osgi.instance.area.default]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.instance.area.default, value=file:/C:/Users/JR/workspace/}), [user.country]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=user.country, value=US}), [com.ibm.wsspi.runtime.ThreadPoolRepositoryName]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.wsspi.runtime.ThreadPoolRepositoryName, value=com.ibm.ws.runtime.WSThreadPoolRepository}), [osgi.bundlestore]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.bundlestore, value=D:\Appserver\IBM\WebSphere\AppServer\profiles\AppSrv01\servers\server1\configuration\org.eclipse.osgi\bundles}), [derby.system.home]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=derby.system.home, value=D:\Appserver\IBM\WebSphere\AppServer/derby}), [ibm.websphere.internalClassAccessMode]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=ibm.websphere.internalClassAccessMode, value=allow}), [eclipse.home.location]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=eclipse.home.location, value=file:/D:/Appserver/IBM/WebSphere/AppServer/}), [osgi.arch]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.arch, value=x86_64}), [java.util.logging.manager]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.util.logging.manager, value=com.ibm.ws.bootstrap.WsLogManager}), [java.ext.dirs]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.ext.dirs, value=D:\Appserver\IBM\WebSphere\AppServer/tivoli/tam;D:\Appserver\IBM\WebSphere\AppServer/java/jre/lib/ext}), [jxe.current.romimage.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=jxe.current.romimage.version, value=17}), [eclipse.buildId]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=eclipse.buildId, value=M20060921-0945}), [sun.cpu.endian]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.cpu.endian, value=little}), [org.osgi.supports.framework.extension]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=org.osgi.supports.framework.extension, value=true}), [java.naming.factory.url.pkgs]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.naming.factory.url.pkgs, value=com.ibm.ws.naming:com.ibm.osgi.jndi.fep:com.ibm.ws.runtime:com.ibm.iscportal.jndi}), [file.encoding]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=file.encoding, value=Cp1252}), [osgi.frameworkClassPath]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.frameworkClassPath, value=., file:D:/Appserver/IBM/WebSphere/AppServer/plugins/com.ibm.cds_2.1.0.jar, file:D:/Appserver/IBM/WebSphere/AppServer/plugins/com.ibm.ws.eclipse.adaptors_7.0.0.jar}), [org.osgi.framework.os.name]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=org.osgi.framework.os.name, value=windows 8}), [osgi.framework.shape]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.framework.shape, value=jar}), [com.ibm.oti.shared.enabled]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.oti.shared.enabled, value=true}), [org.osgi.supports.framework.fragment]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=org.osgi.supports.framework.fragment, value=true}), [com.ibm.xtq.processor.overrideSecureProcessing]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.xtq.processor.overrideSecureProcessing, value=true}), [java.vm.vendor]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vm.vendor, value=IBM Corporation}), [java.vendor]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vendor, value=IBM Corporation}), [java.class.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.class.version, value=50.0}), [java.vm.name]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vm.name, value=IBM J9 VM}), [osgi.signature.support.verify]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.signature.support.verify, value=false}), [com.ibm.security.enableNULLCRLDP]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.security.enableNULLCRLDP, value=true}), [user.install.root]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=user.install.root, value=D:\Appserver\IBM\WebSphere\AppServer\profiles\AppSrv01}), [osgi.logfile]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.logfile, value=D:\Appserver\IBM\WebSphere\AppServer\profiles\AppSrv01\temp\osgi_instance_location\JR\393947674\.metadata\.log}), [com.ibm.zero.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.zero.version, value=2}), [java.fullversion]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.fullversion, value=JRE 1.6.0 IBM J9 2.6 Windows 8 amd64-64 Compressed References 20141211_226933 (JIT enabled, AOT enabled)
+J9VM - R26_Java626_SR8_20141211_2359_B226933
+JIT  - r11.b07_20141003_74578.05
+GC   - R26_Java626_SR8_20141211_2359_B226933_CMPRSS
+J9CL - 20141212_226933}), [python.cachedir]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=python.cachedir, value=D:\Appserver\IBM\WebSphere\AppServer\profiles\AppSrv01/temp/cachedir}), [java.vm.specification.vendor]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vm.specification.vendor, value=Sun Microsystems Inc.}), [com.ibm.oti.vm.bootstrap.library.path]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.oti.vm.bootstrap.library.path, value=D:\Appserver\IBM\WebSphere\AppServer\java\jre\bin\compressedrefs;D:\Appserver\IBM\WebSphere\AppServer\java\jre\bin}), [javax.management.builder.initial]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=javax.management.builder.initial, value=com.ibm.ws.management.PlatformMBeanServerBuilder}), [java.awt.printerjob]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.awt.printerjob, value=sun.awt.windows.WPrinterJob}), [com.ibm.oti.jcl.build]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.oti.jcl.build, value=20141212_226933}), [was.status.socket]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=was.status.socket, value=54328}), [server.root]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=server.root, value=D:\Appserver\IBM\WebSphere\AppServer\profiles\AppSrv01}), [osgi.configuration.area]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.configuration.area, value=file:/D:/Appserver/IBM/WebSphere/AppServer/profiles/AppSrv01/servers/server1/configuration/}), [com.ibm.SOAP.requestTimeout]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.SOAP.requestTimeout, value=600}), [java.util.prefs.PreferencesFactory]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.util.prefs.PreferencesFactory, value=com.ibm.ws.util.prefs.HashPreferencesFactory}), [sun.boot.class.path]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.boot.class.path, value=D:\Appserver\IBM\WebSphere\AppServer\endorsed_apis\jaxws-api.jar;D:\Appserver\IBM\WebSphere\AppServer\endorsed_apis\jaxb-api.jar;D:\Appserver\IBM\WebSphere\AppServer\endorsed_apis\javax.j2ee.annotation.jar;D:\Appserver\IBM\WebSphere\AppServer/endorsed_apis\jaxws-api.jar;D:\Appserver\IBM\WebSphere\AppServer/endorsed_apis\jaxb-api.jar;D:\Appserver\IBM\WebSphere\AppServer/endorsed_apis\javax.j2ee.annotation.jar;D:\Appserver\IBM\WebSphere\AppServer/java/jre/lib/ibmorb.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\bin\compressedrefs\jclSC160\vm.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\annotation.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\beans.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\java.util.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\jndi.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\logging.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\security.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\sql.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmorb.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmorbapi.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmcfw.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\rt.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\charsets.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\resources.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmpkcs.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmcertpathfw.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmjgssfw.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmjssefw.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmsaslfw.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmjcefw.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmjgssprovider.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmjsseprovider2.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\ibmcertpathprovider.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\management-agent.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\xml.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\jlm.jar;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\javascript.jar}), [ibm.system.encoding]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=ibm.system.encoding, value=Cp1252}), [java.vm.info]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vm.info, value=JRE 1.6.0 Windows 8 amd64-64 Compressed References 20141211_226933 (JIT enabled, AOT enabled)
+J9VM - R26_Java626_SR8_20141211_2359_B226933
+JIT  - r11.b07_20141003_74578.05
+GC   - R26_Java626_SR8_20141211_2359_B226933_CMPRSS
+J9CL - 20141212_226933}), [com.ibm.wsspi.ecs.module.ModuleFactory]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.wsspi.ecs.module.ModuleFactory, value=com.ibm.ws.ecs.internal.wtp.module.impl.WTPModuleFactory}), [javax.security.auth.useAllCreds]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=javax.security.auth.useAllCreds, value=true}), [user.timezone]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=user.timezone, value=America/Chicago}), [com.ibm.security.enableCRLDP]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.security.enableCRLDP, value=false}), [com.ibm.oti.vm.library.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.oti.vm.library.version, value=26}), [osgi.framework.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.framework.version, value=3.6.1.R36x_v20100806}), [com.ibm.vm.bitmode]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.vm.bitmode, value=64}), [java.library.path]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.library.path, value=D:\Appserver\IBM\WebSphere\AppServer/lib/native/win/x86_64/;D:\Appserver\IBM\WebSphere\AppServer\java\jre\bin\compressedrefs;D:\Appserver\IBM\WebSphere\AppServer\java\jre\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\Appserver\IBM\WebSphere\AppServer\lib\native\win\x86_64;D:\Appserver\IBM\WebSphere\AppServer\bin;D:\Appserver\IBM\WebSphere\AppServer\java\bin;D:\Appserver\IBM\WebSphere\AppServer\java\jre\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;d:\Tools;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\Nmap;.;}), [java.awt.graphicsenv]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.awt.graphicsenv, value=sun.awt.Win32GraphicsEnvironment}), [sun.java.launcher]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.java.launcher, value=SUN_STANDARD}), [com.ibm.IPC.requestTimeout]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.IPC.requestTimeout, value=600}), [java.naming.provider.url]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.naming.provider.url, value=corbaloc:rir:/NameServiceServerRoot}), [user.name]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=user.name, value=JR}), [os.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=os.version, value=6.2}), [sun.boot.library.path]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.boot.library.path, value=D:\Appserver\IBM\WebSphere\AppServer\java\jre\bin\compressedrefs;D:\Appserver\IBM\WebSphere\AppServer\java\jre\bin}), [java.endorsed.dirs]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.endorsed.dirs, value=D:\Appserver\IBM\WebSphere\AppServer/endorsed_apis;D:\Appserver\IBM\WebSphere\AppServer/java/jre/lib/endorsed;D:\Appserver\IBM\WebSphere\AppServer\endorsed_apis;D:\Appserver\IBM\WebSphere\AppServer\java\jre\lib\endorsed}), [java.security.policy]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.security.policy, value=D:\Appserver\IBM\WebSphere\AppServer\profiles\AppSrv01/properties/server.policy}), [osgi.framework]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.framework, value=file:/D:/Appserver/IBM/WebSphere/AppServer/plugins/org.eclipse.osgi_.jar}), [osgi.classloader.lock]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=osgi.classloader.lock, value=classname}), [org.osgi.framework.vendor]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=org.osgi.framework.vendor, value=Eclipse}), [sun.arch.data.model]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.arch.data.model, value=64}), [com.ibm.ejs.jts.processType]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.ejs.jts.processType, value=server}), [java.specification.vendor]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.specification.vendor, value=Sun Microsystems Inc.}), [com.ibm.jsse2.sp800-131]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.HashMap,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=com.ibm.jsse2.sp800-131, value=})})</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Uptime</object>
+						<displayvalue/>
+						<description>Uptime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=2410463</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>VmName</object>
+						<displayvalue/>
+						<description>VmName</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=IBM J9 VM</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>VmVendor</object>
+						<displayvalue/>
+						<description>VmVendor</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=IBM Corporation</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>VmVersion</object>
+						<displayvalue/>
+						<description>VmVersion</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=2.6</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=Threading</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=Threading</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.lang.management.ThreadMXBeanImpl</comment>
+				<attributes>
+					<attribute>
+						<object>AllThreadIds</object>
+						<displayvalue/>
+						<description>AllThreadIds</description>
+						<shortdescription/>
+						<comment>type=[J,unit=COUNT; Value=[J@698822cc</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CurrentThreadCpuTime</object>
+						<displayvalue/>
+						<description>CurrentThreadCpuTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=15625000</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CurrentThreadCpuTimeSupported</object>
+						<displayvalue/>
+						<description>CurrentThreadCpuTimeSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CurrentThreadUserTime</object>
+						<displayvalue/>
+						<description>CurrentThreadUserTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=15625000</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>DaemonThreadCount</object>
+						<displayvalue/>
+						<description>DaemonThreadCount</description>
+						<shortdescription/>
+						<comment>type=int,unit=COUNT; Value=128</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectMonitorUsageSupported</object>
+						<displayvalue/>
+						<description>ObjectMonitorUsageSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>PeakThreadCount</object>
+						<displayvalue/>
+						<description>PeakThreadCount</description>
+						<shortdescription/>
+						<comment>type=int,unit=COUNT; Value=137</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SynchronizerUsageSupported</object>
+						<displayvalue/>
+						<description>SynchronizerUsageSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ThreadContentionMonitoringEnabled</object>
+						<displayvalue/>
+						<description>ThreadContentionMonitoringEnabled</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ThreadContentionMonitoringSupported</object>
+						<displayvalue/>
+						<description>ThreadContentionMonitoringSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ThreadCount</object>
+						<displayvalue/>
+						<description>ThreadCount</description>
+						<shortdescription/>
+						<comment>type=int,unit=COUNT; Value=132</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ThreadCpuTimeEnabled</object>
+						<displayvalue/>
+						<description>ThreadCpuTimeEnabled</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ThreadCpuTimeSupported</object>
+						<displayvalue/>
+						<description>ThreadCpuTimeSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>TotalStartedThreadCount</object>
+						<displayvalue/>
+						<description>TotalStartedThreadCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=216</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.util.logging:type=Logging</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.util.logging:type=Logging</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.ibm.lang.management.LoggingMXBeanImpl</comment>
+				<attributes>
+					<attribute>
+						<object>LoggerNames</object>
+						<displayvalue/>
+						<description>LoggerNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@4fefa511</comment>
+						<unit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+</profiles>

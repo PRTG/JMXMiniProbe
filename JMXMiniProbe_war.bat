@@ -1,0 +1,7 @@
+SET WEBINFLIB=web\WEB-INF\lib
+SET CLASS_LIBS=%WEBINFLIB%\commons-cli-1.2.jar;%WEBINFLIB%\commons-codec-1.6.jar;%WEBINFLIB%\commons-logging-1.1.1.jar;%WEBINFLIB%\gson-2.2.2.jar;%WEBINFLIB%\httpclient-4.2.5.jar;%WEBINFLIB%\httpclient-cache-4.2.5.jar;%WEBINFLIB%\httpcore-4.2.4.jar;%WEBINFLIB%\httpmime-4.2.5.jar;lib\serverlet-api-2.5.jar
+SET OTHERLIBS=lib\jna-3.5.1.jar;lib\platform-3.5.1.jar;lib\shortpasta-icmp2.jar;lib\snmp4j-2.3.1.jar
+REM java.exe -cp ,\;.\bin;%CLASS_LIBS%;%OTHERLIBS% -Dcom.sun.management.config.file=data\management.properties -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.authenticate=false  -Dcom.sun.management.jmxremote.ssl=false com.paessler.prtg.jmx.DaemonMain -c data/prtgjmx.properties
+
+REM java.exe -jar target\JMXMiniProbe.war confdir -cp /WEB-INF/classes -Dcom.sun.management.config.file=data\management.properties -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.authenticate=false  -Dcom.sun.management.jmxremote.ssl=false -c data/prtgjmx.properties
+java.exe -jar target\JMXMiniProbe.war confdir -Dcom.sun.management.config.file=data\management.properties -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.authenticate=false  -Dcom.sun.management.jmxremote.ssl=false -c data/prtgjmx.properties

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- ###########################################################
+Unit Values[BANDWIDTH, MEMORY, DISK, FILE, TIME_RESPONSE, TIME_SECONDS, TIME_HOURS, TEMP, PERCENT, COUNT,CPU,CUSTOM]
+***************************************************************
+Please note, the apache.commons.digester3 is * VERY * case sensitive
+########################################################### -->
+<profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Profile.xsd">
+	<profile>
+		<kind>jmxdosstr</kind>
+		<name>JMX OS Strategic</name>
+		<tag>mjjmxdosstr,mjmxsensor</tag>
+		<description>Strategic OS Sensor</description>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help>Strategic Host/Operating information CPU Load, Free Mem Disk</help>
+		<entries>
+			<entry>
+				<object>java.lang:type=OperatingSystem</object>
+				<description>Operating system metrics</description>
+				<shortdescription>OS</shortdescription>
+				<attributes>
+					<attribute>
+						<object>SystemCpuLoad</object>
+						<description>SystemCpuLoad</description>
+						<unit>CPU</unit>
+						<mpy>100.0</mpy>
+						<div>1.0</div>
+					</attribute>
+					<attribute>
+						<object>ProcessCpuLoad</object>
+						<description>ProcessCpuLoad</description>
+						<unit>CPU</unit>
+						<mpy>100.0</mpy>
+						<div>1.0</div>
+					</attribute>
+					<attribute>
+						<object>FreePhysicalMemorySize</object>
+						<description>FreePhysicalMemorySize</description>
+						<unit>MEMORY</unit>
+					</attribute>
+					<attribute>
+						<object>AvailableProcessors</object>
+						<description>AvailableProcessors</description>
+						<unit>COUNT</unit>
+					</attribute>
+				</attributes>
+			</entry>
+			<entry>
+				<object>java.lang:type=Memory</object>
+				<description>Memory Metrics</description>
+				<shortdescription>JVM</shortdescription>
+				<attributes>
+					<attribute>
+						<object>NonHeapMemoryUsage</object>
+						<description>Initialized heap memory</description>
+						<unit>MEMORY</unit>
+					</attribute>
+					<attribute>
+						<object>HeapMemoryUsage</object>
+						<description>Committed heap memory</description>
+						<unit>MEMORY</unit>
+					</attribute>
+				</attributes>
+			</entry>
+			<entry>
+				<object>java.lang:type=Threading</object>
+				<description>Threading Metrics</description>
+				<shortdescription>JVM</shortdescription>
+				<attributes>
+					<attribute>
+						<object>ThreadCount</object>
+						<description>Live threads</description>
+						<unit>COUNT</unit>
+					</attribute>
+					<attribute>
+						<object>PeakThreadCount</object>
+						<description>Peak threads</description>
+						<unit>COUNT</unit>
+					</attribute>
+					<attribute>
+						<object>DaemonThreadCount</object>
+						<description>Daemon threads</description>
+						<unit>COUNT</unit>
+					</attribute>
+					<attribute>
+						<object>TotalStartedThreadCount</object>
+						<description>Total threads started</description>
+						<unit>COUNT</unit>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<kind>jmxdosinf</kind>
+		<name>JMX Host OS Info</name>
+		<tag>mjmxsensor,mjjmxdosinf</tag>
+		<description>Host OS Metrics</description>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help>Operating system information from Host, CPU/Mem/Disk</help>
+		<entries>
+	      <entry>
+	        <!--class>com.sun.management.OperatingSystem<class-->
+	        <object>java.lang:type=OperatingSystem</object>
+	        <description>Information on the management interface of the MBean</description>
+	        <shortdescription>OS</shortdescription>
+	        <attributes>
+	          <attribute>
+	            <object>CommittedVirtualMemorySize</object>
+	            <description/>
+	            <shortdescription>CommittedVirtualMemorySize</shortdescription>
+	            <!--type>long</type>
+	            <mpy>1.0</mpy>
+	            <div>1.0</div-->
+	            <unit>MEMORY</unit>
+	          </attribute>
+	          <attribute>
+	            <object>FreePhysicalMemorySize</object>
+	            <description/>
+	            <shortdescription>FreePhysicalMemorySize</shortdescription>
+	            <unit>MEMORY</unit>
+	          </attribute>
+	          <attribute>
+	            <object>FreeSwapSpaceSize</object>
+	            <description/>
+	            <shortdescription>FreeSwapSpaceSize</shortdescription>
+	            <unit>MEMORY</unit>
+	          </attribute>
+	          <attribute>
+	            <object>ProcessCpuLoad</object>
+	            <description/>
+	            <shortdescription>ProcessCpuLoad</shortdescription>
+	            <unit>CPU</unit>
+	          </attribute>
+	          <attribute>
+	            <object>ProcessCpuTime</object>
+	            <description/>
+	            <shortdescription>ProcessCpuTime</shortdescription>
+	            <unit>CPU</unit>
+	          </attribute>
+	          <attribute>
+	            <object>SystemCpuLoad</object>
+	            <description/>
+	            <shortdescription>SystemCpuLoad</shortdescription>
+	            <unit>CPU</unit>
+	          </attribute>
+	          <attribute>
+	            <object>TotalPhysicalMemorySize</object>
+	            <description/>
+	            <shortdescription>TotalPhysicalMemorySize</shortdescription>
+	            <unit>MEMORY</unit>
+	          </attribute>
+	          <attribute>
+	            <object>TotalSwapSpaceSize</object>
+	            <description/>
+	            <shortdescription>TotalSwapSpaceSize</shortdescription>
+	            <unit>MEMORY</unit>
+	          </attribute>
+	          <attribute>
+	            <object>AvailableProcessors</object>
+	            <description/>
+	            <shortdescription>AvailableProcessors</shortdescription>
+	            <unit>COUNT</unit>
+	          </attribute>
+	          <attribute>
+	            <object>SystemLoadAverage</object>
+	            <description/>
+	            <shortdescription>SystemLoadAverage</shortdescription>
+	            <unit>CPU</unit>
+	          </attribute>
+	          <!--attribute>
+	            <object>Arch</object>
+	            <description/>
+	            <shortdescription>Arch</shortdescription>
+	            <unit>String</unit>
+	          </attribute-->
+	          <!--attribute>
+	            <object>Name</object>
+	            <description/>
+	            <shortdescription>Name</shortdescription>
+	            <unit>String</unit>
+	          </attribute-->
+	          <!--attribute>
+	            <object>Version</object>
+	            <description/>
+	            <shortdescription>Version</shortdescription>
+	            <unit>String</unit>
+	          </attribute-->
+	          <!--attribute>
+	            <object>ObjectName</object>
+	            <description/>
+	            <shortdescription>ObjectName</shortdescription>
+	            <unit>String</unit>
+	          </attribute-->
+	        </attributes>
+		  </entry>
+		</entries>
+	</profile>
+</profiles>

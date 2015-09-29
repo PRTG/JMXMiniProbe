@@ -30,34 +30,49 @@
 
 package com.paessler.prtg.jmx.definitions;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.paessler.prtg.jmx.channels.Channel;
 
-public class UnitFieldDefinition extends FieldDefinition {
-    public String type = "radio";
-    public String name;
-    public String caption;
-    public String help;
-    public Map<String, String> options;
 
-    public final static String BANDWIDTH_TYPE = "1";
+public class UnitFieldDefinition extends RadioFieldDefinition {
+
+/*    public final static String BANDWIDTH_TYPE = "1";
     public final static String MEMORY_TYPE = "2";
     public final static String DISK_TYPE = "3";
     public final static String FILE_TYPE = "4";
     public final static String PERCENT_TYPE = "5";
     public final static String COUNT_TYPE = "6";
     public final static String CPU_TYPE = "7";
-    public UnitFieldDefinition(String name, String caption, String help) {
-        this.name = name;
-        this.caption = caption;
-        this.help = help;
-        options = new HashMap<String, String>();
-        options.put(BANDWIDTH_TYPE, "Bandwidth (bytes)");
-        options.put(MEMORY_TYPE, "Memory (bytes)");
-        options.put(DISK_TYPE, "Disk (bytes)");
-        options.put(FILE_TYPE, "File (bytes)");
-        options.put(PERCENT_TYPE, "Percent");
-        options.put(COUNT_TYPE, "Count");
-        options.put(CPU_TYPE, "CPU (%)");
+    public final static String RESPONSETIME_TYPE = "8";
+    public final static String TIMESECONDS_TYPE = "9";
+    public final static String TIMEHOURS_TYPE = "10";
+    public final static String CUSTOM_TYPE = "11";
+*/    
+	// --------------------------------------------------------------
+    public UnitFieldDefinition(String name, String caption, String help, String defaultvalue) {
+        super(name, caption, help, defaultvalue);
+/*        addOption(BANDWIDTH_TYPE, "Bandwidth (bytes)");
+        addOption(MEMORY_TYPE, "Memory (bytes)");
+        addOption(DISK_TYPE, "Disk (bytes)");
+        addOption(FILE_TYPE, "File (bytes)");
+        addOption(PERCENT_TYPE, "Percent");
+        addOption(COUNT_TYPE, "Count");
+        addOption(CPU_TYPE, "CPU (%)");
+        addOption(RESPONSETIME_TYPE, "Response Time");
+        addOption(TIMESECONDS_TYPE, "Time Seconds");
+        addOption(TIMEHOURS_TYPE, "Time Hours");
+*/
+        addOption(Channel.UNIT_STR_BANDWIDTH, "Bandwidth (bytes)");
+        addOption(Channel.UNIT_STR_MEMORY, "Memory (bytes)");
+        addOption(Channel.UNIT_STR_DISK, "Disk (bytes)");
+        addOption(Channel.UNIT_STR_FILE, "File (bytes)");
+        addOption(Channel.UNIT_STR_PERCENT, "Percent");
+        addOption(Channel.UNIT_STR_COUNT, "Count");
+        addOption(Channel.UNIT_STR_CPU, "CPU (%)");
+        addOption(Channel.UNIT_STR_TRESPONSE, "Response Time");
+        addOption(Channel.UNIT_STR_TSEC, "Time Seconds");
+        addOption(Channel.UNIT_STR_THOURS, "Time Hours");
+        addOption(Channel.UNIT_STR_TEMP, "Temperature");
+//        addOption(Channel.UNIT_STR_CUSTOM, "Custom");
+
     }
 }

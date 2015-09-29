@@ -45,7 +45,10 @@ import org.apache.http.conn.ssl.X509HostnameVerifier;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.paessler.prtg.jmx.Logger;
+
 import javax.net.ssl.*;
+
 import java.io.*;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -53,7 +56,7 @@ import java.security.cert.X509Certificate;
 public class NetworkWrapper {
     public static HttpClient wrapClient(HttpClient base) {
         try {
-            SSLContext ctx = SSLContext.getInstance("TLS");
+            SSLContext ctx = SSLContext.getInstance("TLSv1.2");
             X509TrustManager tm = new X509TrustManager() {
                 public void checkClientTrusted(X509Certificate[] xcs, String string) throws CertificateException {
                 }
@@ -102,7 +105,7 @@ public class NetworkWrapper {
 
     public static void post(String url, String data, int timeout) throws IOException {
         DefaultHttpClient httpClient = getClient(timeout);
-        System.out.println("Uploading " + data + " to " + url);
+        Logger.log("Uploading " + data + " to " + url);
         HttpPost post = new HttpPost(url);
         post.setEntity(new StringEntity(data));
         post.setHeader("Accept", "application/json");

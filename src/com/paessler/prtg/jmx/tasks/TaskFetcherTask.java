@@ -33,86 +33,345 @@ package com.paessler.prtg.jmx.tasks;
 import com.google.gson.*;
 import com.paessler.prtg.jmx.Logger;
 import com.paessler.prtg.jmx.ProbeContext;
-import com.paessler.prtg.jmx.definitions.CustomJMXSensorDefinition;
-import com.paessler.prtg.jmx.definitions.VMHealthDefinition;
+import com.paessler.prtg.jmx.definitions.SensorDefinition;
+import com.paessler.prtg.jmx.mbean.PRTGInterface;
+import com.paessler.prtg.jmx.network.Announcement;
 import com.paessler.prtg.jmx.network.NetworkWrapper;
 import com.paessler.prtg.jmx.network.Tasks;
 import com.paessler.prtg.jmx.responses.DataResponse;
-import com.paessler.prtg.jmx.sensors.CustomJMXSensor;
 import com.paessler.prtg.jmx.sensors.Sensor;
-import com.paessler.prtg.jmx.sensors.VMHealthSensor;
+import com.paessler.prtg.util.TimingUtility;
 
 import javax.servlet.ServletContext;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.TimerTask;
+import java.util.Vector;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class TaskFetcherTask extends TimerTask {
+	public static final String EMPTY_TASKLIST = "[]";
+	
     final private ServletContext mServletContext;
     final private ProbeContext mProbeContext;
 
-    public TaskFetcherTask(ServletContext context, ProbeContext probeContext) {
+    private ExecutorService executor = null;
+    private boolean 		myExecutor = false;
+
+    private PRTGInterface prtgMBean = null;
+    // -----------------------------------------------------
+    protected List<DataResponse> resultList = null;
+	// ----------------------------
+    public List<DataResponse> getResultList() {	return resultList;	}
+	// ----------------------------
+	protected void setResultList(List<DataResponse> resultList) {
+		this.resultList = resultList;
+	}
+	
+    // ----------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------
+	private boolean reRunAnnouncement = true;
+	public void setRerunAnnouncement(boolean val) {reRunAnnouncement = val;}
+	public boolean getReRunAnnouncement() {return reRunAnnouncement;}
+    public boolean sendAnnouncement(ProbeContext context){
+    	boolean retVal = false;
+        try {
+			List<SensorDefinition> definitions = context.getSensorDefinitionsListHack();
+
+			Announcement announcement = new Announcement(context.getProbeName(), context.getVersionString(), context.getBaseInterval(), definitions);
+			String url = announcement.buildUrl(context);
+			try {
+			    String postBody = announcement.toString();
+			    if(context.getDebugLevel() > 0){
+			    	Logger.log("Sending: "+url+" " + postBody);
+			    }
+			    NetworkWrapper.post(url, postBody);
+			    retVal =  true;
+			    reRunAnnouncement = false;
+			} catch (Exception e) {
+			    Logger.log(e.getLocalizedMessage());
+			}
+
+		} catch (Throwable e) {
+	        Logger.log("Cought Throwable in TaskFetcherTask.run(). "+e.getMessage());
+			e.printStackTrace();
+		}
+        return retVal;
+    }
+    // ----------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------
+	public synchronized void addDataResponse(Sensor sensor, DataResponse response){
+		List<DataResponse>  list = getResultList();
+		if(list != null){
+			list.add(response);
+		}
+	}
+    // -----------------------------------------------------
+    public TaskFetcherTask(ServletContext context, ProbeContext probeContext, ExecutorService execsrvc) {
+        prtgMBean = PRTGInterface.getAndRegisterBean(PRTGInterface.getDefaultBeanName());
         mServletContext = context;
         mProbeContext = probeContext;
+        if(execsrvc != null){
+        	executor = execsrvc;
+        } else {
+//          executor = Executors.newFixedThreadPool(mProbeContext.workerThreads);
+        	executor = Executors.newFixedThreadPool(2);
+        	myExecutor = true;
+        }
+        setResultList(new Vector<DataResponse>());
+    }
+    public void cleanup(){
+    	if(prtgMBean != null){
+    		PRTGInterface.unregisterBean(prtgMBean);
+    	}
+    	
+    }
+    // -----------------------------------------------------
+    public void finalizer(){
+    	cleanup();
+    	if(myExecutor && executor != null){
+    		executor.shutdown();
+    	}
     }
 
-    @Override
-    public void run() {
-        String url = Tasks.buildUrl(mProbeContext);
-        String json = null;
+// -----------------------------------------------------
+    private String currJson = null;
+    private Map<Integer, Sensor> sensorMap = null;
+    private Map<Integer, Sensor> getSensorMap(){ return sensorMap;}
+    protected boolean addSensor(Sensor sensor){
+    	boolean retVal = false;
+    	if(sensorMap != null){
+    	Integer key = sensor.getSensorid();
+    	Sensor ret = sensorMap.put(key, sensor);
+    	retVal = true;
+    	}
+    	return retVal;
+    }
+    // -----------------------------------------------------
+    protected Sensor sensorFactory(JsonObject json) {
+    	Sensor retVal = null; 
+    	String kind = json.get("kind").getAsString();
+        int id = json.get("sensorid").getAsInt();
         try {
-            json = NetworkWrapper.fetch(url);
-        } catch (IOException e) {
-            Logger.log(mServletContext, e.getLocalizedMessage());
+        	retVal = mProbeContext.sensorFactory(kind);
+            if(retVal != null){
+            	retVal.loadFromJson(json);
+            }
+        } catch (Exception e) {
+            Logger.log("Error creating sensor from JSON: " +json + " " + e.getLocalizedMessage());
+            if(mProbeContext.getDebugLevel() > 0){
+           	 e.printStackTrace();
+            }
         }
-
-        if (json == null)
-            return;
-
+    	return retVal;
+    }
+    // -----------------------------------------------------
+    private Map<Integer, Sensor> getSensors(String json){
+    	if(currJson != null && sensorMap != null && json.equals(currJson)){
+    		return sensorMap;
+    	}
         JsonParser parser = new JsonParser();
         JsonElement top = parser.parse(json);
         JsonArray tasksArray = top.getAsJsonArray();
+        Sensor sensor = null;
         int len = tasksArray.size();
-        List<DataResponse> responseList = new ArrayList<DataResponse>();
+    	Map<Integer, Sensor> oldSensorMap = sensorMap; 
+    	sensorMap = new ConcurrentHashMap<Integer, Sensor>(len);
+//    	sensorMap = new ConcurrentSkipListMap<Integer, Sensor>();
+        JsonObject json4Sensor = null;
+//        String kind = null;
+        int id = -1;
         for (int i = 0; i < len; i++) {
-            JsonObject task = tasksArray.get(i).getAsJsonObject();
-            String kind = task.get("kind").getAsString();
-            int id = task.get("sensorid").getAsInt();
-            try {
-                Sensor sensor;
-                if (kind.equals(VMHealthDefinition.KIND)) {
-                    sensor = new VMHealthSensor();
-                } else if (kind.equals(CustomJMXSensorDefinition.KIND)) {
-                    sensor = new CustomJMXSensor();
-                } else {
-                    continue;
-                }
-                sensor.loadFromJson(task);
-                sensor.sensorid = id;
-                DataResponse response = sensor.go();
-                if (response == null)
-                    return;
-                responseList.add(response);
-            } catch (Exception e) {
-                Logger.log(mServletContext, "Error executing sensor: " + e.getLocalizedMessage());
+            json4Sensor = tasksArray.get(i).getAsJsonObject();
+            id = json4Sensor.get("sensorid").getAsInt();
+            sensor = null;
+            if(oldSensorMap != null){
+            	sensor = oldSensorMap.get(id);
+            }
+        	if(sensor == null || !sensor.isSame(json4Sensor)){
+                sensor = sensorFactory(json4Sensor);
+        	}
+        	if(sensor != null ){
+        		addSensor(sensor);
+        	}
+        }
+        currJson = json;
+        return sensorMap;
+    }
+    // --------------------------------------------------
+    private Map<Integer, Sensor> getSensors(){
+    	Map<Integer, Sensor> retVal = null;
+        String url = Tasks.buildUrl(mProbeContext);
+        String json = null;
+        boolean nocontact = false;
+        try {
+            json = NetworkWrapper.fetch(url);
+        } catch (IOException e) {
+        	nocontact = true;
+       		setRerunAnnouncement(true);
+            Logger.log(e.getLocalizedMessage());
+            if(mProbeContext.getDebugLevel() > 0){
+           	 e.printStackTrace();
             }
         }
 
-        String dataUrl =  String.format("https://%s/probe/data?gid=%s&key=%s&protocol=%d", mProbeContext.host,
-                mProbeContext.gid,
-                mProbeContext.key,
-                mProbeContext.protocol);
+        // If we lost contact with the server, probe anyways and cache results.
+        if(nocontact){
+	        retVal = getSensorMap();
+        } else{
+	        if (json != null && !json.equals(EMPTY_TASKLIST))
+	        {
+		        if(mProbeContext.getDebugLevel() > 0){
+		            Logger.log("Debug task: " + url+"  "+json);
+		        }
+		        retVal = getSensors(json);
+	        }
+        }                	prtgMBean.addQueryCount(1);
+
+        return retVal;
+    }
+    
+    // -----------------------------------------------------
+    protected void sendResponse(List<DataResponse> responseList){
+        String dataUrl =  mProbeContext.getURLPrefix("/probe/data");
         if (responseList.size() > 0) {
             Gson gson = new Gson();
             String dataJson = gson.toJson(responseList);
+            if(mProbeContext.getDebugLevel() > 0){
+                Logger.log("Debug posting sensor data: " + dataUrl+"  "+dataJson);
+            }
             try {
                 NetworkWrapper.post(dataUrl, dataJson);
+                responseList.clear();
             } catch (Exception e) {
-                Logger.log(mServletContext, "Error sending data: " + e.getLocalizedMessage());
+                Logger.log("Error sending data: " + e.getLocalizedMessage());
+	             if(mProbeContext.getDebugLevel() > 1){
+	            	 e.printStackTrace();
+	             }
+            }
+        }
+        // Until we have timestamp, no caching
+        if(!mProbeContext.isTimestampEnabled())
+            responseList.clear();
+        	
+    }
+    // -----------------------------------------------------
+//    @Override
+    public void runMT() {
+    	TimingUtility sensorexectimer = new TimingUtility();
+    	TimingUtility sensorcreationtimer = new TimingUtility();
+    	TimingUtility sensoruploadtimer = new TimingUtility();
+    	boolean updatestats = false;
+    	sensorcreationtimer.start();
+    	Map<Integer, Sensor> sensors = getSensors();
+    	sensorcreationtimer.stop();
+    	if(sensors != null && sensors.size() > 0){
+    		prtgMBean.setSensorCount(getSensorMap().size());
+    		// Run the probe
+            List<Future<?>> futures = new ArrayList<Future<?>> (sensors.size());
+            sensorexectimer.start();
+            for (Sensor sensor: sensors.values()) {
+            	sensor.setControllerTask(this);
+            	futures.add( executor.submit(sensor));
+            }
+            for (Future<?> f : futures) {
+    	        try {
+//    	        		if(!f.isDone())
+     	        		if(f != null)
+    	        			f.get(); //blocks until the runnable completes
+     	        		
+    	         } catch (InterruptedException ie) {
+    	             Logger.log("InterruptedException: on["+f+"] " + ie.getLocalizedMessage());
+    	         } catch (ExecutionException ee) {
+    	             Logger.log("ExecutionException: on["+f+"] " + ee.getLocalizedMessage());
+    	             if(mProbeContext.getDebugLevel() > 1){
+    	            	 ee.printStackTrace();
+    	             }
+    	         }
+            }
+            updatestats = true;
+            sensorexectimer.stop();
+            Logger.log("Sensor Creation:" + sensorcreationtimer +", Data Collection : " + sensorexectimer);
+        	prtgMBean.addQueryCount(1);
+        	prtgMBean.addSenorCreationTime(sensorcreationtimer.getElapsed());
+        	prtgMBean.addExecutionTime(sensorexectimer.getElapsed());
+    	} else{
+            Logger.log("Sensor Creation Yeilded nothing to do[empty list of sensors]");
+            sensorexectimer.stop();
+    	}
+	    try{
+	    	sensoruploadtimer.start();
+	    	sendResponse(getResultList());
+	    	sensoruploadtimer.stop();
+	       } catch (Exception e) {
+	            Logger.log("Error sending data: " + e.getLocalizedMessage());
+	             if(mProbeContext.getDebugLevel() > 1){
+	            	 e.printStackTrace();
+	             }
+	        }
+
+        if(updatestats){
+            Logger.log("Sensor Creation:" + sensorcreationtimer +", Data Collection : " + sensorexectimer);
+        	prtgMBean.addQueryCount(1);
+        	prtgMBean.addSenorCreationTime(sensorcreationtimer.getElapsed());
+        	prtgMBean.addExecutionTime(sensorexectimer.getElapsed());
+        	prtgMBean.addUploadTime(sensoruploadtimer.getElapsed());
+        }
+
+    }
+ // -----------------------------------------------------
+//    @Override
+    public void runST() {
+    	Map<Integer, Sensor> sensors = getSensors();
+        setResultList(new ArrayList<DataResponse>());
+        for (Sensor sensor: sensors.values()) {
+                DataResponse response = sensor.go();
+                if (response != null)
+                	addDataResponse(sensor, response);
+        }
+    	try{
+            sendResponse(getResultList());
+        } catch (Exception e) {
+            Logger.log("Error sending data: " + e.getLocalizedMessage());
+            if(mProbeContext.getDebugLevel() > 1){
+           	 e.printStackTrace();
             }
         }
 
 
+    }
+    // -----------------------------------------------------
+    @Override
+    public void run() {
+    	try{
+    		if(getReRunAnnouncement()){
+    			if(!sendAnnouncement(mProbeContext)){
+    				// Announcement failed, retry next iteration
+    				return;
+    			}
+    		}
+    		runMT();
+    	}
+    	catch(Error err){
+            Logger.log("Error run: " + err.getLocalizedMessage());
+            if(mProbeContext.getDebugLevel() > 0){
+            	err.printStackTrace();
+            }
+    	}
+    	catch(Throwable t){
+            Logger.log("Throwable in run: " + t.getLocalizedMessage());
+            if(mProbeContext.getDebugLevel() > 0){
+            	t.printStackTrace();
+            }
+    	}
     }
 }

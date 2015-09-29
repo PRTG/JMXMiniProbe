@@ -20,7 +20,8 @@ Preparing your PRTG installation
 Getting the mini probe
 ------------------
 
-- You can download a pre-built WAR, which should work both in standalone-mode and as part of an application server, from [the releases page](https://github.com/PaesslerAG/JMXMiniProbe/releases)
+- You can download a pre-built WAR, which should work both in standalone-mode and as part of an application server, from 
+[the releases page](https://github.com/PaesslerAG/JMXMiniProbe/releases)
 - A gradle and/or ant config is on the TODO list
 
 Starting the probe in standalone-mode
@@ -28,15 +29,19 @@ Starting the probe in standalone-mode
 
 Standalone mode causes the probe to run with it's own threadpool, so you don't need to have an application server installed.
 
-Start it with:
-    ```java JMXProbe.war -c prtgjmx.properties```
+For Windows and *nix using the Java Service Wrapper(JSW) Start it with:
+    ```JMXMiniProbe {-c prtgjmx.properties}```
+
+For platforms not supported by JSW use:
+    ```runJMXMiniProbe {-c prtgjmx.properties}```
 
 the ```prtgjmx.properties``` file should be writable by the UID running the probe and include the following parameters:
 
 ```
     key=prtg_probe_key
-    host=10.0.2.160
+    host=ww.xx.yy.zz
 ```
+You can copy the file ```prtgjmx-sample.properties``` as a starting point.
 
 Now you can approve the new MiniProbe in the PRTG web UI and start adding new sensors to it.
 
@@ -47,5 +52,56 @@ Starting the probe in an application server
 ```
     key=prtg_probe_key
     host=10.0.2.160
-```
-* Add **com.paessler.jmxprobe.config=/path/to/config/file** to the server's Java options or classpath.
+    #port=8080
+    #webprotocol=https
+    #webprotocol=http
+    #Debug Level
+    #debug=1
+    #workerthreads=10
+    #baseinterval=30
+    
+
+* If your config file is called prtgjmx.properties and is in the root of the "webapp\JMXProbe" directory, no additional config is needed
+  If you have a different config, add **com.paessler.jmxprobe.config=/path/to/config/file** to the server's Java options or classpath
+
+
+Changelog
+=========
+
+2015-09-28
+----------
+-- Added: Limit Channels to 25
+
+2015-09-20
+----------
+-- Added: SNMP Profile
+
+2015-08-25
+----------
+-- Fixed Bug: Used host as GID
+-- Fixed Bug: Prefer Device IP address
+
+2015-06-09
+----------
+- Added profile based sensor creating to JMX and Port
+- Added JMX Profiles for Tomcat and Miniprobe (selfie)
+- Added Port Profiles for Active Directory Critical
+- Added Executable script generation using appassembler
+- Added utility to generate JMX Profile fragment to list all MBeans in the JVM
+
+
+2015-04-25
+----------
+- Added HTTP(s) Sensor
+- Added Port List Sensor
+- Fixed issues with pom
+- Implemented MBean to monitor the Probe itself.
+
+
+2015-04-25
+----------
+- Added Worker Threads as parameter
+- Added SNMP Vector functionality
+- Added SNMP OID functionality
+- Added functional maven build file (pom.xml)
+

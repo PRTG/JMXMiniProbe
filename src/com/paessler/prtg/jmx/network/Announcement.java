@@ -50,8 +50,8 @@ public class Announcement {
         this.sensors = sensors;
     }
 
-    public String buildUrl(ProbeContext probeContext) {
-        return String.format("https://%s/probe/announce?gid=%s&key=%s&protocol=%d&version=%s&name=%s&baseinterval=%d",
+/*    public String buildUrl(ProbeContext probeContext) {
+        return String.format("http://%s/probe/announce?gid=%s&key=%s&protocol=%d&version=%s&name=%s&baseinterval=%d",
                 probeContext.host,
                 probeContext.gid,
                 probeContext.key,
@@ -60,7 +60,15 @@ public class Announcement {
                 probeContext.encode(this.name),
                 this.baseInterval);
     }
-
+*/    
+    public String buildUrl(ProbeContext probeContext) {
+      return String.format("%s&version=%s&name=%s&baseinterval=%d",
+    		  probeContext.getURLPrefix("/probe/announce"),
+              this.version,
+              probeContext.encode(this.name),
+              this.baseInterval);
+  }
+  
     public String toString() {
         Gson gson = new Gson();
         return gson.toJson(sensors);

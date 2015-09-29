@@ -1,0 +1,265 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.paessler.prtg</groupId>
+  <artifactId>JavaMiniProbe</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0</version>
+  <name>jmx</name>
+  <url>https://github.com/PaesslerAG/JMXMiniProbe</url>
+
+ <properties> 
+<!--  *******************  Package Versions  ******************* -->
+      <snmp4j.version>2.3.1</snmp4j.version>		
+	  <platform-jna.version>3.5.1</platform-jna.version>
+	  <icmp4j.version>16.0.1017-1</icmp4j.version>
+	  <dnsjava.version>2.1.7</dnsjava.version>
+	  <junit.version>3.8.1</junit.version> 
+      <javax.servlet.version>3.1.0</javax.servlet.version>
+      <commons-cli.version>1.2</commons-cli.version>
+      <commons-codec.version>1.6</commons-codec.version>
+      <commons-logging.version>1.1.1</commons-logging.version>
+      <gson.version>2.2.2</gson.version>
+      <apache.httpcore.version>4.4.1</apache.httpcore.version>
+      <apache.httpcomponents.version>4.4.1</apache.httpcomponents.version>
+      <!-- apache.httpclient-cache.version>4.3.6</apache.httpclient-cache.version-->
+      <apache.httpmime.version>4.4.1</apache.httpmime.version>
+      <sblime-client.version>2.2.5</sblime-client.version>
+      <appassembler.version>1.10</appassembler.version>
+<!--  *******************  Package Versions  ******************* -->
+  </properties>
+  
+<!--  *******************  Dependencies  ******************* -->
+    <repositories>
+	  <!-- repository>
+	    <id>localproject-build</id>
+	    <name>data</name>
+	    <url>file://${project.basedir}/../web/WEB-INF/lib/</url>
+	  </repository -->
+        <!--repository>
+            <id>shortpasta</id>
+            <url>https://www.aht-group.com/nexus/content/repositories/thirdparty/</url>
+        </repository-->
+		<repository>
+			<releases/>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>snmp4j.repo</id>
+			<name>SNMP4J Maven Repository</name>
+			<url>https://oosnmp.net/dist/release</url>
+		</repository>
+		<repository>
+		    <id>codehaus-mule-repo</id>
+		    <name>codehaus-mule-repo</name>
+		    <url>
+		      https://repository-master.mulesoft.org/nexus/content/groups/public/
+		    </url>
+		    <layout>default</layout>
+		</repository>
+		<repository>
+		     <id>WASDev</id>
+		     <name>WASDev Repository</name>
+		     <url>http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/wasdev/maven/repository/</url>
+		 </repository>  
+		
+  </repositories>
+  
+  
+  	<!-- ############################################################################  --> 
+	<profiles>
+        <profile>
+            <id>windows-profile</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <file>
+                    <exists>${JAVA_HOME}/lib/tools.jar</exists>
+                </file>
+            </activation>
+            <properties>
+                <toolsjar>${JAVA_HOME}/lib/tools.jar</toolsjar>
+            </properties>
+        </profile>
+        <profile>
+            <id>mac-profile</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <file>
+                    <exists>${java.home}/../lib/tools.jar</exists>
+                </file>
+            </activation>
+            <properties>
+                <toolsjar>${java.home}/../lib/tools.jar</toolsjar>
+            </properties>
+        </profile>
+    </profiles>
+  	<!-- ############################################################################  --> 
+  
+   <dependencies>
+  	<!-- ############################################################################  --> 
+  	<!-- http://stackoverflow.com/questions/3080437/jdk-tools-jar-as-maven-dependency  --> 
+    <dependency>
+      <groupId>jdk.tools</groupId>
+      <artifactId>jdk.tools</artifactId>
+      <version>jdk1.7.0</version>
+      <scope>system</scope>
+      <systemPath>${toolsjar}</systemPath>
+    </dependency>
+  	<!-- ############################################################################  -->
+  	 
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+
+    <!--
+      Provided in the repo:
+       - commons-cli-1.2.jar
+       - commons-codec-1.6.jar
+       - commons-logging-1.1.1.jar
+       - gson-2.2.2.jar
+       - httpclient-4.2.5.jar
+       - httpclient-cache-4.2.5.jar
+       - httpcore-4.2.4.jar
+       - httpmime-4.2.5.jar
+    -->
+    <dependency>
+      <groupId>commons-cli</groupId>
+      <artifactId>commons-cli</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.6</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.2.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>${apache.httpcomponents.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient-cache</artifactId>
+      <version>${apache.httpcomponents.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpcore</artifactId>
+      <version>${apache.httpcore.version}</version>
+    </dependency>
+ 
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpmime</artifactId>
+      <version>${apache.httpcomponents.version}</version>
+    </dependency>
+    <!-- ##### XML Parsing ##### -->
+	<dependency>
+	  <groupId>org.apache.commons</groupId>
+	  <artifactId>commons-digester3</artifactId>
+	  <version>3.2</version>
+	  <classifier>with-deps</classifier>
+	</dependency>
+	    
+    <dependency>
+	  <groupId>org.apache.commons</groupId>
+	  <artifactId>commons-lang3</artifactId>
+	  <version>3.4</version>
+    </dependency>
+    <!-- ##### XML Parsing ##### -->
+    <!-- SNMP4J -->
+	<dependency>
+		<groupId>org.snmp4j</groupId>
+		<artifactId>snmp4j</artifactId>
+		<version>${snmp4j.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.snmp4j</groupId>
+		<artifactId>snmp4j-agent</artifactId>
+		<version>${snmp4j.version}</version>
+	</dependency>
+  <!-- icmp4j/ShortPasta-ICMP -->
+  <dependency>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>platform</artifactId>
+	  <version>${platform-jna.version}</version>
+  </dependency>
+  
+  <dependency>
+      <groupId>org.icmp4j</groupId>
+      <artifactId>icmp4j</artifactId>
+      <version>${icmp4j.version}</version>
+      <!-- type>system</type>
+      <scope>system</scope>
+      <systemPath>${project.build.directory}/../web/WEB-INF/lib/icmp4j.jar</systemPath-->
+  </dependency>
+  
+  <!--  Sublime WBEM/CIM Library -->
+       <dependency>
+			<groupId>org.sblim</groupId>
+			<artifactId>sblim-cim-client2</artifactId>
+            <version>2.2.5</version>
+        </dependency>
+            <!-- version>${sblime-client.version}</version-->
+  
+		<dependency>
+			<groupId>dnsjava</groupId>
+			<artifactId>dnsjava</artifactId>
+			<version>${dnsjava.version}</version>
+		</dependency>  
+		
+	<!--  *******************  Appserver JMX Clients  ******************* -->
+        <!-- dependency>
+            <groupId>com.ibm.websphere.processserver</groupId>
+            <artifactId>com.ibm.ws.admin.client_8.5.0</artifactId>
+            <version>8.5.5.5</version>
+        </dependency-->
+		
+</dependencies>
+<!--  *******************  Dependencies  ******************* -->
+  
+ <build>
+     <plugins>
+         <plugin>
+             <artifactId>maven-archetype-plugin</artifactId>
+             <version>2.0-alpha-5</version>
+             <configuration>
+                 <archetypeCatalog>http://servicemix.apache.org/tooling/${servicemix.version}</archetypeCatalog>
+             </configuration>
+         </plugin>
+     </plugins>
+ </build>
+
+  <modules>
+    <module>JMXDependencies</module>
+    <module>JMXMiniProbeJar</module>
+    <!--module>JMXMiniProbeWar</module-->
+    <module>JMXProbe</module>
+  </modules>
+  
+</project>

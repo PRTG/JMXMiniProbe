@@ -33,13 +33,63 @@ package com.paessler.prtg.jmx.responses;
 import com.paessler.prtg.jmx.channels.Channel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DataResponse {
     public int sensorid = -1;
+    public Long  time = null;
+    public String message = null;
     public transient String sensorName = "";
-    public ArrayList<Channel> channel;
-
+    protected List<Channel> channel;
+    
+   
+    // --------------------------------------------
+    public int getChannelCount(){
+    	int retVal = -1;
+    	if(channel != null){
+    		retVal =  channel.size();
+    	}
+    	return retVal;
+    }
+    public List<Channel> getChannels(){
+    	return channel;
+    }
+    // --------------------------------------------
+    public void addChannel(Channel ch){
+    	channel.add(ch);
+    }
+    // --------------------------------------------
+    public void addChannels(List<Channel> chs){
+    	channel.addAll(chs);
+    }
+    // --------------------------------------------
+    public static boolean timestampEnabled = false;
+    public static void setTimestampEnabled(boolean val){
+    	timestampEnabled = val;
+    }
+    public static boolean isTimestampEnabled(){
+    	return timestampEnabled;
+    }
+    // --------------------------------------------
+    public String getMessage() 				{return this.message;  }
+    public void setMessage(String message)	{this.message = message; }
+    public void addMessage(String message) {
+    	if(this.message == null){
+    		this.message = message;
+    	} else {
+    		this.message += "; " + message; 
+    	}
+    }
+    // --------------------------------------------
+    public void setTime(){
+    	time = System.currentTimeMillis() / 1000L;
+//    	long unixTimestamp = Instant.now().getEpochSecond();
+    }
+    
+    // --------------------------------------------
     public DataResponse(int sensorId, String sensorName) {
+    	if(timestampEnabled)
+    		setTime();
         this.sensorid = sensorId;
         this.sensorName = sensorName;
         this.channel = new ArrayList<Channel>();

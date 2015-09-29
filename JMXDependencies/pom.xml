@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+  	<groupId>com.paessler.prtg</groupId>
+  	<artifactId>JavaMiniProbe</artifactId>
+  	<version>1.0</version>
+  </parent>
+  <artifactId>JMXDependencies</artifactId>
+  <packaging>pom</packaging>
+  <name>JMXDependencies</name>
+  <url>https://github.com/PaesslerAG/JMXMiniProbe</url>
+
+ <build>
+   <plugins>
+      <!-- http://stackoverflow.com/questions/10802280/multiple-installinstall-file-in-a-single-pom-xml -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-install-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>inst_icmp4j</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>install-file</goal>
+                    </goals>
+                    <configuration>
+                        <!-- config for file 1 -->
+    					<!--file>${project.basedir}/../web/WEB-INF/lib/icmp4j.jar</file-->
+    					<file>${project.basedir}/../web/WEB-INF/customlib/icmp4j.jar</file>
+						<groupId>org.icmp4j</groupId>
+		                <artifactId>icmp4j</artifactId>
+		                <packaging>jar</packaging>
+		                <!--version>${icmp4j.version}</version-->
+		                <version>16.0.1017-1</version>
+                    </configuration>
+                </execution>
+                <!-- WEBM library -->
+                <execution>
+                    <id>inst_sblim</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>install-file</goal>
+                    </goals>
+                    <configuration>
+                        <!-- config for file 1 -->
+    					<file>${project.basedir}/../lib/sblim-cim-client2.jar</file>
+						<groupId>org.sblim</groupId>
+		                <artifactId>sblim-cim-client2</artifactId>
+		                <packaging>jar</packaging>
+		                <!--version>${sblime-client.version}</version-->
+		                <version>2.2.5</version>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>                  
+   </plugins>
+ </build>
+
+</project>

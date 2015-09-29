@@ -31,120 +31,248 @@
 package com.paessler.prtg.jmx.sensors;
 
 import com.google.gson.JsonObject;
-import com.paessler.prtg.jmx.channels.LongChannel;
-import com.paessler.prtg.jmx.definitions.SensorDefinition;
+import com.paessler.prtg.jmx.channels.Channel;
 import com.paessler.prtg.jmx.definitions.VMHealthDefinition;
-import com.paessler.prtg.jmx.responses.DataError;
-import com.paessler.prtg.jmx.responses.DataResponse;
+import com.paessler.prtg.jmx.sensors.jmx.JMXAttribute;
+import com.paessler.prtg.jmx.sensors.jmx.JMXBean;
 
-import javax.management.MBeanServerConnection;
-import javax.management.ObjectName;
-import javax.management.openmbean.CompositeData;
-import javax.management.remote.JMXConnector;
-import javax.management.remote.JMXConnectorFactory;
-import javax.management.remote.JMXServiceURL;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.management.ManagementFactory;
 
-public class VMHealthSensor extends Sensor {
+public class VMHealthSensor extends JMXSensor {
+	
+	public VMHealthSensor(){
+		//----------------------------------------------------------------------
+		setKind(VMHealthDefinition.KIND);
+	    setDefinition(new VMHealthDefinition());
+	    setSensorName("VMHealth");
+		
+	}
+    // --------------------------------------------------------------------------------------------
+	public VMHealthSensor(VMHealthSensor tocpy){
+		super(tocpy);
+	}
+	
+	//----------------------------------------------------------------------
     @Override
-    public DataResponse go() {
-        DataResponse response = null;
-        JMXConnector jmxc = null;
-        try {
-            String[] creds = {rmiUsername, rmiPassword};
-            Map env = new HashMap<String, String[]>();
-            env.put(JMXConnector.CREDENTIALS, creds);
-            JMXServiceURL serviceURL = new JMXServiceURL(rmiString);
+    public Sensor copy(){
+		return new VMHealthSensor(this);
+	}
+    // --------------------------------------------------------------------------------------------
+/*    @Override
+    public DataResponse getResponses(MBeanServerConnection mbsc) throws Exception{
+        DataResponse retVal = new DataResponse(sensorid, getSensorName());
+        ObjectName memoryBeanName = new ObjectName(ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME);
+        Double tmpD;
+        if (memoryBeanName != null) {
+//        	tmpD = ((Double) mbsc.getAttribute(memoryBeanName, "SystemLoadAverage"))*100.0;
+//        	response.addChannel(new FloatChannel("OS: SystemLoadAverage", Channel.Unit.CPU, tmpD.floatValue()));
+        	tmpD = ((Double) mbsc.getAttribute(memoryBeanName, "SystemCpuLoad"))*100.0 ;
+        	retVal.addChannel(new FloatChannel("OS: SystemCpuLoad", Channel.Unit.CPU, tmpD.floatValue()));
+        	tmpD = ((Double) mbsc.getAttribute(memoryBeanName, "ProcessCpuLoad"))*100.0;
+        	retVal.addChannel(new FloatChannel("OS: ProcessCpuLoad", Channel.Unit.CPU, tmpD.floatValue()));
+        	retVal.addChannel(new LongChannel("OS: FreePhysicalMemorySize", Channel.Unit.COUNT, (Long) mbsc.getAttribute(memoryBeanName, "FreePhysicalMemorySize")));
+        	retVal.addChannel(new LongChannel("OS: AvailableProcessors", Channel.Unit.COUNT, (Integer) mbsc.getAttribute(memoryBeanName, "AvailableProcessors")));
+        }
+        memoryBeanName = new ObjectName(ManagementFactory.MEMORY_MXBEAN_NAME);
+        CompositeData heapMemoryUsage = (CompositeData) mbsc.getAttribute(memoryBeanName, "HeapMemoryUsage");
+        if (heapMemoryUsage != null) {
+            long hmu = (Long) heapMemoryUsage.get("committed");
+            long initHmu = (Long) heapMemoryUsage.get("init");
+            long maxHmu = (Long) heapMemoryUsage.get("max");
+            long usedHmu = (Long) heapMemoryUsage.get("used");
 
-            jmxc = JMXConnectorFactory.connect(serviceURL, env);
-            MBeanServerConnection mbsc = jmxc.getMBeanServerConnection();
-            ObjectName memoryBeanName = new ObjectName("java.lang:type=Memory");
-            CompositeData heapMemoryUsage = (CompositeData) mbsc.getAttribute(memoryBeanName, "HeapMemoryUsage");
-            response = new DataResponse(sensorId, "VMHealth");
-            if (heapMemoryUsage != null) {
-                long hmu = (Long) heapMemoryUsage.get("committed");
-                long initHmu = (Long) heapMemoryUsage.get("init");
-                long maxHmu = (Long) heapMemoryUsage.get("max");
-                long usedHmu = (Long) heapMemoryUsage.get("used");
+            LongChannel hmuChannel = new LongChannel("JVM: Committed heap memory", Channel.Unit.MEMORY, hmu);
+            LongChannel initChannel = new LongChannel("JVM: Initialized heap memory", Channel.Unit.MEMORY, initHmu);
+            LongChannel maxChannel = new LongChannel("JVM: Max heap memory", Channel.Unit.MEMORY, maxHmu);
+            LongChannel usedChannel = new LongChannel("JVM: Used heap memory", Channel.Unit.MEMORY, usedHmu);
 
-                LongChannel hmuChannel = new LongChannel("Committed heap memory", "BytesMemory", hmu);
-                LongChannel initChannel = new LongChannel("Initialized heap memory", "BytesMemory", initHmu);
-                LongChannel maxChannel = new LongChannel("Max heap memory", "BytesMemory", maxHmu);
-                LongChannel usedChannel = new LongChannel("Used heap memory", "BytesMemory", usedHmu);
-
-                response.channel.add(hmuChannel);
-                response.channel.add(initChannel);
-                response.channel.add(maxChannel);
-                response.channel.add(usedChannel);
-            }
-
-            ObjectName threadingBeanName = new ObjectName("java.lang:type=Threading");
-            int liveThreadCount = (Integer) mbsc.getAttribute(threadingBeanName, "ThreadCount");
-            int peakThreadCount = (Integer) mbsc.getAttribute(threadingBeanName, "PeakThreadCount");
-            int daemonThreadCount = (Integer) mbsc.getAttribute(threadingBeanName, "DaemonThreadCount");
-            long totalThreadCount = (Long) mbsc.getAttribute(threadingBeanName, "TotalStartedThreadCount");
-            LongChannel liveThreadChannel = new LongChannel("Live threads", "Count", liveThreadCount);
-            LongChannel peakThreadChannel = new LongChannel("Peak threads", "Count", peakThreadCount);
-            LongChannel daemonThreadChannel = new LongChannel("Daemon threads", "Count", daemonThreadCount);
-            LongChannel totalThreadChannel = new LongChannel("Total threads started", "Count", totalThreadCount);
-            response.channel.add(liveThreadChannel);
-            response.channel.add(peakThreadChannel);
-            response.channel.add(daemonThreadChannel);
-            response.channel.add(totalThreadChannel);
-
-            ObjectName classBeanName = new ObjectName("java.lang:type=ClassLoading");
-            long totalLoadedClasses = (Long) mbsc.getAttribute(classBeanName, "TotalLoadedClassCount");
-            int currentLoadedClasses = (Integer) mbsc.getAttribute(classBeanName, "LoadedClassCount");
-            long unloadedClasses = (Long) mbsc.getAttribute(classBeanName, "UnloadedClassCount");
-            LongChannel totalLoadedClassChannel = new LongChannel("Total classes loaded", "Count", totalLoadedClasses);
-            LongChannel currentLoadedClassChannel = new LongChannel("Current classes loaded", "Count", currentLoadedClasses);
-            LongChannel unloadedClassChannel = new LongChannel("Total classes unloaded", "Count", unloadedClasses);
-            response.channel.add(totalLoadedClassChannel);
-            response.channel.add(currentLoadedClassChannel);
-            response.channel.add(unloadedClassChannel);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            DataError error = new DataError(sensorId, "VMHealth");
-            error.setCode(-1);
-            error.setError("Exception");
-            error.setMessage(e.getMessage() + " (Service URL: " + rmiString + ")");
-            response = error;
-        } finally {
-            if (jmxc != null) {
-                try {
-                    jmxc.close();
-                } catch (Exception e) {
-                    // Ignore
-                }
-            }
+            retVal.addChannel(hmuChannel);
+            retVal.addChannel(initChannel);
+            retVal.addChannel(maxChannel);
+            retVal.addChannel(usedChannel);
         }
 
-        return response;
+       
+        memoryBeanName = new ObjectName(ManagementFactory.THREAD_MXBEAN_NAME);
+        {
+//        	final long[] deadlocks = mbsc.findMonitorDeadlockedThreads();
+            int liveThreadCount = (Integer) mbsc.getAttribute(memoryBeanName, "ThreadCount");
+            int peakThreadCount = (Integer) mbsc.getAttribute(memoryBeanName, "PeakThreadCount");
+            int daemonThreadCount = (Integer) mbsc.getAttribute(memoryBeanName, "DaemonThreadCount");
+            long totalThreadCount = (Long) mbsc.getAttribute(memoryBeanName, "TotalStartedThreadCount");
+            LongChannel liveThreadChannel = new LongChannel("JVM: Live threads", Channel.Unit.COUNT, liveThreadCount);
+            LongChannel peakThreadChannel = new LongChannel("JVM: Peak threads", Channel.Unit.COUNT, peakThreadCount);
+            LongChannel daemonThreadChannel = new LongChannel("JVM: Daemon threads", Channel.Unit.COUNT, daemonThreadCount);
+            LongChannel totalThreadChannel = new LongChannel("JVM: Total threads started", Channel.Unit.COUNT, totalThreadCount);
+            retVal.addChannel(liveThreadChannel);
+            retVal.addChannel(peakThreadChannel);
+            retVal.addChannel(daemonThreadChannel);
+            retVal.addChannel(totalThreadChannel);
+        }
+        memoryBeanName = new ObjectName(ManagementFactory.CLASS_LOADING_MXBEAN_NAME);
+        {
+            long totalLoadedClasses = (Long) mbsc.getAttribute(memoryBeanName, "TotalLoadedClassCount");
+            int currentLoadedClasses = (Integer) mbsc.getAttribute(memoryBeanName, "LoadedClassCount");
+            long unloadedClasses = (Long) mbsc.getAttribute(memoryBeanName, "UnloadedClassCount");
+            LongChannel totalLoadedClassChannel = new LongChannel("JVM: Total classes loaded", Channel.Unit.COUNT, totalLoadedClasses);
+            LongChannel currentLoadedClassChannel = new LongChannel("JVM: Current classes loaded", Channel.Unit.COUNT, currentLoadedClasses);
+            LongChannel unloadedClassChannel = new LongChannel("JVM: Total classes unloaded", Channel.Unit.COUNT, unloadedClasses);
+            retVal.addChannel(totalLoadedClassChannel);
+            retVal.addChannel(currentLoadedClassChannel);
+            retVal.addChannel(unloadedClassChannel);
+        }
+    	return retVal;
     }
-
+*/    
+    // --------------------------------------------------------------------------------------------
+    protected void addDefs(){
+    	
+    	
+        // --------------------------------------
+    	JMXAttribute tmppair;
+    	JMXBean attrlist = new JMXBean(ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME);
+    	addBeanList(attrlist);
+/*
+	Object Name:java.lang:type=OperatingSystem, Information on the management interface of the MBean
+		Attribute Name: CommittedVirtualMemorySize, Type:long, Description: CommittedVirtualMemorySize
+		Attribute Name: FreePhysicalMemorySize, Type:long, Description: FreePhysicalMemorySize
+		Attribute Name: FreeSwapSpaceSize, Type:long, Description: FreeSwapSpaceSize
+		Attribute Name: ProcessCpuLoad, Type:double, Description: ProcessCpuLoad
+		Attribute Name: ProcessCpuTime, Type:long, Description: ProcessCpuTime
+		Attribute Name: SystemCpuLoad, Type:double, Description: SystemCpuLoad
+		Attribute Name: TotalPhysicalMemorySize, Type:long, Description: TotalPhysicalMemorySize
+		Attribute Name: TotalSwapSpaceSize, Type:long, Description: TotalSwapSpaceSize
+		Attribute Name: Name, Type:java.lang.String, Description: Name
+		Attribute Name: AvailableProcessors, Type:int, Description: AvailableProcessors
+		Attribute Name: Arch, Type:java.lang.String, Description: Arch
+		Attribute Name: SystemLoadAverage, Type:double, Description: SystemLoadAverage
+		Attribute Name: Version, Type:java.lang.String, Description: Version
+		Attribute Name: ObjectName, Type:javax.management.ObjectName, Description: ObjectName
+ */
+        {
+//        	tmpD = ((Double) mbsc.getAttribute(memoryBeanName, "SystemLoadAverage"))*100.0;
+//        	response.addChannel(new FloatChannel("OS: SystemLoadAverage", Channel.Unit.CPU, tmpD.floatValue()));
+        	tmppair = new JMXAttribute("SystemCpuLoad",Channel.Unit.CPU);
+        	tmppair.setMpy(100.0d);
+        	tmppair.setDescription("OS: SystemCpuLoad");
+        	attrlist.addAttributePair(tmppair);
+        	// --------------
+        	tmppair = new JMXAttribute("ProcessCpuLoad",Channel.Unit.CPU);
+        	tmppair.setMpy(100.0d);
+        	tmppair.setDescription("OS: ProcessCpuLoad");
+        	attrlist.addAttributePair(tmppair);
+        	// --------------
+        	tmppair = new JMXAttribute("FreePhysicalMemorySize",Channel.Unit.MEMORY);
+        	tmppair.setDescription("OS: FreePhysicalMemorySize");
+        	attrlist.addAttributePair(tmppair);
+        	// --------------
+        	tmppair = new JMXAttribute("AvailableProcessors",Channel.Unit.COUNT);
+        	tmppair.setDescription("OS: AvailableProcessors");
+        	attrlist.addAttributePair(tmppair);
+        }
+        // --------------------------------------
+        attrlist = new JMXBean(ManagementFactory.MEMORY_MXBEAN_NAME);
+    	addBeanList(attrlist);
+/*
+MBean Found, Class Name:sun.management.MemoryImpl
+	Object Name:java.lang:type=Memory, Information on the management interface of the MBean
+		Attribute Name: Verbose, Type:boolean, Description: Verbose
+		Attribute Name: HeapMemoryUsage, Type:javax.management.openmbean.CompositeData, Description: HeapMemoryUsage
+		Attribute Name: NonHeapMemoryUsage, Type:javax.management.openmbean.CompositeData, Description: NonHeapMemoryUsage
+		Attribute Name: ObjectPendingFinalizationCount, Type:int, Description: ObjectPendingFinalizationCount
+		Attribute Name: ObjectName, Type:javax.management.ObjectName, Description: ObjectName
+ */
+        {
+        	tmppair = new JMXAttribute("HeapMemoryUsage",Channel.Unit.MEMORY);
+        	tmppair.setDescription("JVM: Committed heap memory");
+        	attrlist.addAttributePair(tmppair);
+        	// --------------
+        	tmppair = new JMXAttribute("NonHeapMemoryUsage",Channel.Unit.MEMORY);
+        	tmppair.setDescription("JVM: Initialized heap memory");
+        	attrlist.addAttributePair(tmppair);
+        	// --------------
+/*        	tmppair = new AttributePair("max",Channel.Unit.MEMORY);
+        	tmppair.setDescription("JVM: Max heap memory");
+        	attrlist.addAttributePair(tmppair);
+        	// --------------
+        	tmppair = new AttributePair("used",Channel.Unit.MEMORY);
+        	tmppair.setDescription("JVM: Used heap memory");
+        	attrlist.addAttributePair(tmppair);
+*/        	
+        }
+        // --------------------------------------
+        attrlist = new JMXBean(ManagementFactory.THREAD_MXBEAN_NAME);
+    	addBeanList(attrlist);
+        {
+/*
+	Object Name:java.lang:type=Threading, Information on the management interface of the MBean
+		Attribute Name: ThreadAllocatedMemoryEnabled, Type:boolean, Description: ThreadAllocatedMemoryEnabled
+		Attribute Name: ThreadAllocatedMemorySupported, Type:boolean, Description: ThreadAllocatedMemorySupported
+		Attribute Name: ThreadContentionMonitoringEnabled, Type:boolean, Description: ThreadContentionMonitoringEnabled
+		Attribute Name: DaemonThreadCount, Type:int, Description: DaemonThreadCount
+		Attribute Name: PeakThreadCount, Type:int, Description: PeakThreadCount
+		Attribute Name: CurrentThreadCpuTimeSupported, Type:boolean, Description: CurrentThreadCpuTimeSupported
+		Attribute Name: ObjectMonitorUsageSupported, Type:boolean, Description: ObjectMonitorUsageSupported
+		Attribute Name: SynchronizerUsageSupported, Type:boolean, Description: SynchronizerUsageSupported
+		Attribute Name: ThreadContentionMonitoringSupported, Type:boolean, Description: ThreadContentionMonitoringSupported
+		Attribute Name: ThreadCpuTimeEnabled, Type:boolean, Description: ThreadCpuTimeEnabled
+		Attribute Name: AllThreadIds, Type:[J, Description: AllThreadIds
+		Attribute Name: CurrentThreadCpuTime, Type:long, Description: CurrentThreadCpuTime
+		Attribute Name: CurrentThreadUserTime, Type:long, Description: CurrentThreadUserTime
+		Attribute Name: ThreadCount, Type:int, Description: ThreadCount
+		Attribute Name: TotalStartedThreadCount, Type:long, Description: TotalStartedThreadCount
+		Attribute Name: ThreadCpuTimeSupported, Type:boolean, Description: ThreadCpuTimeSupported
+		Attribute Name: ObjectName, Type:javax.management.ObjectName, Description: ObjectName
+ */
+//        	final long[] deadlocks = mbsc.findMonitorDeadlockedThreads();
+        	tmppair = new JMXAttribute("ThreadCount",Channel.Unit.COUNT);
+        	tmppair.setDescription("JVM: Live threads");
+        	attrlist.addAttributePair(tmppair);
+        	// --------------
+        	tmppair = new JMXAttribute("PeakThreadCount",Channel.Unit.COUNT);
+        	tmppair.setDescription("JVM: Peak threads");
+        	attrlist.addAttributePair(tmppair);
+        	// --------------
+        	tmppair = new JMXAttribute("DaemonThreadCount",Channel.Unit.COUNT);
+        	tmppair.setDescription("JVM: Daemon threads");
+        	attrlist.addAttributePair(tmppair);
+        	// --------------
+        	tmppair = new JMXAttribute("TotalStartedThreadCount",Channel.Unit.COUNT);
+        	tmppair.setDescription("JVM: Total threads started");
+        	attrlist.addAttributePair(tmppair);
+        }
+        // --------------------------------------
+        attrlist = new JMXBean(ManagementFactory.CLASS_LOADING_MXBEAN_NAME);
+    	addBeanList(attrlist);
+        {
+/*
+	Object Name:java.lang:type=ClassLoading, Information on the management interface of the MBean
+		Attribute Name: LoadedClassCount, Type:int, Description: LoadedClassCount
+		Attribute Name: TotalLoadedClassCount, Type:long, Description: TotalLoadedClassCount
+		Attribute Name: UnloadedClassCount, Type:long, Description: UnloadedClassCount
+		Attribute Name: Verbose, Type:boolean, Description: Verbose
+		Attribute Name: ObjectName, Type:javax.management.ObjectName, Description: ObjectName
+ */
+        	tmppair = new JMXAttribute("TotalLoadedClassCount",Channel.Unit.COUNT);
+        	tmppair.setDescription("JVM: Total classes loaded");
+        	attrlist.addAttributePair(tmppair);
+        	// --------------
+        	tmppair = new JMXAttribute("LoadedClassCount",Channel.Unit.COUNT);
+        	tmppair.setDescription("JVM: Current classes loaded");
+        	attrlist.addAttributePair(tmppair);
+        	// --------------
+        	tmppair = new JMXAttribute("UnloadedClassCount",Channel.Unit.COUNT);
+        	tmppair.setDescription("JVM: Total classes unloaded");
+        	attrlist.addAttributePair(tmppair);
+        }
+    }
+    
+    // --------------------------------------------------------------------------------------------
     @Override
-    public SensorDefinition getDefinition() {
-        return new VMHealthDefinition();
+    public void loadFromJson(JsonObject json)  throws Exception{
+    	super.loadFromJson(json);
+    	addDefs();
+//        setmBean(ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME);
     }
-
-    @Override
-    public void loadFromJson(JsonObject json) {
-        if (json.has("rmi_string")) {
-            this.rmiString = json.get("rmi_string").getAsString();
-        }
-
-        if (json.has("rmi_username")) {
-            this.rmiUsername = json.get("rmi_username").getAsString();
-        }
-
-        if (json.has("rmi_password")) {
-            this.rmiPassword = json.get("rmi_password").getAsString();
-        }
-
-        if (json.has("sensorid")){
-            this.sensorId = json.get("sensorid").getAsInt();
-        }
-    }
+    // --------------------------------------------------------------------------------------------
 }

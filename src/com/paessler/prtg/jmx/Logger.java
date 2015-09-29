@@ -34,7 +34,18 @@ import javax.servlet.ServletContext;
 
 // TODO This is very lazy
 public class Logger {
-    public static void log(ServletContext context, String message) {
+	protected static ServletContext context;
+	public static void initLogger(ServletContext srvrlcontext){
+		context = srvrlcontext;
+	}
+    public static void log(String message) {
+        if (context != null) {
+            context.log(message);
+        } else {
+            System.out.println(message);
+        }
+    }
+    public static void info(String message) {
         if (context != null) {
             context.log(message);
         } else {

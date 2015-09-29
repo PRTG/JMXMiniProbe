@@ -32,21 +32,29 @@ package com.paessler.prtg.jmx.definitions;
 
 import java.util.ArrayList;
 
+import com.paessler.prtg.jmx.sensors.jmx.JMXUtils;
+
 public class VMHealthDefinition extends SensorDefinition {
-    public static String KIND = "jmxvmhealth";
+    public static String KIND = "mjjmxvmhealth";
+    public static String TAG = "mjjmxvmhealthsensor";
 
-    public String description = "Monitors VM Health";
-    public String help = "";
-    public String tag = "jmx";
     public VMHealthDefinition() {
-        kind = KIND;
-        name = "JMX VM Health";
-
+        super(KIND, "JMX Monitors VM Health", "JMX VM Health", TAG,
+        		"JVM Health monitoring via JMX");
         groups = new ArrayList<GroupDefinition>();
         GroupDefinition rmiGroupDefinition = new GroupDefinition("Connection", "Connection Settings");
-        rmiGroupDefinition.fields.add( new SimpleEditFieldDefinition("rmi_string", "RMI Connection String"));
-        rmiGroupDefinition.fields.add(new SimpleEditFieldDefinition("rmi_username", "Username"));
-        rmiGroupDefinition.fields.add(new PasswordFieldDefinition("rmi_password", "Password", ""));
+        
+        FieldDefinition tmpfld = new SimpleEditFieldDefinition("rmi_string", "RMI Connection String");
+        tmpfld.setDefaultValue(JMXUtils.RMI_STRING_LOCAL);
+        addField(tmpfld);
+        rmiGroupDefinition.fields.add(tmpfld);
+     
+        tmpfld = new SimpleEditFieldDefinition("rmi_username", "Username");
+        rmiGroupDefinition.fields.add(tmpfld);
+        addField(tmpfld);
+        tmpfld = new PasswordFieldDefinition("rmi_password", "Password", "");
+        rmiGroupDefinition.fields.add(tmpfld);
+        addField(tmpfld);
         groups.add(rmiGroupDefinition);
     }
 
