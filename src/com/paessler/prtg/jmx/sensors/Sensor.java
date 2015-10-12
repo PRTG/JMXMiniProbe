@@ -218,7 +218,7 @@ public abstract class Sensor implements Runnable{
 			if(retVal == null){
 				retVal = new DataError(getSensorid(), getName());
 				retVal.addMessage("Sensor failed, NULL return");
-			} else if(retVal.getChannelCount() < 1){
+			} else if(retVal.getChannelCount() < 1 && !(retVal instanceof DataError)){
 				retVal = new DataError(getSensorid(), getName());
 				retVal.addMessage("Sensor returned no data points, Empty return");
 			} else {

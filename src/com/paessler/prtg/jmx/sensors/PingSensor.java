@@ -49,7 +49,7 @@ import org.icmp4j.IcmpPingUtil;
 import org.icmp4j.IcmpPingRequest;
 import org.icmp4j.IcmpPingResponse;
 
-public class PingSensor extends RemoteSensor {
+public class PingSensor extends RemoteSensor<String> {
 	
 	//----------------------------------------------------------------------
 	public PingSensor(){
@@ -105,7 +105,8 @@ public class PingSensor extends RemoteSensor {
 		public float avg = 0.0f;
 		public long max = Long.MIN_VALUE;
 		public float mDev = 0.0f;
-		public long   loss = 0;
+		public long   lossPercent = 0;
+		private int    lossCnt = 0;
 
 		private double sumSq = 0.0;
 		private int    cnt = 0;
@@ -120,20 +121,20 @@ public class PingSensor extends RemoteSensor {
 				sumSq += tmp*tmp;
 			}
 			else
-			{++loss;}
+			{++lossCnt;}
 			++cnt;
 		}
 		//-----------------------------------------
 		protected void calcFinal(){
 			// http://serverfault.com/questions/333116/what-does-mdev-mean-in-ping8
-			double tmp = avg / (cnt+loss);
-			mDev = (float) Math.sqrt( (sumSq / (cnt+loss)) - (tmp * tmp)); 
+			double tmp = avg / (cnt+lossCnt);
+			mDev = (float) Math.sqrt( (sumSq / (cnt+lossCnt)) - (tmp * tmp)); 
 			sumSq += 0.0f;
 			avg = -1;
-			if((cnt - loss) > 0){
-				avg /= cnt - loss;
+			if((cnt - lossCnt) > 0){
+				avg /= cnt - lossCnt;
 			}
-			loss = 100*(loss/cnt);
+			lossPercent = 100*(lossCnt/cnt);
 		}
 	}
 	//----------------------------------------------------------------------
@@ -161,13 +162,15 @@ public class PingSensor extends RemoteSensor {
 		response.addChannel(lchannel); 
 		fchannel = new FloatChannel("Ping Time MDEV",	Channel.UNIT_STR_TRESPONSE, stats.mDev);
 		response.addChannel(fchannel); 
-		lchannel  = new LongChannel("Packet Loss", 		Channel.UNIT_STR_PERCENT, stats.loss);
+		lchannel  = new LongChannel("Packet Loss", 		Channel.UNIT_STR_PERCENT, stats.lossPercent);
 		response.addChannel(lchannel);
 
-		if(stats.cnt == stats.loss){
+		if(stats.lossCnt > 0){
+			String errmsg = stats.lossPercent+" % Packet Loss";
 			lchannel.setWarning(1);
-			if(errcnt > 1)	{response = getErrorResponse("Error", -1, "100 % Packet Loss");}
-			else 			{response.setMessage("100 % Packet Loss");}
+			response.setMessage(errmsg);
+			if(stats.lossPercent > 99 )	
+			{response = getErrorResponse("Error", -1, errmsg);}
 		}
 		return response;
 	}
