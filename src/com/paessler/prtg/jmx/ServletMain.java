@@ -31,7 +31,6 @@
 
 package com.paessler.prtg.jmx;
 
-import com.paessler.prtg.jmx.tasks.AnnouncementTask;
 import com.paessler.prtg.jmx.tasks.TaskFetcherTask;
 
 import javax.servlet.*;
