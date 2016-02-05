@@ -1,5 +1,7 @@
 JMXMiniProbe Proof-of-Concept
 ============
+## There are major changes planned to the underlying API in PRTG. Therefore, this project is currently on hold.
+Further news will be provided here.
 
 A PRTG MiniProbe for monitoring Java applications using JMX.
 
@@ -13,14 +15,14 @@ Preparing your PRTG installation
 
 - set up your PRTG server to use HTTPS (other connection methods not allowed at the moment)
 - allow MiniProbes to connect (**Setup** -> **System Administration** -> **Core&Probes** -> *Allow MiniProbes to connect*)
-- add an appropriate allow ip filter (**Setup** -> **System Administration** -> **Core&Probes** -> *Allow IPs* , e.g. any) 
+- add an appropriate allow ip filter (**Setup** -> **System Administration** -> **Core&Probes** -> *Allow IPs* , e.g. any)
 - define a new accesskey for the MiniProbes (**Setup** -> **System Administration** -> **Core&Probes** -> *Access Keys*)
 - make sure you can reach the PRTG web interface from the machine the mini probe should run on (e.g. wget https://YOUR_PRTG_SERVER)
 
 Getting the mini probe
 ------------------
 
-- You can download a pre-built WAR, which should work both in standalone-mode and as part of an application server, from 
+- You can download a pre-built WAR, which should work both in standalone-mode and as part of an application server, from
 [the releases page](https://github.com/PaesslerAG/JMXMiniProbe/releases)
 - A gradle and/or ant config is on the TODO list
 
@@ -59,7 +61,7 @@ Starting the probe in an application server
     #debug=1
     #workerthreads=10
     #baseinterval=30
-    
+
 
 * If your config file is called prtgjmx.properties and is in the root of the "webapp\JMXProbe" directory, no additional config is needed
   If you have a different config, add **com.paessler.jmxprobe.config=/path/to/config/file** to the server's Java options or classpath
@@ -104,4 +106,3 @@ Changelog
 - Added SNMP Vector functionality
 - Added SNMP OID functionality
 - Added functional maven build file (pom.xml)
-
