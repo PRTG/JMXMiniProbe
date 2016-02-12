@@ -1,7 +1,8 @@
 JMXMiniProbe Proof-of-Concept
 ============
-## There are major changes planned to the underlying API in PRTG. Therefore, this project is currently on hold.
-Further news will be provided here.
+With the current version of PRTG, you can use the Mini Probe interface with your custom code to implement solutions to special scenarios that you might have in your network. Please note that there are major changes planned to the underlying API in PRTG. Therefore, any code you write now will likely need to be changed later, so it can be used for future versions of PRTG. Further news about changing interfaces will be provided here as soon as there are more detailed plans available.
+
+Current Status: BETA
 
 A PRTG MiniProbe for monitoring Java applications using JMX.
 
