@@ -71,6 +71,10 @@ Starting the probe in an application server
 Changelog
 =========
 
+2016-03-15
+----------
+-- Fixed: Enables use of JMX Attribute Variables like: "[attribute].[Variable]"
+
 2015-09-28
 ----------
 -- Added: Limit Channels to 25
