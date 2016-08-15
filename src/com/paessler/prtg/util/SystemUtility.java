@@ -529,15 +529,22 @@ sun.io.unicode.encoding=UnicodeBig
 	public static int JAVASPEC_VERSION_1_5	= 1500;
 	public static int JAVASPEC_VERSION_1_6	= 1600;
 	public static int JAVASPEC_VERSION_1_7	= 1700;
+	public static int JAVASPEC_VERSION_1_8	= 1800;
 	private static int JAVASPEC_MULTIPLIER	= 1000;
 	private static int javaSpecVersion = -1;
 	private static int javaSubVersion = -1;
 
-	public static String getJavaVersionString()
+	public static String getSysPropertyString(String propstr)
 	{
 		Properties prop = System.getProperties();
-		String str = prop.getProperty("java.version");
+		String str = prop.getProperty(propstr);
 		return str;
+	}
+	public static String getJavaVersionString()
+	{ return getSysPropertyString(SYS_PROPERTY_JAVA_VER);
+//		Properties prop = System.getProperties();
+//		String str = prop.getProperty("java.version");
+//		return str;
 	}
 
 // SystemUtility.getJavaSpecVersion() >= SystemUtility.JAVASPEC_VERSION_1_4	
@@ -547,8 +554,9 @@ sun.io.unicode.encoding=UnicodeBig
 	public static int getJavaSpecVersion()
 	{
 		if (javaSpecVersion == -1)
-		{	Properties prop = System.getProperties();
-			String str = prop.getProperty(SYSTEM_JAVA_SPEC_PROPERTY);
+		{	//Properties prop = System.getProperties();
+			//String str = prop.getProperty(SYSTEM_JAVA_SPEC_PROPERTY);
+			String str = getSysPropertyString(SYSTEM_JAVA_SPEC_PROPERTY);
 			if (str != null)
 			{ Float tmpFlt = new Float(1.0);
 				try

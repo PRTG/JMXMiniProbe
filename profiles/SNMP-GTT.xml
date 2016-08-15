@@ -2,12 +2,14 @@
 <!-- ###########################################################
 Unit Values[BANDWIDTH, MEMORY, DISK, FILE, TIME_RESPONSE, TIME_SECONDS, TIME_HOURS, TEMP, PERCENT, COUNT,CPU,CUSTOM]
 ***************************************************************
+ This file contains the definition of the PRTG JMXMiniProbe MBean
+*** PLEASE DO NOT MODIFY ***
 Please note, the apache.commons.digester3 is * VERY * case sensitive
 ########################################################### -->
 <profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Profile.xsd">
 	<profile>
 		<name>SNMP Custom OID Test</name>
-		<kind>mjtestcustomsnmpsensor</kind>
+		<kind>mjgttcustomsnmpsensor</kind>
 		<tag>mjmxsensor,mjportrangesensor</tag>
 		<description>Test of Custom OIDs Profile</description>
 		<baseclass>com.paessler.prtg.jmx.sensors.SNMPSensor</baseclass>
@@ -21,7 +23,7 @@ Please note, the apache.commons.digester3 is * VERY * case sensitive
         <help>Custom SNMP Obj, Help</help>
         <attributes>
           <attribute>
-            <object>1.3.6.1.4.1.9.2.1.58.0</object>
+            <object>1.3.6.1.4.1.9.9.109.1.1.1.1.10</object>
             <displayvalue>CPU TotMonInt Busy</displayvalue>
             <description>CPU TotMonInt Busy indicator</description>
             <shortdescription/>
@@ -39,7 +41,7 @@ Please note, the apache.commons.digester3 is * VERY * case sensitive
             <limitwarningmsg>CPU 1min approaching unacceptable level</limitwarningmsg>
           </attribute>
           <attribute>
-            <object>1.3.6.1.4.1.9.2.1.56.0</object>
+            <object>1.3.6.1.4.1.9.9.109.1.1.1.1.6</object>
             <displayvalue>CPU 5sec Busy</displayvalue>
             <description>CPU 5/Sec Busy indicator</description>
             <shortdescription/>
@@ -52,7 +54,7 @@ Please note, the apache.commons.digester3 is * VERY * case sensitive
             <limitwarningmsg>CPU 5/sec approaching unacceptable level</limitwarningmsg>
           </attribute>
           <attribute>
-            <object>1.3.6.1.4.1.9.2.1.57.0</object>
+            <object>1.3.6.1.4.1.9.9.109.1.1.1.1.7</object>
             <displayvalue>CPU 1min Busy</displayvalue>
             <description>CPU 1min Busy indicator</description>
             <shortdescription/>

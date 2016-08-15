@@ -31,10 +31,12 @@
 package com.paessler.prtg.jmx.sensors;
 
 import com.google.gson.JsonObject;
+import com.paessler.prtg.jmx.Logger;
 import com.paessler.prtg.jmx.channels.Channel;
 import com.paessler.prtg.jmx.definitions.VMHealthDefinition;
 import com.paessler.prtg.jmx.sensors.jmx.JMXAttribute;
 import com.paessler.prtg.jmx.sensors.jmx.JMXBean;
+import com.paessler.prtg.util.SystemUtility;
 
 import java.lang.management.ManagementFactory;
 
@@ -52,6 +54,12 @@ public class VMHealthSensor extends JMXSensor {
 		super(tocpy);
 	}
 	
+    // --------------------------------------------------------------------------------------------
+	public String getSensorMessage() 
+	{
+		return "JVM v"+SystemUtility.getJavaVersionString()+ " " 
+				+ SystemUtility.getSysPropertyString(SystemUtility.SYS_PROPERTY_JAVA_VENDOR_VENDOR);
+	}
 	//----------------------------------------------------------------------
     @Override
     public Sensor copy(){
@@ -125,7 +133,8 @@ public class VMHealthSensor extends JMXSensor {
     }
 */    
     // --------------------------------------------------------------------------------------------
-    protected void addDefs(){
+    @SuppressWarnings("unused")
+	protected void addDefs(){
     	
     	
         // --------------------------------------
@@ -171,8 +180,6 @@ public class VMHealthSensor extends JMXSensor {
         	attrlist.addAttributePair(tmppair);
         }
         // --------------------------------------
-        attrlist = new JMXBean(ManagementFactory.MEMORY_MXBEAN_NAME);
-    	addBeanList(attrlist);
 /*
 MBean Found, Class Name:sun.management.MemoryImpl
 	Object Name:java.lang:type=Memory, Information on the management interface of the MBean
@@ -182,13 +189,33 @@ MBean Found, Class Name:sun.management.MemoryImpl
 		Attribute Name: ObjectPendingFinalizationCount, Type:int, Description: ObjectPendingFinalizationCount
 		Attribute Name: ObjectName, Type:javax.management.ObjectName, Description: ObjectName
  */
-        {
-        	tmppair = new JMXAttribute("HeapMemoryUsage",Channel.Unit.MEMORY);
-        	tmppair.setDescription("JVM: Committed heap memory");
+        attrlist = new JMXBean(ManagementFactory.MEMORY_MXBEAN_NAME);
+        if(attrlist != null){
+        	addBeanList(attrlist);
+        	
+        	tmppair = new JMXAttribute("HeapMemoryUsage.used",Channel.Unit.MEMORY);
+        	tmppair.setDescription("JVM: Heap memory[used]");
         	attrlist.addAttributePair(tmppair);
         	// --------------
-        	tmppair = new JMXAttribute("NonHeapMemoryUsage",Channel.Unit.MEMORY);
-        	tmppair.setDescription("JVM: Initialized heap memory");
+        	tmppair = new JMXAttribute("HeapMemoryUsage.max",Channel.Unit.MEMORY);
+        	tmppair.setDescription("JVM: Heap memory[max]");
+        	attrlist.addAttributePair(tmppair);
+        	// --------------
+        	tmppair = new JMXAttribute("HeapMemoryUsage.init",Channel.Unit.MEMORY);
+        	tmppair.setDescription("JVM: Heap memory[init]");
+        	attrlist.addAttributePair(tmppair);
+        	// --------------
+        	tmppair = new JMXAttribute("HeapMemoryUsage.committed",Channel.Unit.MEMORY);
+        	tmppair.setDescription("JVM: Heap memory[committed]");
+        	attrlist.addAttributePair(tmppair);
+        	
+        	// --------------
+        	tmppair = new JMXAttribute("NonHeapMemoryUsage.used",Channel.Unit.MEMORY);
+        	tmppair.setDescription("JVM: Non-heap memory[used]");
+        	attrlist.addAttributePair(tmppair);
+        	// --------------
+        	tmppair = new JMXAttribute("NonHeapMemoryUsage.max",Channel.Unit.MEMORY);
+        	tmppair.setDescription("JVM: Non-heap memory[max]");
         	attrlist.addAttributePair(tmppair);
         	// --------------
 /*        	tmppair = new AttributePair("max",Channel.Unit.MEMORY);
@@ -199,6 +226,8 @@ MBean Found, Class Name:sun.management.MemoryImpl
         	tmppair.setDescription("JVM: Used heap memory");
         	attrlist.addAttributePair(tmppair);
 */        	
+        } else{
+        	Logger.log("**** Error: Failed to get JMXBean: "+ManagementFactory.MEMORY_MXBEAN_NAME+"*****\n\n\n");
         }
         // --------------------------------------
         attrlist = new JMXBean(ManagementFactory.THREAD_MXBEAN_NAME);

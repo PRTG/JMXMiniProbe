@@ -31,6 +31,8 @@
 package com.paessler.prtg.jmx.sensors;
 
 import com.google.gson.JsonObject;
+import com.paessler.prtg.jmx.Logger;
+import com.paessler.prtg.jmx.ProbeContext;
 import com.paessler.prtg.jmx.channels.Channel;
 import com.paessler.prtg.jmx.definitions.SensorConstants;
 import com.paessler.prtg.jmx.responses.DataError;
@@ -39,8 +41,10 @@ import com.paessler.prtg.jmx.sensors.jmx.JMXAttribute;
 import com.paessler.prtg.jmx.sensors.jmx.JMXBean;
 import com.paessler.prtg.jmx.sensors.jmx.JMXSensorDefinition;
 import com.paessler.prtg.jmx.sensors.jmx.JMXUtils;
+import com.paessler.prtg.jmx.sensors.jmx.JMXUtils.MBeanConnectionHolder;
 import com.paessler.prtg.jmx.sensors.profile.Entry;
 import com.paessler.prtg.jmx.sensors.profile.Profile;
+import com.paessler.prtg.util.SystemUtility;
 
 import javax.management.MBeanServerConnection;
 import javax.management.ObjectName;
@@ -50,6 +54,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JMXSensor extends Sensor {
+	
     // --------------------------------------------------------------------------------------------
 	public JMXSensor(){
 		super();
@@ -80,22 +85,25 @@ public class JMXSensor extends Sensor {
         Channel channel;
         for (JMXAttribute curr : attributeList) {
 			if(curr.isEnabled()){
-            String attributeName = curr.object;
+            String attributeName = curr.getObject();
             Object obj = null;  
             try {
 				obj = mbsc.getAttribute(bean, attributeName);
+	            if (obj != null) {
+	            	channel = curr.getChannel(obj);
+	            	if(channel != null){
+	            		retVal.addChannel(channel);
+	            	}
+	            } else {
+	            	Logger.log("********* Error: nvalid attribute["+attributeName+"] for MBean["+bean.toString()+"] Obj:"+obj+" ************************\n\n\n");
+	            }
+	       
 			} catch (Exception e) {
                 DataError error = new DataError(sensorid, bean.toString());
                 error.setError("Exception");
                 error.setMessage("Invalid attribute["+attributeName+"] for MBean["+bean.toString()+"] value type (Service URL: " + rmiString + ")");
                 retVal = error;
 			}
-            if (obj != null) {
-            	channel = curr.getChannel(obj);
-            	if(channel != null){
-            		retVal.addChannel(channel);
-            	}
-            }
 		  } // if(curr.isEnabled())
         } // for
     	return retVal;
@@ -112,6 +120,10 @@ public class JMXSensor extends Sensor {
         for(JMXBean curr: beanList){
         	addResponses(mbsc, retVal, curr);
         }
+        String msg = getSensorMessage();
+        if(msg != null){
+        	retVal.addMessage(msg);
+        }
         return retVal;
     }
 
@@ -119,10 +131,11 @@ public class JMXSensor extends Sensor {
     @Override
     public DataResponse go() {
         DataResponse response = null;
-    	JMXConnector jmxc = null; 
+        MBeanConnectionHolder mbsch = null; 
         try {
 //            MBeanServerConnection mbsc = getMBeanServer();
-            MBeanServerConnection mbsc = JMXUtils.getJMXConnection(rmiString, username, password);
+        	mbsch = JMXUtils.getJMXConnection(rmiString, username, password);
+        	MBeanServerConnection mbsc = mbsch.getMbc();
             if(mbsc == null){
                 DataError error = new DataError(sensorid, getSensorName());
                 error.setCode(-1);
@@ -141,9 +154,9 @@ public class JMXSensor extends Sensor {
             error.setMessage(e.getMessage() + " (Service URL: " + rmiString + ")");
             response = error;
         } finally {
-            if (jmxc != null) {
+            if (mbsch != null) {
                 try {
-                    jmxc.close();
+                	mbsch.close();
                 } catch (Exception e) {
                     // Ignore
                 }

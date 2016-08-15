@@ -67,6 +67,8 @@ public abstract class Sensor implements Runnable{
     }
     public abstract Sensor copy();
     // --------------------------------------------------------------------------------------------
+	public String getSensorMessage() {return null;}
+    // --------------------------------------------------------------------------------------------
 	public String getSensorName() {return sensorName;}
 	public void setSensorName(String name) {sensorName = name;}
 	// --------------------------------------------------------

@@ -9,26 +9,37 @@ The following are all the JMX MBeans found
 ########################################################### -->
 <profiles>
 	<profile>
+		<!-- Profile Name -->
 		<name>Name of the Profile</name>
-		<tag>jmxsensor,mjjmxsensor</tag>
-		<kind>jmxsensor</kind>
+		<!-- Tags -->
+		<tag>jmxsensor,mjjmxsensor</tag> 
+		 <!-- Unique kind/identifier for this sensor -->
+		<kind>mjmxxxxxx</kind>
+		 <!-- Sensor Description, what appears in the Sensor selection dialog-->
 		<description>Description as displayed in the add Sensor Dialog</description>
+		 <!-- Base Java Class for this Sensor -->
 		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		 <!-- Base Java Class for this Sensor -->
 		<help>This is the help as displayed in the add Sensor Dialog help popup</help>
 		<properties>
+			<!-- List Name-Value pairs of arbitrary properties as supported by Java Class -->
 			<property>
 				<name>Propery_name</name>
 				<value>Propery Value</value>
 			</property>
 		</properties>
 		<entries>
+			<!-- Entry base for group of objects, for JMX, used for bean name -->
 			<entry>
+				<!-- Object name, for JMX MBean name -->
 				<object>Object name</object>
+				<!-- Name to Display, Not used but enter for completeness -->
 				<displayvalue>Display value</displayvalue>
-				<description>Description of the Entry</description>
-				<shortdescription>"JMX" short discription, will be used to indicate entry</shortdescription>
+				<description>Description of the Entry, should be prepended to each Attribute description</description>
+				<shortdescription>"JMX/OS/VM" short discription, will be used to indicate entry(prepended to Attibute)</shortdescription>
 				<comment>Comment, anything you want</comment>
 				<properties>
+					<!-- List Name-Value pairs of arbitrary properties as supported by Java Class -->
 					<property>
 						<name>Propery_name</name>
 						<value>Propery Value</value>
@@ -36,7 +47,7 @@ The following are all the JMX MBeans found
 				</properties>
 				<attributes>
 					<attribute>
-						<object>Name of object, JMX Attribute/PortNumber</object>
+						<object>Name of object, JMX Attribute/PortNumber/OID/etc</object>
 						<displayvalue>Value to display in Channel</displayvalue>
 						<description>Field description</description>
 						<shortdescription>Short Descr</shortdescription>

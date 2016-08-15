@@ -127,6 +127,8 @@
                                       <xs:element type="xs:boolean" name="enabled" minOccurs="0"/>
                                       <xs:element type="xs:float" name="mpy" default="1.0" minOccurs="0"/>
                                       <xs:element type="xs:float" name="div" default="1.0" minOccurs="0"/>
+                                      <xs:element type="xs:float" name="addend" default="0.0" minOccurs="0"/>	<!-- value to add -->
+                                      <xs:element type="xs:int" name="addendfirst" default="0" minOccurs="0"/>	<!-- 0 => (val * mpy/div) +addend | 0 => (val +addend) * mpy/div  -->
                                       <xs:element type="xs:int" name="limitmaxerror" minOccurs="0"/>
                                       <xs:element type="xs:int" name="limitmaxwarning" minOccurs="0"/>
                                       <xs:element type="xs:int" name="limitminwarning" minOccurs="0"/>

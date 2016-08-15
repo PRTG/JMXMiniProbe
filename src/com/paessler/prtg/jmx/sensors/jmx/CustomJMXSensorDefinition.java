@@ -72,6 +72,7 @@ public class CustomJMXSensorDefinition extends SensorDefinition {
         for (int i = 1; i < 11; i++) {
             GroupDefinition attributeDefinition = new GroupDefinition("Attribute #" + i, "Attribute");
             SimpleEditFieldDefinition objectName = new SimpleEditFieldDefinition("object_name_" + i, "Object name");
+            objectName.setHelp("MBean Attribute name. For composite values use a \".\" accessor/separator Attribute.var[like HeapMemoryUsage.used]");
 // Skipped this one, since we don't want them to change the actual attribute name             
 //            addField(objectName);
             attributeDefinition.fields.add(objectName);

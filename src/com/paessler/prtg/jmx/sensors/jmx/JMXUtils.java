@@ -128,11 +128,13 @@ public class JMXUtils {
 	        	Object type = mbai.getType();
 	        	String commentstring = "";
 	        	if(type instanceof CompositeData){
+	        		commentstring = "Composit[";
 	        		CompositeData data = (CompositeData)type;
 	        		commentstring = data.getCompositeType().toString();
 	        		for(Object curr: data.values()){
-	        			commentstring += ";"+curr;
+	        			commentstring += ";"+curr+"["+curr.getClass().getSimpleName()+"]";
 	        		}
+        			commentstring += "]";
 	        	} else {
 	        		if(type != null){
 	        			commentstring = type.toString();
@@ -203,6 +205,47 @@ public class JMXUtils {
 	        return retVal;
 	    }
 	
+		  
+		  public static class MBeanConnectionHolder {
+	            MBeanServerConnection mbc = null;
+	        	JMXConnector jmxc = null;
+	        	public MBeanConnectionHolder(MBeanServerConnection mbconn, JMXConnector jmxconn){
+		            this.mbc = mbconn;
+		            this.jmxc = jmxconn;
+	        		
+	        	}
+	        	public void finalize() throws Throwable{
+	        		close();
+	        		super.finalize();
+	        	}
+				public MBeanServerConnection getMbc()  throws IOException{
+					if(mbc == null){
+						mbc = jmxc.getMBeanServerConnection();
+					}
+					return mbc;
+				}
+				public void setMbc(MBeanServerConnection mbc) {
+					this.mbc = mbc;
+				}
+				public JMXConnector getJmxc() {
+					return jmxc;
+				}
+				public void setJmxc(JMXConnector jmxc) {
+					mbc = null;
+					this.jmxc = jmxc;
+				}
+
+				public void close(){
+					mbc = null;
+					if(jmxc != null){
+						try {
+							jmxc.close();
+						}
+						catch(Throwable e) {}
+						jmxc = null;
+					}
+				}
+		  }
 			// -----------------------------------------------------------------------------------
 		  /**
 		   *  Create a connection to a JMX Server
@@ -212,30 +255,30 @@ public class JMXUtils {
 		   * @return			Connection or null on failure
 		   * @throws IOException
 		   */
-		  public static MBeanServerConnection getJMXConnection(String rmistring, String username, String password) throws IOException{
-            MBeanServerConnection retVal = ManagementFactory.getPlatformMBeanServer();
-        	JMXConnector jmxc = null; 
-        	if(!(rmistring == null || 
-        			LOCALHOST_STRING.equalsIgnoreCase(rmistring) ||
-        			LOCAL_STRING.equalsIgnoreCase(rmistring) || 
-        			RMI_STRING_LOCAL.equalsIgnoreCase(rmistring))){
-                String[] creds = {username, password};
-                Map<String, Object> env = new HashMap<String, Object>();
-                env.put(JMXConnector.CREDENTIALS, creds);
-                env.put(Context.SECURITY_PRINCIPAL, username);
-                env.put(Context.SECURITY_CREDENTIALS, password);
-                JMXServiceURL serviceURL = new JMXServiceURL(rmistring);
+		  public static MBeanConnectionHolder getJMXConnection(String rmistring, String username, String password) throws IOException{
+			  MBeanConnectionHolder retVal = new MBeanConnectionHolder(ManagementFactory.getPlatformMBeanServer(), null);
+	        	JMXConnector jmxc = null; 
+	        	if(!(rmistring == null || 
+	        			LOCALHOST_STRING.equalsIgnoreCase(rmistring) ||
+	        			LOCAL_STRING.equalsIgnoreCase(rmistring) || 
+	        			RMI_STRING_LOCAL.equalsIgnoreCase(rmistring))){
+	                String[] creds = {username, password};
+	                Map<String, Object> env = new HashMap<String, Object>();
+	                env.put(JMXConnector.CREDENTIALS, creds);
+	                env.put(Context.SECURITY_PRINCIPAL, username);
+	                env.put(Context.SECURITY_CREDENTIALS, password);
+	                JMXServiceURL serviceURL = new JMXServiceURL(rmistring);
 
-                jmxc = JMXConnectorFactory.connect(serviceURL, env);
-                if(jmxc != null){
-                	retVal = jmxc.getMBeanServerConnection();
-                } else {
-                	retVal = null;
-                }
-        	}
-        	return retVal;
-			  
-		  }
+	                retVal.setJmxc(JMXConnectorFactory.connect(serviceURL, env));
+	                if(retVal.getJmxc() != null){
+	                	retVal.getMbc();
+	                } else {
+	                	retVal = null;
+	                }
+	        	}
+	        	return retVal;
+				  
+			  }
 			// -----------------------------------------------------------------------------------
 		    private static void showHelp(Options options) {
 		        HelpFormatter formatter = new HelpFormatter();
@@ -245,9 +288,13 @@ public class JMXUtils {
 		    public static boolean dumpJMXToFile(String outputfile, String rmiString, String username, String password, boolean includeselfie){
 		    	boolean retVal = false;
 //		        Profiles prof = loadProfile(null, "W:/Paessler/java/JMXMiniProbe/data/profiles/jmx/Tomcat.xml");
+		    	MBeanConnectionHolder mbsch = null;
 		        MBeanServerConnection mbsc = null;
 		        try {
-					mbsc = getJMXConnection(rmiString, username, password);
+		        	mbsch = getJMXConnection(rmiString, username, password);
+		        	if(mbsch != null) {
+		        		mbsc = mbsch.getMbc();
+		        	}
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					System.out.println("Cought Exception while Connecting to ["+rmiString+"] "+e.getMessage());
@@ -293,6 +340,9 @@ public class JMXUtils {
 				        	}
 				        }
 		        	}
+		        	// Close it
+	        		mbsch.close();
+
 		        } else {
 					System.out.println("No Connection to JMX Server");
 		        }
@@ -301,7 +351,7 @@ public class JMXUtils {
 			// -----------------------------------------------------------------------------------
 		    // -r "service:jmx:rmi:///jndi/rmi://192.168.0.172:1090/jmxrmi" -o junk.xml
 		    public static void main(String[] args) {
-		    	org.apache.log4j.BasicConfigurator.configure();
+//		    	org.apache.log4j.BasicConfigurator.configure();
 		        Options options = new Options();
 		        options.addOption("r", true, "RMI String["+RMI_STRING_DEFAULT+"]");
 		        options.addOption("o", true, "Output file");

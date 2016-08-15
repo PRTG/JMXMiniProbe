@@ -10,6 +10,9 @@
 
  <properties> 
 <!--  *******************  Package Versions  ******************* -->
+      <JMXMiniProbe.byteCodeVersion>1.7</JMXMiniProbe.byteCodeVersion>		
+      <JMXMiniProbe.srcCodeVersion>1.7</JMXMiniProbe.srcCodeVersion>		
+<!--  *******************  Package Versions  ******************* -->
       <snmp4j.version>2.3.1</snmp4j.version>		
 	  <platform-jna.version>3.5.1</platform-jna.version>
 	  <icmp4j.version>16.0.1017-1</icmp4j.version>

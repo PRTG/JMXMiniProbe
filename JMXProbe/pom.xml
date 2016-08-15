@@ -11,6 +11,12 @@
   	<!-- version>1.0</version-->
   <name>JMXProbe</name>
   <url>https://github.com/PaesslerAG/JMXMiniProbe</url>
+ <properties> 
+<!--  *******************  Source and ByteCode Compatibility Versions  ******************* -->
+      <JMXMiniProbe.byteCodeVersion>1.7</JMXMiniProbe.byteCodeVersion>		
+      <JMXMiniProbe.srcCodeVersion>1.7</JMXMiniProbe.srcCodeVersion>		
+<!--  *******************  Package Versions  ******************* -->
+ </properties> 
 
 <!--  *******************  Dependencies  ******************* -->
     <repositories>
@@ -71,8 +77,8 @@
 		    <artifactId>maven-compiler-plugin</artifactId>
 		    <version>2.3.2</version>
 		    <configuration>
-		        <source>1.7</source>
-		        <target>1.7</target>
+		        <source>${JMXMiniProbe.srcCodeVersion}</source>
+		        <target>${JMXMiniProbe.byteCodeVersion}</target>
 		        <showDeprecation>true</showDeprecation>
 		        <compilerArguments>
 		            <d>${project.build.outputDirectory}</d>

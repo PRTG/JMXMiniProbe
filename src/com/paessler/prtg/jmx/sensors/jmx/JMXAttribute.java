@@ -29,6 +29,12 @@
  */
 package com.paessler.prtg.jmx.sensors.jmx;
 
+import java.util.List;
+import java.util.Vector;
+import java.util.regex.Pattern;
+
+import javax.management.openmbean.CompositeDataSupport;
+
 import com.paessler.prtg.jmx.channels.Channel;
 import com.paessler.prtg.jmx.channels.Channel.Unit;
 import com.paessler.prtg.jmx.channels.FloatChannel;
@@ -36,12 +42,52 @@ import com.paessler.prtg.jmx.channels.LongChannel;
 import com.paessler.prtg.jmx.sensors.profile.Attribute;
 
 public class JMXAttribute {
+	public static String SEPARATOR_STRING = ".";
 	public static double DEFAULT_NOOPVAL = 1.0d;
-    public String object, description = null;
+	public List<String> object;
+    public String description = null;
     public Unit unit;
     public double mpy = DEFAULT_NOOPVAL, div = DEFAULT_NOOPVAL;
     public boolean enabled = true;
 
+    public List<String> parseObjectName(String name){
+    	List<String> retVal = new Vector<String>();
+    	if(name != null){
+    		String[] strings = name.split(Pattern.quote(SEPARATOR_STRING));
+    		for(String curr: strings){
+        		retVal.add(curr);
+    		}
+    	}
+    	return retVal;
+    }
+    // ---------------------------------------------
+    public String getObjectName(){
+    	return getObjectName(SEPARATOR_STRING);
+    }
+    // ---------------------------------------------
+    public String getObjectName(String sep){
+    	StringBuilder retVal = new StringBuilder();
+    	boolean isFirst = true;
+		for(String curr: object){
+			if(!isFirst){
+				retVal.append(sep);
+				isFirst = false;
+			}
+    		retVal.append(curr);
+		}
+    	return retVal.toString();
+    }
+    // ---------------------------------------------
+    public String toString(){
+    	StringBuilder retVal = new StringBuilder();
+    	retVal.append("JMXAttribute[");
+    	retVal.append(getObjectName());
+		retVal.append("|Unit=");
+		retVal.append(getUnit().toString());
+		retVal.append("]");
+    	return retVal.toString();
+    }
+    // ---------------------------------------------
     public JMXAttribute(Attribute<?> attr) {
         setObject(attr.getObject().toString());
         setUnit(attr.getUnitEnum());
@@ -49,22 +95,52 @@ public class JMXAttribute {
     }
     
     public JMXAttribute(String name, Unit unit) {
-        this.object = name;
-        this.unit = unit;
+        setObject(name);
+        setUnit(unit);
     }
     public JMXAttribute(String name, String unit) {
     	this(name, Channel.toUnit(unit));
     }
 	// --------------------------------
-	public String getObject() {	return object;}
-	public void setObject(String name) {this.object = name;	}
+    public int getObjectCount() {return object.size();}
+    public boolean isObjectIndexValid(int index) {return object != null && (index < getObjectCount());}
+	// --------------------------------
+	public String getObject(int index) 
+	{	String retVal = null;
+		if(isObjectIndexValid(index)){
+			retVal = object.get(index);
+		}
+		return retVal;
+	}
+	public void setObject(String name, int index) 
+	{
+		if(index > getObjectCount()){
+			// Adjust to make sure there is space
+			for(int idx=getObjectCount();idx < index;++idx){
+				this.object.add(null);				
+			}
+		}
+		if(index == getObjectCount()){
+			this.object.add(name);
+		} else if(index < getObjectCount()){
+			this.object.set(index, name);
+		}
+	}
+	// --------------------------------
+	public String getObject() {	return getObject(0);}
+	public void setObject(String name) {this.object = parseObjectName(name);	}
 	// --------------------------------
 	public Unit getUnit() {	return unit;	}
 	public void setUnit(Unit unit) {this.unit = unit;	}
 	// --------------------------------
-	public String getDescription() {
-		return (description == null ? getObject() :description);
+	public String getDescription(String sep) {
+		return (description == null ? getObjectName(sep) :description);
 	}
+	// ------------
+	public String getDescription() {
+		return getDescription(SEPARATOR_STRING);
+	}
+	// ------------
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -101,19 +177,37 @@ public class JMXAttribute {
 		return (float)retVal;
 	}
 	// --------------------------------------------------
-	public Channel getChannel(Object obj){
+	public Channel getChannel(Object obj, int index){
 		Channel retVal = null;
-        if (obj instanceof Number) {
-            Number number = (Number) obj;
-            if (obj instanceof Integer || obj instanceof Long) {
-                long val = adjustValue(number.longValue());
-                retVal = new LongChannel(getDescription(), getUnit(), val);
-            } else if (obj instanceof Float || obj instanceof Double) {
-                float val = adjustValue(number.floatValue());
-                retVal = new FloatChannel(getDescription(), getUnit(), val);
-            }
-        }
+		if(isObjectIndexValid(index)){
+	        if (obj instanceof Number) {
+	            Number number = (Number) obj;
+	            String descr = getDescription(" - ");
+	            if (obj instanceof Integer || obj instanceof Long) {
+	                long val = adjustValue(number.longValue());
+	                retVal = new LongChannel(descr, getUnit(), val);
+	            } else if (obj instanceof Float || obj instanceof Double) {
+	                float val = adjustValue(number.floatValue());
+	                retVal = new FloatChannel(descr, getUnit(), val);
+	            }
+	        } else if(obj instanceof CompositeDataSupport) {
+	        	CompositeDataSupport cd = (CompositeDataSupport)obj;
+	        	String key = getObject(++index);
+	        	if(cd.containsKey(key)){
+	        		obj = cd.get(key);
+		        	retVal = getChannel(obj, index);
+	        	} else {
+	        		retVal = new LongChannel(getDescription(), getUnit(), 0);
+	        		retVal.setWarning(1);
+	                retVal.setMessage(toString()+": element["+key+"] not found ");
+	        	}
+	        }
+		}
 		return retVal;
+	}
+	// --------------------------------------------------
+	public Channel getChannel(Object obj){
+		return getChannel(obj, 0);
 	}
 	
 }

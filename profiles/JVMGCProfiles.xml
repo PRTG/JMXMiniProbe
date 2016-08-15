@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- ###########################################################
+Unit Values[BANDWIDTH, MEMORY, DISK, FILE, TIME_RESPONSE, TIME_SECONDS, TIME_HOURS, TEMP, PERCENT, COUNT,CPU,CUSTOM]
+***************************************************************
+Please note, the apache.commons.digester3 is * VERY * case sensitive
+########################################################### -->
+<profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Profile.xsd">
+	<profile>
+		<name>JVM GC Stats MarkSweep</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>mjjmxgcmssensor</kind>
+		<description>Garbage Collection statistics</description>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help>JVM Mark and Sweep Garbage Collection metrics</help>
+		<entries>
+			<entry>
+				<object>java.lang:type=GarbageCollector,name=PS MarkSweep</object>
+				<displayvalue>MS GarbageCollector Stats</displayvalue>
+				<description>Mark and Sweap Garbage Collector</description>
+				<shortdescription>GC-MS</shortdescription>
+				<comment>Class Name:sun.management.GarbageCollectorImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CollectionCount</object>
+						<displayvalue/>
+						<description>CollectionCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionTime</object>
+						<displayvalue/>
+						<description>CollectionTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>LastGcInfo</object>
+						<displayvalue/>
+						<description>LastGcInfo</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryPoolNames</object>
+						<displayvalue/>
+						<description>MemoryPoolNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@7c18d288</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=PS MarkSweep</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.lang:type=GarbageCollector,name=PS MarkSweep</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>JVM GC Stats PS Scavenge</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>mjjmxgcpssensor</kind>
+		<description>PS Scavenge Garbage Collection statistics</description>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help>JVM PS Scavenge Garbage Collection metrics</help>
+		<entries>
+			<entry>
+				<object>java.lang:type=GarbageCollector,name=PS Scavenge</object>
+				<displayvalue>PS GarbageCollector Stats</displayvalue>
+				<description>PS Scavenge Garbage Collector</description>
+				<shortdescription>GC-PS</shortdescription>
+				<comment>Class Name:sun.management.GarbageCollectorImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CollectionCount</object>
+						<displayvalue/>
+						<description>CollectionCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionTime</object>
+						<displayvalue/>
+						<description>CollectionTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>LastGcInfo</object>
+						<displayvalue/>
+						<description>LastGcInfo</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryPoolNames</object>
+						<displayvalue/>
+						<description>MemoryPoolNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@417cc8df</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=PS Scavenge</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.lang:type=GarbageCollector,name=PS Scavenge</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+</profiles>

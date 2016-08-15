@@ -193,7 +193,16 @@ public class TaskFetcherTask extends TimerTask {
     		return sensorMap;
     	}
         JsonParser parser = new JsonParser();
-        JsonElement top = parser.parse(json);
+//        JsonElement top = parser.parse(json);
+        JsonElement top = null;
+        try {
+        	top = parser.parse(json);
+        }
+        catch (Throwable e)
+        {
+            Logger.log(e.getClass().getName()+":  " + e.getLocalizedMessage()+"\nJSON>>"+json+"<<\n");
+            return sensorMap;
+        }
         JsonArray tasksArray = top.getAsJsonArray();
         Sensor sensor = null;
         int len = tasksArray.size();
