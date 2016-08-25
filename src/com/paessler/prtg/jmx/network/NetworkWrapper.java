@@ -105,7 +105,9 @@ public class NetworkWrapper {
 
     public static void post(String url, String data, int timeout) throws IOException {
         DefaultHttpClient httpClient = getClient(timeout);
-        Logger.log("Uploading " + data + " to " + url);
+//	    if(context.getDebugLevel() > 0){
+//	    	Logger.log("Uploading " + data + " to " + url);
+//	    }
         HttpPost post = new HttpPost(url);
         post.setEntity(new StringEntity(data));
         post.setHeader("Accept", "application/json");

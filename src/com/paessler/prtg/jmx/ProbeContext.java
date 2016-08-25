@@ -60,6 +60,7 @@ import com.paessler.prtg.jmx.sensors.profile.Profile;
 import com.paessler.prtg.jmx.sensors.profile.ProfileFactory;
 import com.paessler.prtg.jmx.sensors.profile.Profiles;
 import com.paessler.prtg.util.ClassUtility;
+import com.paessler.prtg.util.SystemUtility;
 import com.paessler.prtg.util.snmp.SNMPUtil;
 
 //import sun.org.mozilla.javascript.internal.ast.TryStatement;
@@ -71,6 +72,7 @@ import com.paessler.prtg.util.snmp.SNMPUtil;
 public class ProbeContext {
 	public static final String HOST_STRING = "host";
 	public static final String HOST_GUID = "guid";
+	public static final String PROBE_NAME = "name";
 	public static final String KEY_STRING = "key";
 	public static final String SENSORPROFILE_STRING = "sensorprofile";
 	public static final String DUMPJMXRMI_STRING = "dumpjmx.rmistring";
@@ -197,6 +199,13 @@ public class ProbeContext {
         // ------------------------------------
         // BEGIN Optional
         if(!isErrorStatus()) {
+        	
+        	tmp = settings.getProperty(ProbeContext.PROBE_NAME);
+	        if (tmp != null) {
+		        setProbeName(tmp);
+		        tmp = null;
+	        } else
+	        { setProbeName(SystemUtility.getHostName() + " [JMXMiniProbe]"); }
 
         	tmp = settings.getProperty(ProbeContext.SENSORPROFILE_STRING);
 	        if (tmp != null) {

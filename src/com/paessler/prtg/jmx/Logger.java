@@ -30,7 +30,12 @@
 
 package com.paessler.prtg.jmx;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import javax.servlet.ServletContext;
+
+import com.paessler.prtg.util.StringUtility;
 
 // TODO This is very lazy
 public class Logger {
@@ -38,6 +43,12 @@ public class Logger {
 	public static void initLogger(ServletContext srvrlcontext){
 		context = srvrlcontext;
 	}
+    public static void log(String message, Exception e) {
+    	StringWriter target = new StringWriter();
+    	target.append(message+StringUtility.NewLine);
+    	e.printStackTrace(new PrintWriter(target));
+    	log(target.toString());
+    }
     public static void log(String message) {
         if (context != null) {
             context.log(message);

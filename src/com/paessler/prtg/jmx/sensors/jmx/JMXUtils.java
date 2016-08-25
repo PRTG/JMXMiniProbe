@@ -58,6 +58,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.PosixParser;
 
+import com.paessler.prtg.jmx.Logger;
 import com.paessler.prtg.jmx.mbean.PRTGInterface;
 import com.paessler.prtg.jmx.sensors.JMXSensor;
 import com.paessler.prtg.jmx.sensors.profile.Entry;
@@ -297,7 +298,7 @@ public class JMXUtils {
 		        	}
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
-					System.out.println("Cought Exception while Connecting to ["+rmiString+"] "+e.getMessage());
+					Logger.log("Cought Exception while Connecting to ["+rmiString+"] "+e.getMessage());
 				}
 		        String xml = null;
 		        if(mbsc != null){
@@ -306,14 +307,15 @@ public class JMXUtils {
 						prof = getBeanProfiles(mbsc, JMXSensorDefinition.KIND, JMXSensorDefinition.TAG, includeselfie);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						Logger.log("Cought Exception while dumpJMXToFile ", e1);
+						
 					}
 		        	if(prof != null){
 		        		xml = ProfileFactory.toXML(prof);
 				        if(xml != null){
 				        	if(outputfile != null){
 				        		File ofn = new File(outputfile);
-								System.out.println("Outputting XML to  ["+ofn.getAbsolutePath()+"] ");
+								Logger.log("Outputting XML to  ["+ofn.getAbsolutePath()+"] ");
 				        		OutputStream os = null;
 				        		try {
 									os = new FileOutputStream(ofn);
@@ -336,7 +338,7 @@ public class JMXUtils {
 									}
 								} // finally
 				        	} else {// if os
-				        		System.out.println(xml);
+				        		Logger.log(xml);
 				        	}
 				        }
 		        	}
@@ -344,7 +346,7 @@ public class JMXUtils {
 	        		mbsch.close();
 
 		        } else {
-					System.out.println("No Connection to JMX Server");
+					Logger.log("No Connection to JMX Server");
 		        }
 		        return retVal;
 		    }
@@ -384,7 +386,7 @@ public class JMXUtils {
 		        
 //		        Profiles prof = loadProfile(null, "W:/Paessler/java/JMXMiniProbe/data/profiles/jmx/Tomcat.xml");
 		        if(!dumpJMXToFile(outputfile, rmiString, username, password, includeselfie)){
-					System.out.println("Failed to dump JMX MBeans");
+					Logger.log("Failed to dump JMX MBeans");
 		        }
 //		        System.out.println(prof);
 		  }

@@ -101,8 +101,8 @@ public class TaskFetcherTask extends TimerTask {
 				    retVal =  true;
 				    reRunAnnouncement = false;
 				} catch (HttpResponseException he) {
+				    Logger.log(he.getLocalizedMessage());
 					if(he.getStatusCode() < 500){
-					    Logger.log(he.getLocalizedMessage());
 					    Thread.sleep(10000*retryAttempts);
 					} else{
 					    retryAttempts = maxtries;

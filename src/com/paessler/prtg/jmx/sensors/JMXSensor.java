@@ -143,15 +143,22 @@ public class JMXSensor extends Sensor {
                 error.setMessage("Failed to connect JMX Server (Service URL: " + rmiString + ")");
              	return error;
             }
-            
             response = getResponses(mbsc);
             
         } catch (Exception e) {
-            e.printStackTrace();
+        	String errMessage = e.getMessage() + " (Service URL: " + rmiString + ")";
+        	if(e instanceof java.io.IOException)
+        	{
+        		errMessage = "Connection/SSL Problem; " + errMessage;
+        		Logger.log(errMessage);
+        	} else
+        	{
+        		Logger.log(errMessage, e);
+        	}
             DataError error = new DataError(sensorid, getSensorName());
             error.setCode(-1);
             error.setError("Exception");
-            error.setMessage(e.getMessage() + " (Service URL: " + rmiString + ")");
+            error.setMessage(errMessage);
             response = error;
         } finally {
             if (mbsch != null) {

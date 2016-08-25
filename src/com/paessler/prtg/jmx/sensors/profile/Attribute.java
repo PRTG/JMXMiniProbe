@@ -274,7 +274,7 @@ public abstract class Attribute<T extends Comparable<T>> implements Comparable<A
         digester.addBeanPropertySetter( base+"/enabled", "enabled" );
         digester.addBeanPropertySetter( base+"/unit", "unit" );
         digester.addBeanPropertySetter( base+"/mode", "mode" );
-        digester.addBeanPropertySetter( base+"/customunit", "customunit" );
+        digester.addBeanPropertySetter( base+"/customunit", "customUnit" );
         
 //        digester.addCallMethod(base+"/unit", "setUnit", 1,  new String[]{"java.lang.String"});
         digester.addBeanPropertySetter( base+"/mpy", "mpy" );

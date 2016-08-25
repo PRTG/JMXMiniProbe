@@ -1,0 +1,2274 @@
+<!-- ###########################################################
+Unit Values[BANDWIDTH, MEMORY, DISK, FILE, TIME_RESPONSE, TIME_SECONDS, TIME_HOURS, TEMP, PERCENT, COUNT, CPU, CUSTOM]
+***************************************************************
+Please note, the apache.commons.digester3 is case sensitive.
+All XML TAGS should be in lower case.
+Profile Tags * MUST * be unique.
+***************************************************************
+RMI Connection Strings:
+Generic:	service:jmx:{rmi|iiop}:///jndi/rmi://{TARGET_MACHINE}:{RMI_REGISTRY_PORT def:1099}/jmxrmiWeblogic:	service:jmx:iiop://{ServerIP}:{Port}/jndi/weblogic.management.mbeanservers.domainruntimeWebsphere:	service:jmx:iiop://{ServerIP}:{Port}/jndi/JMXConnector***************************************************************
+The following are all the JMX MBeans found
+########################################################### -->
+<profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Profile.xsd">
+	<profile>
+		<name>JMImplementation:type=MBeanServerDelegate</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>JMImplementation:type=MBeanServerDelegate</object>
+				<displayvalue/>
+				<description>Represents  the MBean server from the management point of view.</description>
+				<shortdescription/>
+				<comment>Class Name:javax.management.MBeanServerDelegate</comment>
+				<attributes>
+					<attribute>
+						<object>ImplementationName</object>
+						<displayvalue/>
+						<description>The JMX implementation name (the name of this product)</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=JMX</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ImplementationVendor</object>
+						<displayvalue/>
+						<description>the JMX implementation vendor (the vendor of this product).</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=Oracle Corporation</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ImplementationVersion</object>
+						<displayvalue/>
+						<description>The JMX implementation version (the version of this product).</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=1.7.0_91-b15</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MBeanServerId</object>
+						<displayvalue/>
+						<description>The MBean server agent identification</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=stuppas11.stu.adml_1457975251743</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SpecificationName</object>
+						<displayvalue/>
+						<description>The full name of the JMX specification implemented by this product.</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=Java Management Extensions</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SpecificationVendor</object>
+						<displayvalue/>
+						<description>The vendor of the JMX specification implemented by this product.</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=Oracle Corporation</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SpecificationVersion</object>
+						<displayvalue/>
+						<description>The version of the JMX specification implemented by this product.</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=1.4</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>com.paessler.prtg.jmx.mbean.PRTGBean:name=JMXMiniProbe</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>com.paessler.prtg.jmx.mbean.PRTGBean:name=JMXMiniProbe</object>
+				<displayvalue/>
+				<description>JMX: PRTG JMXMiniProbe statistics</description>
+				<shortdescription/>
+				<comment>Class Name:com.paessler.prtg.jmx.mbean.PRTGInterface</comment>
+				<attributes>
+					<attribute>
+						<object>AvgExecutionTime</object>
+						<displayvalue/>
+						<description>AvgExecutionTime, Average query Execution Time[ms].</description>
+						<shortdescription/>
+						<comment>type=java.lang.long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>AvgSenorCreationTime</object>
+						<displayvalue/>
+						<description>AvgSenorCreationTime, Average sensor creation Execution.</description>
+						<shortdescription/>
+						<comment>type=java.lang.long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>AvgUploadTime</object>
+						<displayvalue/>
+						<description>avgUploadTime, Average time to upload data Time[ms].</description>
+						<shortdescription/>
+						<comment>type=java.lang.long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>QueryCount</object>
+						<displayvalue/>
+						<description>QueryCount, Number of queries run.</description>
+						<shortdescription/>
+						<comment>type=java.lang.long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>sensorCount</object>
+						<displayvalue/>
+						<description>SensorCount, Number of sensors.</description>
+						<shortdescription/>
+						<comment>type=java.lang.int,unit=COUNT; Value=No such attribute: sensorCount</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>com.sun.management:type=HotSpotDiagnostic</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>com.sun.management:type=HotSpotDiagnostic</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:sun.management.HotSpotDiagnostic</comment>
+				<attributes>
+					<attribute>
+						<object>DiagnosticOptions</object>
+						<displayvalue/>
+						<description>DiagnosticOptions</description>
+						<shortdescription/>
+						<comment>type=[Ljavax.management.openmbean.CompositeData;,unit=COUNT; Value=[Ljavax.management.openmbean.CompositeData;@1fc202e5</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=com.sun.management:type=HotSpotDiagnostic</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=ClassLoading</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=ClassLoading</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:sun.management.ClassLoadingImpl</comment>
+				<attributes>
+					<attribute>
+						<object>LoadedClassCount</object>
+						<displayvalue/>
+						<description>LoadedClassCount</description>
+						<shortdescription/>
+						<comment>type=int,unit=COUNT; Value=1448</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.lang:type=ClassLoading</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>TotalLoadedClassCount</object>
+						<displayvalue/>
+						<description>TotalLoadedClassCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=1448</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UnloadedClassCount</object>
+						<displayvalue/>
+						<description>UnloadedClassCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Verbose</object>
+						<displayvalue/>
+						<description>Verbose</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=Compilation</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=Compilation</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:sun.management.CompilationImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CompilationTimeMonitoringSupported</object>
+						<displayvalue/>
+						<description>CompilationTimeMonitoringSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=HotSpot 64-Bit Tiered Compilers</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.lang:type=Compilation</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>TotalCompilationTime</object>
+						<displayvalue/>
+						<description>TotalCompilationTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=436</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=GarbageCollector,name=PS MarkSweep</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=GarbageCollector,name=PS MarkSweep</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:sun.management.GarbageCollectorImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CollectionCount</object>
+						<displayvalue/>
+						<description>CollectionCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionTime</object>
+						<displayvalue/>
+						<description>CollectionTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>LastGcInfo</object>
+						<displayvalue/>
+						<description>LastGcInfo</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryPoolNames</object>
+						<displayvalue/>
+						<description>MemoryPoolNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@7c18d288</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=PS MarkSweep</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.lang:type=GarbageCollector,name=PS MarkSweep</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=GarbageCollector,name=PS Scavenge</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=GarbageCollector,name=PS Scavenge</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:sun.management.GarbageCollectorImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CollectionCount</object>
+						<displayvalue/>
+						<description>CollectionCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionTime</object>
+						<displayvalue/>
+						<description>CollectionTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>LastGcInfo</object>
+						<displayvalue/>
+						<description>LastGcInfo</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryPoolNames</object>
+						<displayvalue/>
+						<description>MemoryPoolNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@417cc8df</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=PS Scavenge</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.lang:type=GarbageCollector,name=PS Scavenge</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=Memory</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=Memory</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:sun.management.MemoryImpl</comment>
+				<attributes>
+					<attribute>
+						<object>HeapMemoryUsage</object>
+						<displayvalue/>
+						<description>HeapMemoryUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=157286400, init=164129088, max=2335703040, used=19125776})</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>NonHeapMemoryUsage</object>
+						<displayvalue/>
+						<description>NonHeapMemoryUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=24576000, init=24576000, max=136314880, used=9236496})</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.lang:type=Memory</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectPendingFinalizationCount</object>
+						<displayvalue/>
+						<description>ObjectPendingFinalizationCount</description>
+						<shortdescription/>
+						<comment>type=int,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Verbose</object>
+						<displayvalue/>
+						<description>Verbose</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=MemoryManager,name=CodeCacheManager</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=MemoryManager,name=CodeCacheManager</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:sun.management.MemoryManagerImpl</comment>
+				<attributes>
+					<attribute>
+						<object>MemoryPoolNames</object>
+						<displayvalue/>
+						<description>MemoryPoolNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@3ab62081</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=CodeCacheManager</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.lang:type=MemoryManager,name=CodeCacheManager</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=MemoryPool,name=Code Cache</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=MemoryPool,name=Code Cache</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:sun.management.MemoryPoolImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CollectionUsage</object>
+						<displayvalue/>
+						<description>CollectionUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThreshold</object>
+						<displayvalue/>
+						<description>CollectionUsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: CollectionUsage threshold is not supported</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdCount</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: CollectionUsage threshold is not supported</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=java.lang.UnsupportedOperationException: CollectionUsage threshold is not supported</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdSupported</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryManagerNames</object>
+						<displayvalue/>
+						<description>MemoryManagerNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@b101344</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=Code Cache</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.lang:type=MemoryPool,name=Code Cache</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>PeakUsage</object>
+						<displayvalue/>
+						<description>PeakUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=2555904, init=2555904, max=50331648, used=605952})</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Type</object>
+						<displayvalue/>
+						<description>Type</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=NON_HEAP</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Usage</object>
+						<displayvalue/>
+						<description>Usage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=2555904, init=2555904, max=50331648, used=598208})</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThreshold</object>
+						<displayvalue/>
+						<description>UsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdCount</object>
+						<displayvalue/>
+						<description>UsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>UsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdSupported</object>
+						<displayvalue/>
+						<description>UsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=MemoryPool,name=PS Eden Space</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=MemoryPool,name=PS Eden Space</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:sun.management.MemoryPoolImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CollectionUsage</object>
+						<displayvalue/>
+						<description>CollectionUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=0, init=41418752, max=862453760, used=0})</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThreshold</object>
+						<displayvalue/>
+						<description>CollectionUsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdCount</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdSupported</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryManagerNames</object>
+						<displayvalue/>
+						<description>MemoryManagerNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@52e530d5</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=PS Eden Space</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.lang:type=MemoryPool,name=PS Eden Space</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>PeakUsage</object>
+						<displayvalue/>
+						<description>PeakUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=41418752, init=41418752, max=862453760, used=20262968})</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Type</object>
+						<displayvalue/>
+						<description>Type</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=HEAP</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Usage</object>
+						<displayvalue/>
+						<description>Usage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=41418752, init=41418752, max=862453760, used=20262968})</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThreshold</object>
+						<displayvalue/>
+						<description>UsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: Usage threshold is not supported</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdCount</object>
+						<displayvalue/>
+						<description>UsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: Usage threshold is not supported</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>UsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=java.lang.UnsupportedOperationException: Usage threshold is not supported</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdSupported</object>
+						<displayvalue/>
+						<description>UsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=MemoryPool,name=PS Old Gen</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=MemoryPool,name=PS Old Gen</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:sun.management.MemoryPoolImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CollectionUsage</object>
+						<displayvalue/>
+						<description>CollectionUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=0, init=109051904, max=1751646208, used=0})</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThreshold</object>
+						<displayvalue/>
+						<description>CollectionUsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdCount</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdSupported</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryManagerNames</object>
+						<displayvalue/>
+						<description>MemoryManagerNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@696add0e</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=PS Old Gen</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.lang:type=MemoryPool,name=PS Old Gen</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>PeakUsage</object>
+						<displayvalue/>
+						<description>PeakUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=109051904, init=109051904, max=1751646208, used=0})</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Type</object>
+						<displayvalue/>
+						<description>Type</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=HEAP</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Usage</object>
+						<displayvalue/>
+						<description>Usage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=109051904, init=109051904, max=1751646208, used=0})</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThreshold</object>
+						<displayvalue/>
+						<description>UsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdCount</object>
+						<displayvalue/>
+						<description>UsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>UsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdSupported</object>
+						<displayvalue/>
+						<description>UsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=MemoryPool,name=PS Perm Gen</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=MemoryPool,name=PS Perm Gen</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:sun.management.MemoryPoolImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CollectionUsage</object>
+						<displayvalue/>
+						<description>CollectionUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=0, init=22020096, max=85983232, used=0})</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThreshold</object>
+						<displayvalue/>
+						<description>CollectionUsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdCount</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdSupported</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryManagerNames</object>
+						<displayvalue/>
+						<description>MemoryManagerNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@f631ab6</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=PS Perm Gen</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.lang:type=MemoryPool,name=PS Perm Gen</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>PeakUsage</object>
+						<displayvalue/>
+						<description>PeakUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=22020096, init=22020096, max=85983232, used=8643664})</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Type</object>
+						<displayvalue/>
+						<description>Type</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=NON_HEAP</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Usage</object>
+						<displayvalue/>
+						<description>Usage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=22020096, init=22020096, max=85983232, used=8643664})</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThreshold</object>
+						<displayvalue/>
+						<description>UsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdCount</object>
+						<displayvalue/>
+						<description>UsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>UsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdSupported</object>
+						<displayvalue/>
+						<description>UsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=MemoryPool,name=PS Survivor Space</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=MemoryPool,name=PS Survivor Space</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:sun.management.MemoryPoolImpl</comment>
+				<attributes>
+					<attribute>
+						<object>CollectionUsage</object>
+						<displayvalue/>
+						<description>CollectionUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=0, init=6815744, max=6815744, used=0})</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThreshold</object>
+						<displayvalue/>
+						<description>CollectionUsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdCount</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CollectionUsageThresholdSupported</object>
+						<displayvalue/>
+						<description>CollectionUsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryManagerNames</object>
+						<displayvalue/>
+						<description>MemoryManagerNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@435792a0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=PS Survivor Space</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.lang:type=MemoryPool,name=PS Survivor Space</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>PeakUsage</object>
+						<displayvalue/>
+						<description>PeakUsage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=6815744, init=6815744, max=6815744, used=0})</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Type</object>
+						<displayvalue/>
+						<description>Type</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=HEAP</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Usage</object>
+						<displayvalue/>
+						<description>Usage</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.CompositeData,unit=COUNT; Value=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.lang.management.MemoryUsage,items=((itemName=committed,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=init,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=max,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)),(itemName=used,itemType=javax.management.openmbean.SimpleType(name=java.lang.Long)))),contents={committed=6815744, init=6815744, max=6815744, used=0})</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThreshold</object>
+						<displayvalue/>
+						<description>UsageThreshold</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: Usage threshold is not supported</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdCount</object>
+						<displayvalue/>
+						<description>UsageThresholdCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=java.lang.UnsupportedOperationException: Usage threshold is not supported</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdExceeded</object>
+						<displayvalue/>
+						<description>UsageThresholdExceeded</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=java.lang.UnsupportedOperationException: Usage threshold is not supported</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>UsageThresholdSupported</object>
+						<displayvalue/>
+						<description>UsageThresholdSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Valid</object>
+						<displayvalue/>
+						<description>Valid</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=OperatingSystem</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=OperatingSystem</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:com.sun.management.UnixOperatingSystem</comment>
+				<attributes>
+					<attribute>
+						<object>Arch</object>
+						<displayvalue/>
+						<description>Arch</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=amd64</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>AvailableProcessors</object>
+						<displayvalue/>
+						<description>AvailableProcessors</description>
+						<shortdescription/>
+						<comment>type=int,unit=COUNT; Value=8</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CommittedVirtualMemorySize</object>
+						<displayvalue/>
+						<description>CommittedVirtualMemorySize</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=4293480448</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>FreePhysicalMemorySize</object>
+						<displayvalue/>
+						<description>FreePhysicalMemorySize</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=1230577664</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>FreeSwapSpaceSize</object>
+						<displayvalue/>
+						<description>FreeSwapSpaceSize</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=2115387392</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MaxFileDescriptorCount</object>
+						<displayvalue/>
+						<description>MaxFileDescriptorCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=500000</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=Linux</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.lang:type=OperatingSystem</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>OpenFileDescriptorCount</object>
+						<displayvalue/>
+						<description>OpenFileDescriptorCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=32</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ProcessCpuLoad</object>
+						<displayvalue/>
+						<description>ProcessCpuLoad</description>
+						<shortdescription/>
+						<comment>type=double,unit=COUNT; Value=8.916457021876531E-8</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ProcessCpuTime</object>
+						<displayvalue/>
+						<description>ProcessCpuTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=1200000000</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SystemCpuLoad</object>
+						<displayvalue/>
+						<description>SystemCpuLoad</description>
+						<shortdescription/>
+						<comment>type=double,unit=COUNT; Value=0.008474343410607045</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SystemLoadAverage</object>
+						<displayvalue/>
+						<description>SystemLoadAverage</description>
+						<shortdescription/>
+						<comment>type=double,unit=COUNT; Value=0.38</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>TotalPhysicalMemorySize</object>
+						<displayvalue/>
+						<description>TotalPhysicalMemorySize</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=10504261632</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>TotalSwapSpaceSize</object>
+						<displayvalue/>
+						<description>TotalSwapSpaceSize</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=2147475456</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Version</object>
+						<displayvalue/>
+						<description>Version</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=2.6.32-431.23.3.el6.x86_64</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=Runtime</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=Runtime</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:sun.management.RuntimeImpl</comment>
+				<attributes>
+					<attribute>
+						<object>BootClassPath</object>
+						<displayvalue/>
+						<description>BootClassPath</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=/data/stu/java/jdk1.7.0_91/jre/lib/resources.jar:/data/stu/java/jdk1.7.0_91/jre/lib/rt.jar:/data/stu/java/jdk1.7.0_91/jre/lib/sunrsasign.jar:/data/stu/java/jdk1.7.0_91/jre/lib/jsse.jar:/data/stu/java/jdk1.7.0_91/jre/lib/jce.jar:/data/stu/java/jdk1.7.0_91/jre/lib/charsets.jar:/data/stu/java/jdk1.7.0_91/jre/lib/jfr.jar:/data/stu/java/jdk1.7.0_91/jre/classes</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>BootClassPathSupported</object>
+						<displayvalue/>
+						<description>BootClassPathSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ClassPath</object>
+						<displayvalue/>
+						<description>ClassPath</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=/data_shared/sup_jmx_JLO/JMXProbe/etc:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/javax.servlet-api-3.1.0.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/commons-cli-1.2.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/commons-codec-1.6.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/commons-logging-1.1.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/gson-2.2.2.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/httpclient-4.4.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/httpclient-cache-4.4.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/httpcore-4.4.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/httpmime-4.4.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/commons-digester3-3.2-with-deps.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/cglib-2.2.2.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/asm-3.3.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/commons-beanutils-1.8.3.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/commons-lang3-3.4.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/snmp4j-2.3.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/log4j-1.2.14.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/snmp4j-agent-2.3.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/platform-3.5.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/jna-3.5.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/icmp4j-16.0.1017-1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/sblim-cim-client2-2.2.5.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/dnsjava-2.1.7.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/JMXMiniProbe-1.0.jar</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>InputArguments</object>
+						<displayvalue/>
+						<description>InputArguments</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@420d3967</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>LibraryPath</object>
+						<displayvalue/>
+						<description>LibraryPath</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ManagementSpecVersion</object>
+						<displayvalue/>
+						<description>ManagementSpecVersion</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=1.2</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=30410@stuppas11.stu.adml</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.lang:type=Runtime</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SpecName</object>
+						<displayvalue/>
+						<description>SpecName</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=Java Virtual Machine Specification</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SpecVendor</object>
+						<displayvalue/>
+						<description>SpecVendor</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=Oracle Corporation</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SpecVersion</object>
+						<displayvalue/>
+						<description>SpecVersion</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=1.7</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>StartTime</object>
+						<displayvalue/>
+						<description>StartTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=1457975250095</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SystemProperties</object>
+						<displayvalue/>
+						<description>SystemProperties</description>
+						<shortdescription/>
+						<comment>type=javax.management.openmbean.TabularData,unit=COUNT; Value=javax.management.openmbean.TabularDataSupport(tabularType=javax.management.openmbean.TabularType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,rowType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),indexNames=(key)),contents={[java.vm.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vm.version, value=24.91-b03}), [java.vendor.url]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vendor.url, value=http://java.oracle.com/}), [sun.jnu.encoding]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.jnu.encoding, value=UTF-8}), [java.vm.info]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vm.info, value=mixed mode}), [user.dir]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=user.dir, value=/data_shared/sup_jmx_JLO/JMXProbe/bin}), [sun.cpu.isalist]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.cpu.isalist, value=}), [java.awt.graphicsenv]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.awt.graphicsenv, value=sun.awt.X11GraphicsEnvironment}), [sun.os.patch.level]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.os.patch.level, value=unknown}), [java.io.tmpdir]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.io.tmpdir, value=/tmp}), [user.home]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=user.home, value=/home/ocb}), [java.awt.printerjob]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.awt.printerjob, value=sun.print.PSPrinterJob}), [java.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.version, value=1.7.0_91}), [file.encoding.pkg]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=file.encoding.pkg, value=sun.io}), [java.vendor.url.bug]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vendor.url.bug, value=http://bugreport.sun.com/bugreport/}), [file.encoding]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=file.encoding, value=UTF-8}), [line.separator]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=line.separator, value=
+}), [app.home]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=app.home, value=/data_shared/sup_jmx_JLO/JMXProbe}), [sun.java.command]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.java.command, value=com.paessler.prtg.jmx.DaemonMain}), [java.vm.specification.vendor]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vm.specification.vendor, value=Oracle Corporation}), [java.vm.vendor]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vm.vendor, value=Oracle Corporation}), [app.name]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=app.name, value=runJMXMiniProbe}), [java.class.path]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.class.path, value=/data_shared/sup_jmx_JLO/JMXProbe/etc:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/javax.servlet-api-3.1.0.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/commons-cli-1.2.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/commons-codec-1.6.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/commons-logging-1.1.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/gson-2.2.2.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/httpclient-4.4.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/httpclient-cache-4.4.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/httpcore-4.4.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/httpmime-4.4.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/commons-digester3-3.2-with-deps.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/cglib-2.2.2.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/asm-3.3.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/commons-beanutils-1.8.3.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/commons-lang3-3.4.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/snmp4j-2.3.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/log4j-1.2.14.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/snmp4j-agent-2.3.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/platform-3.5.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/jna-3.5.1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/icmp4j-16.0.1017-1.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/sblim-cim-client2-2.2.5.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/dnsjava-2.1.7.jar:/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib/JMXMiniProbe-1.0.jar}), [sun.io.unicode.encoding]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.io.unicode.encoding, value=UnicodeLittle}), [os.arch]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=os.arch, value=amd64}), [app.repo]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=app.repo, value=/data_shared/sup_jmx_JLO/JMXProbe/WEB-INF/lib}), [user.name]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=user.name, value=ocb}), [user.language]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=user.language, value=fr}), [java.runtime.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.runtime.version, value=1.7.0_91-b15}), [sun.boot.class.path]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.boot.class.path, value=/data/stu/java/jdk1.7.0_91/jre/lib/resources.jar:/data/stu/java/jdk1.7.0_91/jre/lib/rt.jar:/data/stu/java/jdk1.7.0_91/jre/lib/sunrsasign.jar:/data/stu/java/jdk1.7.0_91/jre/lib/jsse.jar:/data/stu/java/jdk1.7.0_91/jre/lib/jce.jar:/data/stu/java/jdk1.7.0_91/jre/lib/charsets.jar:/data/stu/java/jdk1.7.0_91/jre/lib/jfr.jar:/data/stu/java/jdk1.7.0_91/jre/classes}), [sun.cpu.endian]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.cpu.endian, value=little}), [awt.toolkit]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=awt.toolkit, value=sun.awt.X11.XToolkit}), [sun.boot.library.path]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.boot.library.path, value=/data/stu/java/jdk1.7.0_91/jre/lib/amd64}), [java.vm.name]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vm.name, value=Java HotSpot(TM) 64-Bit Server VM}), [java.home]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.home, value=/data/stu/java/jdk1.7.0_91/jre}), [app.pid]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=app.pid, value=30410}), [java.endorsed.dirs]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.endorsed.dirs, value=/data/stu/java/jdk1.7.0_91/jre/lib/endorsed}), [basedir]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=basedir, value=/data_shared/sup_jmx_JLO/JMXProbe}), [sun.management.compiler]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.management.compiler, value=HotSpot 64-Bit Tiered Compilers}), [java.runtime.name]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.runtime.name, value=Java(TM) SE Runtime Environment}), [java.library.path]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.library.path, value=/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib}), [file.separator]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=file.separator, value=/}), [java.specification.vendor]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.specification.vendor, value=Oracle Corporation}), [java.vm.specification.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vm.specification.version, value=1.7}), [sun.java.launcher]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.java.launcher, value=SUN_STANDARD}), [user.timezone]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=user.timezone, value=}), [os.name]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=os.name, value=Linux}), [path.separator]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=path.separator, value=:}), [java.ext.dirs]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.ext.dirs, value=/data/stu/java/jdk1.7.0_91/jre/lib/ext:/usr/java/packages/lib/ext}), [sun.arch.data.model]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=sun.arch.data.model, value=64}), [java.specification.name]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.specification.name, value=Java Platform API Specification}), [os.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=os.version, value=2.6.32-431.23.3.el6.x86_64}), [user.country]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=user.country, value=FR}), [java.class.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.class.version, value=51.0}), [java.vendor]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vendor, value=Oracle Corporation}), [java.vm.specification.name]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.vm.specification.name, value=Java Virtual Machine Specification}), [java.specification.version]=javax.management.openmbean.CompositeDataSupport(compositeType=javax.management.openmbean.CompositeType(name=java.util.Map&lt;java.lang.String, java.lang.String&gt;,items=((itemName=key,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)),(itemName=value,itemType=javax.management.openmbean.SimpleType(name=java.lang.String)))),contents={key=java.specification.version, value=1.7})})</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Uptime</object>
+						<displayvalue/>
+						<description>Uptime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=1736</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>VmName</object>
+						<displayvalue/>
+						<description>VmName</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=Java HotSpot(TM) 64-Bit Server VM</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>VmVendor</object>
+						<displayvalue/>
+						<description>VmVendor</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=Oracle Corporation</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>VmVersion</object>
+						<displayvalue/>
+						<description>VmVersion</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=24.91-b03</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.lang:type=Threading</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.lang:type=Threading</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:sun.management.ThreadImpl</comment>
+				<attributes>
+					<attribute>
+						<object>AllThreadIds</object>
+						<displayvalue/>
+						<description>AllThreadIds</description>
+						<shortdescription/>
+						<comment>type=[J,unit=COUNT; Value=[J@35b220a3</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CurrentThreadCpuTime</object>
+						<displayvalue/>
+						<description>CurrentThreadCpuTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=96709466</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CurrentThreadCpuTimeSupported</object>
+						<displayvalue/>
+						<description>CurrentThreadCpuTimeSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>CurrentThreadUserTime</object>
+						<displayvalue/>
+						<description>CurrentThreadUserTime</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=90000000</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>DaemonThreadCount</object>
+						<displayvalue/>
+						<description>DaemonThreadCount</description>
+						<shortdescription/>
+						<comment>type=int,unit=COUNT; Value=3</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectMonitorUsageSupported</object>
+						<displayvalue/>
+						<description>ObjectMonitorUsageSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.lang:type=Threading</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>PeakThreadCount</object>
+						<displayvalue/>
+						<description>PeakThreadCount</description>
+						<shortdescription/>
+						<comment>type=int,unit=COUNT; Value=5</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>SynchronizerUsageSupported</object>
+						<displayvalue/>
+						<description>SynchronizerUsageSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ThreadAllocatedMemoryEnabled</object>
+						<displayvalue/>
+						<description>ThreadAllocatedMemoryEnabled</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ThreadAllocatedMemorySupported</object>
+						<displayvalue/>
+						<description>ThreadAllocatedMemorySupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ThreadContentionMonitoringEnabled</object>
+						<displayvalue/>
+						<description>ThreadContentionMonitoringEnabled</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=false</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ThreadContentionMonitoringSupported</object>
+						<displayvalue/>
+						<description>ThreadContentionMonitoringSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ThreadCount</object>
+						<displayvalue/>
+						<description>ThreadCount</description>
+						<shortdescription/>
+						<comment>type=int,unit=COUNT; Value=5</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ThreadCpuTimeEnabled</object>
+						<displayvalue/>
+						<description>ThreadCpuTimeEnabled</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ThreadCpuTimeSupported</object>
+						<displayvalue/>
+						<description>ThreadCpuTimeSupported</description>
+						<shortdescription/>
+						<comment>type=boolean,unit=COUNT; Value=true</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>TotalStartedThreadCount</object>
+						<displayvalue/>
+						<description>TotalStartedThreadCount</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=6</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.nio:type=BufferPool,name=direct</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.nio:type=BufferPool,name=direct</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:sun.management.ManagementFactoryHelper$1</comment>
+				<attributes>
+					<attribute>
+						<object>Count</object>
+						<displayvalue/>
+						<description>Count</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryUsed</object>
+						<displayvalue/>
+						<description>MemoryUsed</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=direct</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.nio:type=BufferPool,name=direct</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>TotalCapacity</object>
+						<displayvalue/>
+						<description>TotalCapacity</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.nio:type=BufferPool,name=mapped</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.nio:type=BufferPool,name=mapped</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:sun.management.ManagementFactoryHelper$1</comment>
+				<attributes>
+					<attribute>
+						<object>Count</object>
+						<displayvalue/>
+						<description>Count</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>MemoryUsed</object>
+						<displayvalue/>
+						<description>MemoryUsed</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>Name</object>
+						<displayvalue/>
+						<description>Name</description>
+						<shortdescription/>
+						<comment>type=java.lang.String,unit=COUNT; Value=mapped</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.nio:type=BufferPool,name=mapped</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>TotalCapacity</object>
+						<displayvalue/>
+						<description>TotalCapacity</description>
+						<shortdescription/>
+						<comment>type=long,unit=COUNT; Value=0</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+	<profile>
+		<name>java.util.logging:type=Logging</name>
+		<tag>jmxsensor,mjjmxsensor</tag>
+		<kind>jmxsensor</kind>
+		<description/>
+		<baseclass>com.paessler.prtg.jmx.sensors.JMXSensor</baseclass>
+		<help/>
+		<entries>
+			<entry>
+				<object>java.util.logging:type=Logging</object>
+				<displayvalue/>
+				<description>Information on the management interface of the MBean</description>
+				<shortdescription/>
+				<comment>Class Name:sun.management.ManagementFactoryHelper$PlatformLoggingImpl</comment>
+				<attributes>
+					<attribute>
+						<object>LoggerNames</object>
+						<displayvalue/>
+						<description>LoggerNames</description>
+						<shortdescription/>
+						<comment>type=[Ljava.lang.String;,unit=COUNT; Value=[Ljava.lang.String;@5d6227a2</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+					<attribute>
+						<object>ObjectName</object>
+						<displayvalue/>
+						<description>ObjectName</description>
+						<shortdescription/>
+						<comment>type=javax.management.ObjectName,unit=COUNT; Value=java.util.logging:type=Logging</comment>
+						<unit/>
+						<customunit/>
+						<enabled>true</enabled>
+					</attribute>
+				</attributes>
+			</entry>
+		</entries>
+	</profile>
+</profiles>
