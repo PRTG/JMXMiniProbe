@@ -75,6 +75,7 @@ Changelog
 ----------
 -- Added: Probe name added to property file. "name=xxx" The name the Probe will announce itself as...
 -- Fixed: bug in Attribute Digester (org.apache.commons.digester3.Digester is Case sensitive... Rather Picky that one !!)
+-- Fixed: Minor logging change
 
 2016-03-15
 ----------
