@@ -49,10 +49,10 @@ public class VMHealthDefinition extends SensorDefinition {
         addField(tmpfld);
         rmiGroupDefinition.fields.add(tmpfld);
      
-        tmpfld = new SimpleEditFieldDefinition("rmi_username", "Username");
+        tmpfld = new SimpleEditFieldDefinition(SensorConstants.USERNAME, "Username");
         rmiGroupDefinition.fields.add(tmpfld);
         addField(tmpfld);
-        tmpfld = new PasswordFieldDefinition("rmi_password", "Password", "");
+        tmpfld = new PasswordFieldDefinition(SensorConstants.PASSWORD, "Password", "");
         rmiGroupDefinition.fields.add(tmpfld);
         addField(tmpfld);
         groups.add(rmiGroupDefinition);

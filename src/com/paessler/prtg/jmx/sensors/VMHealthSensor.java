@@ -33,6 +33,7 @@ package com.paessler.prtg.jmx.sensors;
 import com.google.gson.JsonObject;
 import com.paessler.prtg.jmx.Logger;
 import com.paessler.prtg.jmx.channels.Channel;
+import com.paessler.prtg.jmx.definitions.SensorConstants;
 import com.paessler.prtg.jmx.definitions.VMHealthDefinition;
 import com.paessler.prtg.jmx.sensors.jmx.JMXAttribute;
 import com.paessler.prtg.jmx.sensors.jmx.JMXBean;
@@ -300,6 +301,12 @@ MBean Found, Class Name:sun.management.MemoryImpl
     @Override
     public void loadFromJson(JsonObject json)  throws Exception{
     	super.loadFromJson(json);
+		if (json.has(SensorConstants.RMIUSERNAME)) {
+			setUsername(json.get(SensorConstants.RMIUSERNAME).getAsString());
+		}
+		if (json.has(SensorConstants.RMIPASSWORD)) {
+			setPassword(json.get(SensorConstants.RMIPASSWORD).getAsString());
+		}
     	addDefs();
 //        setmBean(ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME);
     }

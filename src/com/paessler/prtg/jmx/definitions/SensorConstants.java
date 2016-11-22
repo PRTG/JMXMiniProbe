@@ -16,6 +16,8 @@ public abstract class SensorConstants {
 	public static final String TIMEOUT 			= "timeout";
 	public static final String VERSION	 		= "version";
     public static final String RMISTRING 		= "rmi_string";
+	public static final String RMIUSERNAME		= "rmi_username";
+	public static final String RMIPASSWORD		= "rmi_password";
 	// ----------------------------------------------------------------
     public static final String MBEAN_STRING 	= "mbean";
 	// ----------------------------------------------------------------
